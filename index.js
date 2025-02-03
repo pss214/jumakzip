@@ -14,7 +14,17 @@ app.listen(3000,function(err){
     console.log("start3000");
 });
 
+//메인페이지 로드
 app.get('/', function(req, res){
     res.render('index', {title : 'main'})
 })
 
+//예약페이지 로드
+app.get('/reservation', function(req, res){
+    res.render('reservation', {title : 'reservation'})
+})
+
+//소개페이지 로드
+app.get('/info', function(req, res){
+    res.render('info', {title : 'info'})
+})
