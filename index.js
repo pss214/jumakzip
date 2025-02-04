@@ -61,6 +61,13 @@ app.get("/info", function (req, res) {
   res.render("info", { title: "info" });
 });
 
+//회원가입페이지 로드
+app.get("/signup", function (req, res) {
+  res.render("signup", { title: "회원가입" ,
+    style: ""
+  });
+});
+
 //image 가져오는 경로
 app.get("/image/:name", function (req, res) {
   var name = req.params.name;
