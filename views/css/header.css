@@ -1,21 +1,97 @@
 header {
+  background-color: #fff;
   width: 100%;
+  height: 70px;
+  padding: 10px 20px;
   display: flex;
-  border-bottom: 1px solid #000;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
 }
+
 header .logo {
-  width: 320px;
+  width: 220px;
+  cursor: pointer;
 }
 header .logo img {
-  width: 120px;
+  width: 100%;
+}
+
+header .menu {
+  position: relative;
 }
 header .menu {
-  width: 100%;
+  width: 600px;
+  height: 70px;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
 }
-header .menu ul {
+header .menu li {
+  line-height: 70px;
+  text-align: center;
+  padding: 0 20px;
+  cursor: default;
+}
+header .menu li:hover {
+  background-color: #d9d9d9;
+  transition: all 100ms;
+}
+
+.detailMenuBackground {
+  display: none;
+  position: fixed;
+  background-color: #fff;
+  width: 100%;
+  height: 130px;
+  padding-top: 20px;
+  top: 70px;
+  justify-content: center;
+}
+.detailMenuBackground .detailMenu {
+  width: 600px;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+}
+
+.detailMenuBackground .detailMenu .introduction {
   display: flex;
-  width: 100%;
+  flex-direction: column;
+  row-gap: 10px;
+  padding: 0 10px;
+  text-align: center;
 }
+
+.detailMenuBackground .detailMenu li:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.detailMenuBackground .detailMenu .customerCenter {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  padding: 0 10px;
+  text-align: center;
+}
+
 header .user {
-  width: 320px;
+  display: flex;
+  column-gap: 10px;
+  width: 220px;
+}
+header .user .profile {
+  margin-left: auto;
+  width: 36px;
+  height: 36px;
+  border-radius: 100%;
+  background: #000;
+}
+header .user .logIn {
+  cursor: pointer;
+  height: 36px;
+  border: 1px solid black;
+  border-radius: 18px;
+  padding: 0 26px;
+  font-size: 16px;
+  line-height: 36px;
 }
