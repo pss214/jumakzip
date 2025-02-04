@@ -36,3 +36,24 @@ app.get("/reservation", function (req, res) {
 app.get("/info", function (req, res) {
   res.render("info", { title: "info" });
 });
+
+//image 가져오는 경로
+app.get("/image/:name", function(req,res){
+  var name = req.params.name
+  console.log('이미지 요청: ' + './views/image/'+name);
+  res.sendFile(path.join(__dirname, "views",'/image/'+name))
+})
+
+
+//css 가져오는 경로
+app.get("/css/:name", function(req,res){
+  var name = req.params.name
+  console.log('css 요청: ' + './views/css/'+name);
+  res.sendFile(path.join(__dirname, "views",'/css/'+name))
+})
+//js 가져오는 경로
+app.get("/js/:name", function(req,res){
+  var name = req.params.name
+  console.log('js 요청: ' + './views/js/'+name);
+  res.sendFile(path.join(__dirname, "views",'/js/'+name))
+})
