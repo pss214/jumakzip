@@ -1,6 +1,7 @@
 header {
   width: 100%;
   display: flex;
+  border-bottom: 1px solid #000;
 }
 header .logo {
   width: 320px;
@@ -9,6 +10,10 @@ header .logo img {
   width: 120px;
 }
 header .menu {
+  width: 100%;
+}
+header .menu ul {
+  display: flex;
   width: 100%;
 }
 header .user {
