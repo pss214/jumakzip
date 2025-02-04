@@ -6,6 +6,26 @@ const app = express();
 const bodyparser = require("body-parser");
 const fs = require("fs");
 const http = require("http");
+var mysql=require('mysql2');
+//데이터베이스 연결 함수
+function dbcon(){
+  db = null;
+  try{
+    file = fs.readFileSync("dbcon.json",'utf8')
+    db = JSON.parse(file)
+  }catch(err){
+    console.log("읽기 에러")
+    throw err;
+  }
+  const con=mysql.createConnection({
+      host: db.name,
+      user: db.id, password: db.pw,
+      database:'jumakzip',port:'3306'
+  });
+  con.connect();
+  console.log('db connect');
+}
+const dbconn = dbcon()
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
