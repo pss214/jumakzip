@@ -1,0 +1,143 @@
+@charset "utf-8";
+
+*{
+    margin: 0 auto;
+    padding: 0;
+    color: #333333;
+    font-family: "함초롱바탕";
+}
+
+a{
+    text-decoration: none;
+    display: block;
+}
+
+body{
+
+}
+
+.bodywrap{
+    display: flex;
+    flex-direction: column;
+    width: 1522.390px; /* 80% */
+}
+
+.bodywrap>ul{
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* 1522.390px */
+    order: 1;
+
+}
+
+.bodywrap>ul>li{
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* 1522.390px */
+    margin-top: 50px;
+    margin-top: 3.125rem;
+}
+
+.i0, .i1{ /* 1.2 */
+    margin: 0;
+    width: 608.938px; /* 40% */
+    height: 427.938px; /* 40% */ /* 이 40%를 기준으로 1.24317073969구함 */
+    height: 26.746125rem;
+    object-fit: cover;
+}
+
+.box0, .box2{
+    margin: 0;
+    width: 689.366289472px; /* 1.24317073969 나눠서 구함 */
+    height: 427.937999999px; /* 1.24317073969 나눠서 구함 */
+    height: 26.7461249999rem;
+    background-color: #444444;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    position: relative;
+}
+
+.box1, .box3{
+    width: 617.775157893px; /* 1.24317073969 나눠서 구함 */
+    height: 389.327052631px; /* 1.24317073969 나눠서 구함 */
+    height: 24.3329407894rem;
+    background-color: #ffffff;
+    border-radius: 15px;
+    border: 2px solid #3A8DFD;
+    box-sizing: border-box;
+    position: absolute;
+    top: 21.391px; /* 5% */
+    top: 1.3369375rem;
+    left: 48.250px; /* 7% */
+    left: 3.015625rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.imgimg0, .imgimg6{
+    width: 122.750px; /* 20% */
+    height: 57.797px; /* 15% */
+    height: 3.6123125rem;
+    margin-left: 390px;
+}
+
+.imgimg1{
+    width: 460.312px; /* 75% */
+    height: 96.328px; /* 25% */
+}
+
+.imgimg2{
+    width: 40%;
+    height: 45%;
+}
+
+.imgimg3{
+    margin-left: 60px;
+    width: 20%;
+    height: 15%;
+}
+
+.imgimg4{
+    margin-left: 60px;
+    width: 60%;
+    height: 13%;
+}
+
+.imgimg5{
+    margin-left: 60px;
+    width: 70%;
+    height: 50%;
+}
+
+.imgimg7{
+    width: 50%;
+    height: 25%;
+}
+
+.imgimg8{
+    width: 70%;
+    height: 55%;
+}
+
+.box1>a{
+    position: absolute;
+    bottom: 30px;
+    left: 250px;
+    width: 162.666666667px;
+    height: 55px;
+    line-height: 55px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 30px;
+    background-color: #3A8DFD;
+    border: 1px solid #cccccc;
+}
+
+.box1>a:hover{
+    color: #FFFF00;
+}
