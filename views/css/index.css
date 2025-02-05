@@ -1,143 +1,100 @@
-@charset "utf-8";
 
-*{
-    margin: 0 auto;
-    padding: 0;
-    color: #333333;
-    font-family: "함초롱바탕";
+@keyframes mouseUpDown {
+  0% {
+    transform: translateY(10%);
+  }
+  50% {
+    transform: translateY(-10%);
+  }
+  100% {
+    transform: translateY(10%);
+  }
 }
 
-a{
-    text-decoration: none;
-    display: block;
+@keyframes lineIncrease {
+  0% {
+    transform-origin: top;
+    transform: rotateX(90deg);
+  }
+  60% {
+    transform-origin: bottom;
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform-origin: bottom;
+    transform: rotateX(90deg);
+  }
 }
 
-body{
-
+main {
+  margin: 0;
+  width: 100%;
+}
+.mainVideoDiv {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  left: 0;
+  top: -70;
+}
+.mainVideoDiv video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.mainVideoDiv .tagsOnVideo {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 110px;
+}
+.mainVideoDiv .tagsOnVideo h2 {
+  font-size: 125px;
+  font-weight: 800;
+  color: white;
+  margin-top: 40vh;
+  font-family: "Rubik", serif;
+  line-height: 140px;
+}
+.mainVideoDiv .tagsOnVideo p {
+  margin-left: 5px;
+  font-size: 28px;
+  color: white;
+}
+.mainVideoDiv .tagsOnVideo .scrollIcons {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 25px;
+  animation: mouseUpDown 1500ms infinite;
+}
+.mainVideoDiv .tagsOnVideo .scrollIcons .mouseImage {
+  filter: brightness(0) invert(1);
+  width: 40px;
+  margin-bottom: 25px;
+}
+.mainVideoDiv .tagsOnVideo .scrollIcons .mouseLine {
+  width: 1px;
+  height: 70px;
+  background: #fff;
+  animation: lineIncrease 2000ms infinite;
 }
 
-.bodywrap{
-    display: flex;
-    flex-direction: column;
-    width: 1522.390px; /* 80% */
+.mainDiv {
+  width: 1400px;
+  margin: 0 auto;
 }
-
-.bodywrap>ul{
-    display: flex;
-    flex-direction: column;
-    width: 100%; /* 1522.390px */
-    order: 1;
-
+.mainDiv .videoWrap {
+  width: 100%;
+  height: 340px;
+  overflow: hidden;
 }
-
-.bodywrap>ul>li{
-    display: flex;
-    justify-content: space-between;
-    width: 100%; /* 1522.390px */
-    margin-top: 50px;
-    margin-top: 3.125rem;
-}
-
-.i0, .i1{ /* 1.2 */
-    margin: 0;
-    width: 608.938px; /* 40% */
-    height: 427.938px; /* 40% */ /* 이 40%를 기준으로 1.24317073969구함 */
-    height: 26.746125rem;
-    object-fit: cover;
-}
-
-.box0, .box2{
-    margin: 0;
-    width: 689.366289472px; /* 1.24317073969 나눠서 구함 */
-    height: 427.937999999px; /* 1.24317073969 나눠서 구함 */
-    height: 26.7461249999rem;
-    background-color: #444444;
-    border-top-left-radius: 100px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    position: relative;
-}
-
-.box1, .box3{
-    width: 617.775157893px; /* 1.24317073969 나눠서 구함 */
-    height: 389.327052631px; /* 1.24317073969 나눠서 구함 */
-    height: 24.3329407894rem;
-    background-color: #ffffff;
-    border-radius: 15px;
-    border: 2px solid #3A8DFD;
-    box-sizing: border-box;
-    position: absolute;
-    top: 21.391px; /* 5% */
-    top: 1.3369375rem;
-    left: 48.250px; /* 7% */
-    left: 3.015625rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
-
-.imgimg0, .imgimg6{
-    width: 122.750px; /* 20% */
-    height: 57.797px; /* 15% */
-    height: 3.6123125rem;
-    margin-left: 390px;
-}
-
-.imgimg1{
-    width: 460.312px; /* 75% */
-    height: 96.328px; /* 25% */
-}
-
-.imgimg2{
-    width: 40%;
-    height: 45%;
-}
-
-.imgimg3{
-    margin-left: 60px;
-    width: 20%;
-    height: 15%;
-}
-
-.imgimg4{
-    margin-left: 60px;
-    width: 60%;
-    height: 13%;
-}
-
-.imgimg5{
-    margin-left: 60px;
-    width: 70%;
-    height: 50%;
-}
-
-.imgimg7{
-    width: 50%;
-    height: 25%;
-}
-
-.imgimg8{
-    width: 70%;
-    height: 55%;
-}
-
-.box1>a{
-    position: absolute;
-    bottom: 30px;
-    left: 250px;
-    width: 162.666666667px;
-    height: 55px;
-    line-height: 55px;
-    text-align: center;
-    color: #ffffff;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 30px;
-    background-color: #3A8DFD;
-    border: 1px solid #cccccc;
-}
-
-.box1>a:hover{
-    color: #FFFF00;
+.mainDiv .videoWrap video {
+  transform: translateY(-50%) scale(0.8);
+  width: 100%;
 }
