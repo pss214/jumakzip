@@ -25,13 +25,16 @@ function dbcon() {
     port: "3306",
   });
   con.connect();
-  console.log("db connect");
+  console.log('db connect');
+  return con
 }
 const dbconn = dbcon();
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+app.use(express.json());
+app.use(bodyparser.urlencoded({extend:false}));
 app.use("/", express.static("./"));
 app.listen(3000, function (err) {
   if (err) throw err;
@@ -44,26 +47,6 @@ app.use(expressLayouts);
 app.set("layout", "layouts/layout");
 app.set("layout extractScripts", true);
 app.set("layout extractStyle", true);
-
-//video 가져오는 경로
-app.get("/video/:name", function (req, res) {
-  var name = req.params.name;
-  console.log("이미지 요청: " + "./views/video/" + name);
-  res.sendFile(path.join(__dirname, "views", "/video/" + name));
-});
-
-//css 가져오는 경로
-app.get("/css/:name", function (req, res) {
-  var name = req.params.name;
-  console.log("css 요청: " + "./views/css/" + name);
-  res.sendFile(path.join(__dirname, "views", "/css/" + name));
-});
-//js 가져오는 경로
-app.get("/js/:name", function (req, res) {
-  var name = req.params.name;
-  console.log("js 요청: " + "./views/js/" + name);
-  res.sendFile(path.join(__dirname, "views", "/js/" + name));
-});
 
 // 페이지 로드 코드들 ----------------------------------------------------------
 
@@ -90,9 +73,67 @@ app.get("/info", function (req, res) {
   res.render("info", { title: "info" });
 });
 
+//회원가입페이지 로드
+app.get("/signup", function (req, res) {
+  res.render("signup", { title: "회원가입" ,
+    style: ""
+  });
+});
+//회원가입 이후 데이터를 db에 저장하는 코드
+app.post("/signup", async function(req,res){
+  var id = req.body.id
+  var pw = req.body.pw
+  var phone = req.body.phone
+  var nickname = req.body.nickname
+  var isad = req.body.ad
+  
+  var sql = `insert into account(username,password,phone,nickname,usertype,isad) 
+  value ('${id}','${pw}','${phone}','${nickname}', 'user','${isad}')`
+  dbconn.query(sql, function(err,results,fields){
+    if(err){
+      console.error("회원가입 데이터 기입 실패 : ",err)
+      res.status(400).send(`회원가입이 실패되었습니다. 다시 입력해주세요.`)
+    }
+    res.status(201).send("완료되었습니다!")
+  })
+})
+
+app.post("/signin", function(req,res){
+  var id = req.body.id
+  var pw = req.body.pw
+  var sql = `select * from account where id='${id}'`
+
+  dbconn.query(sql, function(err,results, fields){
+    if (err) {
+      console.log('회원을 찾을 수 없음!')
+    }
+    if (results.password != pw) {
+      res.status(400).send(`로그인이 실패되었습니다. 다시 입력해주세요.`)
+    }
+  })
+})
+
+//파일 가져오기 ------------------------------
+
+//video 가져오는 경로
+app.get("/video/:name", function (req, res) {
+  var name = req.params.name;
+  console.log("이미지 요청: " + "./views/video/" + name);
+  res.sendFile(path.join(__dirname, "views", "/video/" + name));
+});
+
 //image 가져오는 경로
 app.get("/image/:name", function (req, res) {
   var name = req.params.name;
-  console.log("이미지 요청: " + "./views/image/" + name);
   res.sendFile(path.join(__dirname, "views", "/image/" + name));
+});
+//css 가져오는 경로
+app.get("/css/:name", function (req, res) {
+  var name = req.params.name;
+  res.sendFile(path.join(__dirname, "views", "/css/" + name));
+});
+//js 가져오는 경로
+app.get("/js/:name", function (req, res) {
+  var name = req.params.name;
+  res.sendFile(path.join(__dirname, "views", "/js/" + name));
 });
