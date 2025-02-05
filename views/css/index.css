@@ -1,0 +1,99 @@
+@keyframes mouseUpDown {
+  0% {
+    transform: translateY(10%);
+  }
+  50% {
+    transform: translateY(-10%);
+  }
+  100% {
+    transform: translateY(10%);
+  }
+}
+
+@keyframes lineIncrease {
+  0% {
+    transform-origin: top;
+    transform: rotateX(90deg);
+  }
+  60% {
+    transform-origin: bottom;
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform-origin: bottom;
+    transform: rotateX(90deg);
+  }
+}
+
+main {
+  margin: 0;
+  width: 100%;
+}
+.mainVideoDiv {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  left: 0;
+  top: -70;
+}
+.mainVideoDiv video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.mainVideoDiv .tagsOnVideo {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 110px;
+}
+.mainVideoDiv .tagsOnVideo h2 {
+  font-size: 125px;
+  font-weight: 800;
+  color: white;
+  margin-top: 40vh;
+  font-family: "Rubik", serif;
+  line-height: 140px;
+}
+.mainVideoDiv .tagsOnVideo p {
+  margin-left: 5px;
+  font-size: 28px;
+  color: white;
+}
+.mainVideoDiv .tagsOnVideo .scrollIcons {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 25px;
+  animation: mouseUpDown 1500ms infinite;
+}
+.mainVideoDiv .tagsOnVideo .scrollIcons .mouseImage {
+  filter: brightness(0) invert(1);
+  width: 40px;
+  margin-bottom: 25px;
+}
+.mainVideoDiv .tagsOnVideo .scrollIcons .mouseLine {
+  width: 1px;
+  height: 70px;
+  background: #fff;
+  animation: lineIncrease 2000ms infinite;
+}
+
+.mainDiv {
+  width: 1400px;
+  margin: 0 auto;
+}
+.mainDiv .videoWrap {
+  width: 100%;
+  height: 340px;
+  overflow: hidden;
+}
+.mainDiv .videoWrap video {
+  transform: translateY(-50%) scale(0.8);
+  width: 100%;
+}
