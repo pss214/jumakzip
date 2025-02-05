@@ -4,14 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
-    <link rel="stylesheet" href="css/index.css">
-    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=pnbzlotkpu&callback=CALLBACK_FUNCTION"s></script>
-    <script type="text/javascript" src="js/index.js"></script>
+    <link rel="stylesheet" href="css/index.css" />
+    <script
+      type="text/javascript"
+      src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=pnbzlotkpu&callback=CALLBACK_FUNCTION"
+      s
+    ></script>
+    <script type="text/javascript" src="js/index.js" defer></script>
   </head>
   <body>
     <main>
       <div class="mainVideoDiv">
-        <video src="video/mainVideo.mp4" loop autoplay muted></video>
+        <div class="videoWrap">
+          <video src="video/mainVideo.mp4" loop autoplay muted></video>
+        </div>
         <div class="tagsOnVideo">
           <h2>Rest at JUMAK</h2>
           <p>
@@ -23,16 +29,12 @@
           </div>
         </div>
       </div>
-      <div class="mainDiv">
-        <div class="videoWrap">
-          <h2>Rest at JUMAK</h2>
-          <p>
-            머물기만 해도 편안이 느껴지는 곳, 주막집에서 사랑하는 <br />
-            연인,친구,가족들과 함께 편안하고 행복한 추억 만들어보세요.
-          </p>
-        </div>
-      </div>
+      <!-- <h2>Rest at JUMAK</h2>
+      <p>
+        머물기만 해도 편안이 느껴지는 곳, 주막집에서 사랑하는 <br />
+        연인,친구,가족들과 함께 편안하고 행복한 추억 만들어보세요.
+      </p>
+      <div class="mainDiv"></div> -->
     </main>
-    <script src="/js/index.js"></script>
   </body>
 </html>

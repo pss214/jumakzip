@@ -1,4 +1,3 @@
-
 @keyframes mouseUpDown {
   0% {
     transform: translateY(10%);
@@ -36,12 +35,17 @@ main {
   height: 100vh;
   left: 0;
   top: -70;
+  transition: all 600ms;
 }
-.mainVideoDiv video {
+.mainVideoDiv .videoWrap {
+  overflow: hidden;
+}
+.mainVideoDiv .videoWrap video {
   position: absolute;
   width: 100%;
   height: 100%;
   z-index: -1;
+  transition: all 600ms;
 }
 .mainVideoDiv .tagsOnVideo {
   position: absolute;
@@ -49,6 +53,7 @@ main {
   width: 100%;
   height: 100%;
   padding: 0 110px;
+  transition: all 400ms;
 }
 .mainVideoDiv .tagsOnVideo h2 {
   font-size: 125px;
@@ -89,7 +94,7 @@ main {
   width: 1400px;
   margin: 0 auto;
 }
-.mainDiv .videoWrap {
+/* .mainDiv .videoWrap {
   width: 100%;
   height: 340px;
   overflow: hidden;
@@ -97,4 +102,4 @@ main {
 .mainDiv .videoWrap video {
   transform: translateY(-50%) scale(0.8);
   width: 100%;
-}
+} */
