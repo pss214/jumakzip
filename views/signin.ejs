@@ -3,22 +3,52 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/signin.css" />
     <title><%- title %></title>
   </head>
   <body>
-    <main>
-      <div class="logInContainer">
+    <div class="container">
+      <div class="login_wrap">
+        <img src="/image/logo0.png" />
         <form action="/login" method="post">
-          <input type="text" name="id" placeholder="아이디" />
-          <input type="text" name="pw" placeholder="비밀번호" />
-          <button type="submit">로그인</button>
+          <div class="inner_line">
+            <div class="login_box">
+                <div class="input_item id">
+                  <input
+                    class="input_pw"
+                    type="text"
+                    id="id"
+              
+                    placeholder="아이디"
+                  />
+                </div>
+                <div style="height: 15px;"></div>
+                <div class="input_item id">
+                  <!-- 아이디 창 안에 텍스트  -->
+                  <input
+                    class="input_pw"
+                    type="text"
+                    id="pw"
+                    placeholder="비밀번호"
+                  />
+                </div>
+                <div id = "iderror" class = "psg"
+            </div>
+            <div style="height: 15px;"></div>
+            <div class="input_item id">
+              <input class="input_id submit" type="button" onclick="ok()" value="로그인">
+          </div>
+            <!-- 버튼(로그인) 을 클릭하면 폼 서버로 제출이 된다. -->
+          </div>
+        </div>
           <ul>
             <li>아이디 찾기</li>
             <li>비밀번호 찾기</li>
             <li>회원가입</li>
           </ul>
         </form>
-      </div>
-    </main>
+      
+    </div>
+    <script src="/js/signin.js"></script>
   </body>
 </html>
