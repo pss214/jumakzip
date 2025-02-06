@@ -48,3 +48,7 @@
     box-sizing: border-box;
     z-index: 5;
 }
+
+.msg{
+    color: red;
+}

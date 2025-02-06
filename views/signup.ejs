@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <h1 style="text-align: center;">회원가입</h1>
+        <h1 style="text-align: center;">회원가입</h1>   
         <div class="login_wrap">
             <form method="post" action="/signup">
                 <div class="login_box">
@@ -16,10 +16,69 @@
                         <img src="/image/cilpeople.png">
                         <input type="text" class="input_id" name="id" id="id" placeholder="아이디">
                     </div>
+                    
+                    <div class="input_item id">  
+                        <img src="/image/password.png">
+                        <input type="password" class="input_pw" name="pw" id="pw" placeholder="비밀번호">
+                    </div>
+                    <div class="input_item id">
+                        <img src="/image/password.png"> 
+                        <input type="password" class="input_pw" name="pwck" id="pwck" placeholder="비밀번호확인">
+                    </div>
+                    <div class="input_item">
+                        <img src="/image/smartphone.png">
+                        <div style="line-height: 60px;">
+                            <select id="num1" name="num1"> 
+                        <!-- 옵션중에서 선택을 해라  010을 선택했으면 num1이 010이 됨됨-->
+                                <option selected>010</option>  
+                                <option>011</option>
+                                <option>012</option>
+                            </select>-
+                            <input type="text" name="num2" size="4" maxlength="4">-
+                            <input type="text" name="num3" size="4" maxlength="4">
+                        </div>
+                        
+                        
+                    </div>
+                    <div class="input_item id">  
+                        <img src="/image/cilpeople.png">
+                        <input type="text" class="input_pw" name="nickname" id="nickname" placeholder="닉네임"> 
+                    </div>
+                    <div style="height: 20px;"></div>
+                    <div id="iderr" class="msg">- 아이디가 유효하지 않습니다. (문자와 숫자 포함 4글자 이상 12글자 이하)</div>
+                    <div id="pwerr" class="msg">- 비밀번호가 유효하지 않습니다. (문자와 숫자,특수문자포함 8글자 이상)</div>
+                    <div id="pwckerr" class="msg">- 비밀번호와 같지 않습니다. </div>
+                    <div id="nicknameerr" class="msg">-닉네임이 유효하지 않습니다. (10글자 이하로 작성하시오.)</div> 
+                    <div class="input_item">
+                        <input style="width: 30px; height: 30px; margin-top: 15px; margin-left: 10px;" type="checkbox"  name="ad" id="ad">
+                        <p style="margin-left: 20px; line-height: 60px;">
+                            광고수신동의(선택)
+                        </p>
+
+                    </div>
+                    <div class="input_item">
+                        <input style="width: 30px; height: 30px; margin-top: 15px; margin-left: 10px;" type="checkbox"  id="im">
+                        <p style="margin-left: 20px; line-height: 60px;">
+                            개인정보 수집 및 이용(필수)
+                        </p>
+                        
+
+                    </div>
+                    <div id="inforerr" class="msg">-개인정보 수집 및 이용은 필수입니다.
+
+                    </div>
+
+                    <div style="height: 30px;">
+                    </div>
+                    <div class="input_item id">
+                        <input class="input_id" type="button" onclick="ok()" value="가입하기"> 
+                    </div>
+                </div>
                 </div>
             </form>
         </div>
         
     </div>
+    <script src="/js/signup.js"></script>
 </body>
 </html>
