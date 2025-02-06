@@ -1,4 +1,3 @@
-
 @keyframes mouseUpDown {
   0% {
     transform: translateY(10%);
@@ -36,12 +35,20 @@ main {
   height: 100vh;
   left: 0;
   top: -70;
+  transition: all 600ms;
 }
-.mainVideoDiv video {
+.mainVideoDiv .videoWrap {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+.mainVideoDiv .videoWrap video {
   position: absolute;
   width: 100%;
   height: 100%;
+  object-fit: cover;
   z-index: -1;
+  transition: all 600ms;
 }
 .mainVideoDiv .tagsOnVideo {
   position: absolute;
@@ -49,6 +56,7 @@ main {
   width: 100%;
   height: 100%;
   padding: 0 110px;
+  transition: all 800ms;
 }
 .mainVideoDiv .tagsOnVideo h2 {
   font-size: 125px;
@@ -71,7 +79,7 @@ main {
   left: 50%;
   transform: translateX(-50%);
   bottom: 25px;
-  animation: mouseUpDown 1500ms infinite;
+  animation: mouseUpDown 2000ms infinite;
 }
 .mainVideoDiv .tagsOnVideo .scrollIcons .mouseImage {
   filter: brightness(0) invert(1);
@@ -88,13 +96,125 @@ main {
 .mainDiv {
   width: 1400px;
   margin: 0 auto;
+  opacity: 0;
+  transition: all 600ms;
 }
-.mainDiv .videoWrap {
+.mainDiv .mainText {
+  text-align: center;
+}
+.mainDiv .mainText h2 {
+  font-size: 72px;
+  font-weight: 900;
+  margin-bottom: 22px;
+}
+.mainDiv .mainText p {
+  font-size: 22px;
+  font-weight: 300;
+  color: #666;
+  line-height: 33px;
+  margin-bottom: 300px;
+}
+
+.mainDiv .roomIntroduction {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
+}
+
+.mainDiv .roomIntroduction .article1 {
+  display: flex;
+  flex-direction: column;
+  row-gap: 50px;
+  padding-top: 50px;
+  padding-right: 50px;
+}
+.mainDiv .roomIntroduction .article1 .room1Img {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
-  height: 340px;
+  aspect-ratio: 16/9;
+  background-color: #3a8dfd;
+  border-radius: 20px;
   overflow: hidden;
+
+  opacity: 0;
+  transform: translateY(30%);
+  transition: all 800ms;
 }
-.mainDiv .videoWrap video {
-  transform: translateY(-50%) scale(0.8);
+.mainDiv .roomIntroduction .article1 .room1Img img {
   width: 100%;
+  object-fit: cover;
+}
+.mainDiv .roomIntroduction .article1 .room2Text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  aspect-ratio: 16/9;
+  padding: 0 40px;
+
+  opacity: 0;
+  transform: translateY(30%);
+  transition: all 400ms;
+}
+.mainDiv .roomIntroduction .article1 .room2Text p:nth-child(1) {
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+.mainDiv .roomIntroduction .article1 .room2Text p:nth-child(2) {
+  font-size: 24px;
+  font-weight: 200;
+}
+
+.mainDiv .roomIntroduction .article2 {
+  display: flex;
+  flex-direction: column;
+  row-gap: 50px;
+  padding-top: 50px;
+  padding-left: 50px;
+  border-left: 1px dashed #aaa;
+}
+.mainDiv .roomIntroduction .article2 .room2Img {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background-color: #3a8dfd;
+  border-radius: 20px;
+  overflow: hidden;
+
+  opacity: 0;
+  transform: translateY(30%);
+  transition: all 800ms;
+}
+.mainDiv .roomIntroduction .article2 .room2Img img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.mainDiv .roomIntroduction .article2 .room1Text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  aspect-ratio: 16/9;
+  padding: 0 40px;
+
+  opacity: 0;
+  transform: translateY(30%);
+  transition: all 800ms;
+}
+.mainDiv .roomIntroduction .article2 .room1Text p:nth-child(1) {
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+.mainDiv .roomIntroduction .article2 .room1Text p:nth-child(2) {
+  font-size: 24px;
+  font-weight: 200;
 }
