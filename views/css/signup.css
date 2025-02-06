@@ -31,8 +31,13 @@
   font-weight: 400;
   line-height: 22px;
   letter-spacing: -0.2px;
+  border-radius: 8px;
   color: #1e1e23;
   z-index: 5;
+}
+.input_id.submit {
+  background-color: #3a8dfd;
+  color: white;
 }
 .text_label {
   display: inline-block;

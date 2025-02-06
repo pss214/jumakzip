@@ -15,8 +15,8 @@
                     <div class="input_item id">
                         <img src="/image/cilpeople.png">
                         <input type="text" class="input_id" name="id" id="id" placeholder="아이디">
+                        <input type="button" id="id_ck" onclick="idck()" value="중복">
                     </div>
-                    
                     <div class="input_item id">  
                         <img src="/image/password.png">
                         <input type="password" class="input_pw" name="pw" id="pw" placeholder="비밀번호">
@@ -30,12 +30,12 @@
                         <div style="line-height: 60px;">
                             <select id="num1" name="num1"> 
                         <!-- 옵션중에서 선택을 해라  010을 선택했으면 num1이 010이 됨됨-->
-                                <option selected>010</option>  
-                                <option>011</option>
-                                <option>012</option>
+                                <option value="010">010</option>  
+                                <option value="011">011</option>
+                                <option value="012">012</option>
                             </select>-
-                            <input type="text" name="num2" size="4" maxlength="4">-
-                            <input type="text" name="num3" size="4" maxlength="4">
+                            <input type="text" id="num2" size="4" maxlength="4">-
+                            <input type="text" id="num3" size="4" maxlength="4">
                         </div>
                         
                         
@@ -46,9 +46,11 @@
                     </div>
                     <div style="height: 20px;"></div>
                     <div id="iderr" class="msg">- 아이디가 유효하지 않습니다. (문자와 숫자 포함 4글자 이상 12글자 이하)</div>
+                    <div id="idckerr" class="msg">- 아이디 중복확인이 완료되지 않았습니다. 중복버튼을 눌러주세요</div>
                     <div id="pwerr" class="msg">- 비밀번호가 유효하지 않습니다. (문자와 숫자,특수문자포함 8글자 이상)</div>
                     <div id="pwckerr" class="msg">- 비밀번호와 같지 않습니다. </div>
                     <div id="nicknameerr" class="msg">-닉네임이 유효하지 않습니다. (10글자 이하로 작성하시오.)</div> 
+                    <div id="phoneerr" class="msg">-전화번호가 유효하지 않습니다.</div>
                     <div class="input_item">
                         <input style="width: 30px; height: 30px; margin-top: 15px; margin-left: 10px;" type="checkbox"  name="ad" id="ad">
                         <p style="margin-left: 20px; line-height: 60px;">
@@ -71,7 +73,7 @@
                     <div style="height: 30px;">
                     </div>
                     <div class="input_item id">
-                        <input class="input_id" type="button" onclick="ok()" value="가입하기"> 
+                        <input class="input_id submit" type="button" onclick="ok()" value="가입하기"> 
                     </div>
                 </div>
                 </div>

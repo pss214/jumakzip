@@ -11,6 +11,7 @@ const cookieParser = require('cookie-parser')
 const cookie = require('cookie');
 const { title } = require("process");
 var ejs=require('ejs');
+const bcrypt = require('bcrypt');
 //데이터베이스 연결 함수
 function dbcon() {
   db = null;
@@ -85,23 +86,52 @@ app.get("/signup", function (req, res) {
   });
 });
 //회원가입 이후 데이터를 db에 저장하는 코드
-app.post("/signup", async function(req,res){
+app.post("/idck", function(req,res){
+  
+  var sql = `select username from account where username='${req.body.id}'`
+  dbconn.query(sql,function(err,results,fields){
+      if (err) {
+        console.error(err)
+        res.status(500).json(err)
+        return
+      }
+      if (results.length === 0) {
+        res.status(200).json({ "data":null,"msg":"사용 가능한 아이디입니다"})
+      }else{
+        res.status(200).json({ "data":results,"msg":"이미 사용중인 아이디입니다"})
+      }
+  })
+})
+app.post("/signup", function(req,res){
   var id = req.body.id
   var pw = req.body.pw
   var phone = req.body.phone
   var nickname = req.body.nickname
   var isad = req.body.ad
-  
-  var sql = `insert into account(username,password,phone,nickname,usertype,isad) 
-  value ('${id}','${pw}','${phone}','${nickname}', 'user','${isad}')`
-  dbconn.query(sql, function(err,results,fields){
+  var hashpw = ""
+  bcrypt.genSalt(10,(err,salt)=>{
     if(err){
-      console.error("회원가입 데이터 기입 실패 : ",err)
-      res.status(400).json({ "msg" : "회원가입이 실패되었습니다"})
+      console.error(err)
       return
     }
-    res.status(201).json({ "msg" : "회원가입이 완료되었습니다!"})
-  })
+    bcrypt.hash(pw, salt,(err,hash)=>{
+      if(err){
+        console.error(err)
+        return
+      }
+      hashpw=hash
+      var sql = `insert into account(username,password,phone,nickname,usertype,isad) 
+      value ('${id}','${hashpw}','${phone}','${nickname}', 'user','${isad}')`
+      dbconn.query(sql, function(err,results,fields){
+        if(err){
+          console.error("회원가입 데이터 기입 실패 : ",err)
+          res.status(400).json({ "msg" : "회원가입이 실패되었습니다"})
+          return
+        }
+        res.status(201).json({ "msg" : "회원가입이 완료되었습니다!"})
+      })
+        })
+      })
 })
 //로그인 성공 이후 세션쿠키 전달하는 코드
 app.post("/signin", function(req,res){
@@ -110,14 +140,26 @@ app.post("/signin", function(req,res){
   var sql = `select password,usertype from account where username='${id}'`
 
   dbconn.query(sql, function(err,results, fields){
-    if (results.length==0 || results[0].password != pw) {
-      console.log('회원을 찾을 수 없음!')
-      res.status(400).json({"msg" : "로그인을 실패했습니다."})
+    if(err){
+      console.error(err)
+      res.redirect("/error")
       return
     }
-    res.cookie("id",id,{maxAge: 60000*60*3,})
-    res.cookie("usertype",results[0].usertype,{maxAge: 60000*60*3,})
-    res.redirect("/")
+    bcrypt.compare(pw,results[0].password,(err,ispassword)=>{
+      if(err){
+        console.error(err)
+        res.redirect("/error")
+        return
+      }
+      if (results.length > 0 || ispassword) {
+        res.cookie("id",id,{maxAge: 60000*60*3,})
+        res.cookie("usertype",results[0].usertype,{maxAge: 60000*60*3,})
+        res.redirect("/")
+      }else{
+        res.status(400).json({"msg" : "로그인을 실패했습니다."})
+        return
+      }
+    })
   })
 })
 //로그아웃 하면 쿠키(세션) 삭제
@@ -129,7 +171,6 @@ app.get("/logout",function(req,res){
 //마이페이지 조회 코드
 app.get("/mypage",function(req,res){
   var user = req.cookies.id
-  console.log(user)
   if(user == undefined){
     res.redirect("/login")
     return
@@ -167,8 +208,10 @@ app.delete("/mypage",function(req,res){
   }
   var sql = `delete * from account where username='${user.id}'`
   dbconn.query(sql,function(err,results,fields){
-    if(err || results.length==0)
+    if(err || results.length==0){
       res.status(400).json({"msg":"회원 조회를 실패했습니다."})
+      return
+    }
     res.status(200).json({
       "msg":"회원 조회 성공",
       "user": results[0]
@@ -180,7 +223,6 @@ app.delete("/mypage",function(req,res){
 //video 가져오는 경로
 app.get("/video/:name", function (req, res) {
   var name = req.params.name;
-  console.log("이미지 요청: " + "./views/video/" + name);
   res.sendFile(path.join(__dirname, "views", "/video/" + name));
 });
 
