@@ -71,27 +71,15 @@ app.get("/signin", function (req, res) {
 
 //예약페이지 로드
 app.get("/reservation", function (req, res) {
-  res.render("reservation", { 
-    title: "reservation",
-    style:""
-
-   });
+  res.render("reservation", { title: "reservation",style:"" });
 });
 //예약페이지 로드
 app.get("/reservation/detail", function (req, res) {
-  res.render("reservation_detail", { 
-    title: "reservation",
-    style:""
-
-   });
+  res.render("reservation_detail", { title: "reservation_detail",style:"" });
 });
 //예약페이지 로드
-app.get("/reservation/detail/confirmationandpayment", function (req, res) {
-  res.render("reservation_confirmationandpayment", { 
-    title: "reservation",
-    style:""
-
-   });
+app.get("/reservation/pay", function (req, res) {
+  res.render("reservation_pay", { title: "reservation_pay",style:"" });
 });
 
 //소개페이지 로드

@@ -7,6 +7,7 @@ header {
   justify-content: space-between;
   align-items: center;
   position: fixed;
+  z-index: 50;
 }
 
 header .logo {
@@ -46,6 +47,7 @@ header .menu li:hover {
   padding-top: 20px;
   top: 70px;
   justify-content: center;
+  z-index: 50;
 }
 .detailMenuBackground .detailMenu {
   width: 600px;
