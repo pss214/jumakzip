@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/mypage.css" />
+  </head>
+  <body>
+    <main>
+      <section class="sideBar">
+        <span>마이 페이지</span>
+        <ul>
+          <li>개인정보 수정</li>
+          <li>예약 내역 조회</li>
+        </ul>
+      </section>
+      <div class="contentsWrap">
+        <section class="content">
+          <p>별난 감자님</p>
+          <section class="updatePersonalInfo">
+            <ul>
+              <li>
+                <span>닉네임</span>
+                <input type="text" placeholder="별난 감자" />
+                <button>수정하기</button>
+              </li>
+              <li>
+                <span>아이디</span>
+                <input type="text" value="<%= data.username %>" readonly />
+              </li>
+              <li>
+                <span>비밀번호</span>
+                <input type="text" placeholder="별난 감자" />
+                <button>수정하기</button>
+              </li>
+              <li>
+                <span>비밀번호 확인</span>
+                <input type="text" placeholder="별난 감자" />
+                <button>수정하기</button>
+              </li>
+              <li>
+                <span>전화번호</span>
+                <input
+                  type="text"
+                  placeholder="별난 감자"
+                  value="010-3015-4954"
+                  readonly
+                />
+                <button>수정하기</button>
+              </li>
+              <li>
+                <span>광고 수신 동의</span>
+                <input type="text" placeholder="별난 감자" />
+                <button>수정하기</button>
+              </li>
+            </ul>
+          </section>
+          <section class="checkReservationDetail"></section>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

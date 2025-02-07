@@ -3,43 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><% title %></title>
-    <link rel="stylesheet" href="css/mypage.css" />
+    <title><%= title %></title>
   </head>
   <body>
     <main>
       <div class="checkPassword">
         <span>비밀번호 인증</span>
-        <input type="password" id="pw" />
-        <button onclick="checkPassword()">확인</button>
-      </div>
-      <div class="contentsWrap">
-        <section class="sideBar">
-          <span>마이 페이지</span>
-          <ul>
-            <li>개인정보 수정</li>
-            <li>예약 내역 조회</li>
-          </ul>
-        </section>
-        <section class="content">
-          <section class="updatePersonalInfo">
-            <ul>
-              <li>
-                <span>닉네임</span>
-                <input type="text" placeholder="별난 감자" />
-                <button>수정하기</button>
-              </li>
-              <li><span>아이디</span></li>
-              <li><span>비밀번호</span></li>
-              <li><span>비밀번호 확인</span></li>
-              <li><span>전화번호</span></li>
-              <li><span>광고 수신 동의</span></li>
-            </ul>
-          </section>
-          <section class="checkReservationDetail"></section>
-        </section>
+        <form method="post" action="/mypage_detail">
+          <input type="password" name="pw" />
+          <button type="submit">확인</button>
+        </form>
       </div>
     </main>
-    <script src="/js/mypage.js"></script>
   </body>
 </html>
