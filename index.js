@@ -7,11 +7,11 @@ const bodyparser = require("body-parser");
 const fs = require("fs");
 const http = require("http");
 var mysql = require("mysql2");
-const cookieParser = require('cookie-parser')
-const cookie = require('cookie');
+const cookieParser = require("cookie-parser");
+const cookie = require("cookie");
 const { title } = require("process");
-var ejs=require('ejs');
-const bcrypt = require('bcrypt');
+var ejs = require("ejs");
+const bcrypt = require("bcrypt");
 //데이터베이스 연결 함수
 function dbcon() {
   db = null;
@@ -30,8 +30,8 @@ function dbcon() {
     port: "3306",
   });
   con.connect();
-  console.log('db connect');
-  return con
+  console.log("db connect");
+  return con;
 }
 const dbconn = dbcon();
 
@@ -39,8 +39,8 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 app.use(express.json());
-app.use(bodyparser.urlencoded({extend:false}));
-app.use(cookieParser('jumakzip'))
+app.use(bodyparser.urlencoded({ extend: false }));
+app.use(cookieParser("jumakzip"));
 app.use("/", express.static("./"));
 app.listen(3000, function (err) {
   if (err) throw err;
@@ -81,143 +81,145 @@ app.get("/info", function (req, res) {
 
 //회원가입페이지 로드
 app.get("/signup", function (req, res) {
-  res.render("signup", { title: "회원가입" ,
-    style: ""
-  });
+  res.render("signup", { title: "회원가입", style: "" });
 });
 //회원가입 이후 데이터를 db에 저장하는 코드
-app.post("/idck", function(req,res){
-  
-  var sql = `select username from account where username='${req.body.id}'`
-  dbconn.query(sql,function(err,results,fields){
+app.post("/idck", function (req, res) {
+  var sql = `select username from account where username='${req.body.id}'`;
+  dbconn.query(sql, function (err, results, fields) {
+    if (err) {
+      console.error(err);
+      res.status(500).json(err);
+      return;
+    }
+    if (results.length === 0) {
+      res.status(200).json({ data: null, msg: "사용 가능한 아이디입니다" });
+    } else {
+      res
+        .status(200)
+        .json({ data: results, msg: "이미 사용중인 아이디입니다" });
+    }
+  });
+});
+app.post("/signup", function (req, res) {
+  var id = req.body.id;
+  var pw = req.body.pw;
+  var phone = req.body.phone;
+  var nickname = req.body.nickname;
+  var isad = req.body.ad;
+  var hashpw = "";
+  bcrypt.genSalt(10, (err, salt) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    bcrypt.hash(pw, salt, (err, hash) => {
       if (err) {
-        console.error(err)
-        res.status(500).json(err)
-        return
+        console.error(err);
+        return;
       }
-      if (results.length === 0) {
-        res.status(200).json({ "data":null,"msg":"사용 가능한 아이디입니다"})
-      }else{
-        res.status(200).json({ "data":results,"msg":"이미 사용중인 아이디입니다"})
-      }
-  })
-})
-app.post("/signup", function(req,res){
-  var id = req.body.id
-  var pw = req.body.pw
-  var phone = req.body.phone
-  var nickname = req.body.nickname
-  var isad = req.body.ad
-  var hashpw = ""
-  bcrypt.genSalt(10,(err,salt)=>{
-    if(err){
-      console.error(err)
-      return
-    }
-    bcrypt.hash(pw, salt,(err,hash)=>{
-      if(err){
-        console.error(err)
-        return
-      }
-      hashpw=hash
+      hashpw = hash;
       var sql = `insert into account(username,password,phone,nickname,usertype,isad) 
-      value ('${id}','${hashpw}','${phone}','${nickname}', 'user','${isad}')`
-      dbconn.query(sql, function(err,results,fields){
-        if(err){
-          console.error("회원가입 데이터 기입 실패 : ",err)
-          res.status(400).json({ "msg" : "회원가입이 실패되었습니다"})
-          return
+      value ('${id}','${hashpw}','${phone}','${nickname}', 'user','${isad}')`;
+      dbconn.query(sql, function (err, results, fields) {
+        if (err) {
+          console.error("회원가입 데이터 기입 실패 : ", err);
+          res.status(400).json({ msg: "회원가입이 실패되었습니다" });
+          return;
         }
-        res.status(201).json({ "msg" : "회원가입이 완료되었습니다!"})
-      })
-        })
-      })
-})
+        res.status(201).json({ msg: "회원가입이 완료되었습니다!" });
+      });
+    });
+  });
+});
 //로그인 성공 이후 세션쿠키 전달하는 코드
-app.post("/signin", function(req,res){
-  var id = req.body.id
-  var pw = req.body.pw
-  var sql = `select password,usertype from account where username='${id}'`
+app.post("/signin", function (req, res) {
+  var id = req.body.id;
+  var pw = req.body.pw;
+  var sql = `select password,usertype from account where username='${id}'`;
 
-  dbconn.query(sql, function(err,results, fields){
-    if(err){
-      console.error(err)
-      res.redirect("/error")
-      return
+  dbconn.query(sql, function (err, results, fields) {
+    if (err) {
+      console.error(err);
+      res.redirect("/error");
+      return;
     }
-    bcrypt.compare(pw,results[0].password,(err,ispassword)=>{
-      if(err){
-        console.error(err)
-        res.redirect("/error")
-        return
+    bcrypt.compare(pw, results[0].password, (err, ispassword) => {
+      if (err) {
+        console.error(err);
+        res.redirect("/error");
+        return;
       }
       if (results.length > 0 || ispassword) {
-        res.cookie("id",id,{maxAge: 60000*60*3,})
-        res.cookie("usertype",results[0].usertype,{maxAge: 60000*60*3,})
-        res.redirect("/")
-      }else{
-        res.status(400).json({"msg" : "로그인을 실패했습니다."})
-        return
+        res.cookie("id", id, { maxAge: 60000 * 60 * 3 });
+        res.cookie("usertype", results[0].usertype, { maxAge: 60000 * 60 * 3 });
+        res.redirect("/");
+      } else {
+        res.status(400).json({ msg: "로그인을 실패했습니다." });
+        return;
       }
-    })
-  })
-})
+    });
+  });
+});
 //로그아웃 하면 쿠키(세션) 삭제
-app.get("/logout",function(req,res){
-  res.clearCookie('id')
-  res.clearCookie('usertype')
-  res.redirect('/')
-})
+app.get("/logout", function (req, res) {
+  res.clearCookie("id");
+  res.clearCookie("usertype");
+  res.redirect("/");
+});
 //마이페이지 조회 코드
-app.get("/mypage",function(req,res){
-  var user = req.cookies.id
-  if(user == undefined){
-    res.redirect("/login")
-    return
+app.get("/mypage", function (req, res) {
+  var user = req.cookies.id;
+  if (user == undefined) {
+    res.redirect("/login");
+    return;
   }
-  var sql = `select username,phone,nickname,isad from account where username='${user}'`
-  dbconn.query(sql,function(err,results,fields){
-    if(err || results.length==0){
-      console.error("회원 조회 실패")
-      res.redirect("/error")
-      return
+  var sql = `select username,phone,nickname,isad from account where username='${user}'`;
+  dbconn.query(sql, function (err, results, fields) {
+    if (err || results.length == 0) {
+      console.error("회원 조회 실패");
+      res.redirect("/error");
+      return;
     }
-    res.render("mypage",{
-      title:"mypage",
-      style:""
-    })
-  })
-  
-})
+    res.render("mypage", {
+      title: "mypage",
+      style: "",
+    });
+  });
+});
 //에러 페이지로 이동
-app.get("/error",function(req,res){
-  fs.readFile(path.join(__dirname,"views")+'/error.ejs','utf-8',function(err,data){
-    if(err) throw err;
-    res.send(ejs.render(data,{title:"error"}))
-  })
-})
+app.get("/error", function (req, res) {
+  fs.readFile(
+    path.join(__dirname, "views") + "/error.ejs",
+    "utf-8",
+    function (err, data) {
+      if (err) throw err;
+      res.send(ejs.render(data, { title: "error" }));
+    }
+  );
+});
 //이 외의 페이지로 이동할 경우 notfound페이지로 이동
-app.get("/:url",function(req,res){
-  res.redirect("/")
-})
+app.get("/:url", function (req, res) {
+  res.redirect("/");
+});
 //유저 삭제 코드
-app.delete("/mypage",function(req,res){
-  var user =req.cookies.id
-  if(user == undefined){
-    res.redirect("/login")
+app.delete("/mypage", function (req, res) {
+  var user = req.cookies.id;
+  if (user == undefined) {
+    res.redirect("/login");
   }
-  var sql = `delete * from account where username='${user.id}'`
-  dbconn.query(sql,function(err,results,fields){
-    if(err || results.length==0){
-      res.status(400).json({"msg":"회원 조회를 실패했습니다."})
-      return
+  var sql = `delete * from account where username='${user.id}'`;
+  dbconn.query(sql, function (err, results, fields) {
+    if (err || results.length == 0) {
+      res.status(400).json({ msg: "회원 조회를 실패했습니다." });
+      return;
     }
     res.status(200).json({
-      "msg":"회원 조회 성공",
-      "user": results[0]
-    })
-  })
-})
+      msg: "회원 조회 성공",
+      user: results[0],
+    });
+  });
+});
 //파일 가져오기 ------------------------------
 
 //video 가져오는 경로

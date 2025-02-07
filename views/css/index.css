@@ -95,7 +95,6 @@ main {
 .mainDiv {
   width: 1400px;
   margin: 0 auto;
-  opacity: 0;
   transition: all 600ms;
 }
 .mainDiv .mainText {
@@ -138,9 +137,8 @@ main {
   border-radius: 20px;
   overflow: hidden;
 
-  opacity: 0;
-  transform: translateY(30%);
-  transition: all 800ms;
+  transform: translateY(15%);
+  transition: all 600ms;
 }
 .mainDiv .roomIntroduction .article1 .room1Img img {
   width: 100%;
@@ -155,8 +153,7 @@ main {
   aspect-ratio: 16/9;
   padding: 0 40px;
 
-  opacity: 0;
-  transform: translateY(30%);
+  transform: translateY(15%);
   transition: all 400ms;
 }
 .mainDiv .roomIntroduction .article1 .room2Text p:nth-child(1) {
@@ -187,9 +184,8 @@ main {
   border-radius: 20px;
   overflow: hidden;
 
-  opacity: 0;
-  transform: translateY(30%);
-  transition: all 800ms;
+  transform: translateY(15%);
+  transition: all 600ms;
 }
 .mainDiv .roomIntroduction .article2 .room2Img img {
   width: 100%;
@@ -205,9 +201,8 @@ main {
   aspect-ratio: 16/9;
   padding: 0 40px;
 
-  opacity: 0;
-  transform: translateY(30%);
-  transition: all 800ms;
+  transform: translateY(15%);
+  transition: all 600ms;
 }
 .mainDiv .roomIntroduction .article2 .room1Text p:nth-child(1) {
   font-size: 34px;
@@ -219,21 +214,30 @@ main {
   font-weight: 200;
 }
 
+/* amenitys */
+
 .mainDiv .amenitys {
   display: grid;
   grid-template-columns: 1fr 1fr;
   row-gap: 100px;
   padding: 0 50px;
+  margin-bottom: 150px;
 }
 
-.mainDiv .amenitys h3 {
-  font-size: 44px;
+.subHeading {
   grid-column: 1 / 3;
-  margin-bottom: 50px;
 
-  opacity: 0;
-  transform: translateY(30%);
-  transition: all 800ms;
+  transform: translateY(15%);
+  transition: all 600ms;
+}
+
+.subHeading h2 {
+  font-size: 28px;
+  color: #3a8dfd;
+  margin-bottom: 20px;
+}
+.subHeading h3 {
+  font-size: 40px;
 }
 
 .mainDiv .amenitys article {
@@ -241,39 +245,33 @@ main {
 }
 
 .mainDiv .amenitys .amenitys1 {
-  opacity: 0;
-  transform: translateY(30%);
-  transition: all 800ms;
+  transform: translateY(15%);
+  transition: all 600ms;
 }
 
 .mainDiv .amenitys .amenitys2 {
-  opacity: 0;
-  transform: translateY(30%);
-  transition: all 800ms ease-in-out 200ms;
+  transform: translateY(15%);
+  transition: all 600ms ease-in-out 200ms;
 }
 
 .mainDiv .amenitys .amenitys3 {
-  opacity: 0;
-  transform: translateY(30%);
-  transition: all 800ms ease-in-out 200ms;
+  transform: translateY(15%);
+  transition: all 600ms ease-in-out 200ms;
 }
 
 .mainDiv .amenitys .amenitys4 {
-  opacity: 0;
-  transform: translateY(30%);
-  transition: all 800ms;
+  transform: translateY(15%);
+  transition: all 600ms;
 }
 
 .mainDiv .amenitys .amenitys5 {
-  opacity: 0;
-  transform: translateY(30%);
-  transition: all 800ms;
+  transform: translateY(15%);
+  transition: all 600ms;
 }
 
 .mainDiv .amenitys .amenitys6 {
-  opacity: 0;
-  transform: translateY(30%);
-  transition: all 800ms ease-in-out 200ms;
+  transform: translateY(15%);
+  transition: all 600ms ease-in-out 200ms;
 }
 
 .mainDiv .amenitys article .imgWrap {
@@ -296,4 +294,89 @@ main {
   font-size: 26px;
   font-weight: 500;
   color: #666;
+}
+
+/* touristSpots */
+
+.mainDiv .touristSpots {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 100px;
+  column-gap: 50px;
+  padding: 0 50px;
+  margin-bottom: 150px;
+}
+
+.mainDiv .touristSpots .touristSpot1 {
+  transform: translateY(15%);
+  transition: all 400ms;
+}
+
+.mainDiv .touristSpots .touristSpot2 {
+  transform: translateY(15%);
+  transition: all 400ms ease-in-out 200ms;
+}
+
+.mainDiv .touristSpots .touristSpot3 {
+  transform: translateY(15%);
+  transition: all 400ms ease-in-out 200ms;
+}
+
+.mainDiv .touristSpots .touristSpot4 {
+  transform: translateY(15%);
+  transition: all 400ms;
+}
+
+.mainDiv .touristSpots article:nth-child(even) {
+  padding-left: 50px;
+}
+.mainDiv .touristSpots article:nth-child(odd) {
+  padding-right: 50px;
+}
+
+.mainDiv .touristSpots article .imgWrap {
+  width: 100%;
+  aspect-ratio: 16/9;
+  margin-bottom: 60px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.mainDiv .touristSpots article .imgWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mainDiv .touristSpots article .textWrap h4 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.mainDiv .touristSpots article .textWrap p {
+  font-size: 26px;
+  font-weight: 500;
+  color: #666;
+}
+
+/* way to come */
+
+.mainDiv .wayToCome {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 100px;
+  column-gap: 50px;
+  padding: 0 50px;
+  margin-bottom: 150px;
+}
+.mainDiv .wayToCome .map {
+  grid-column: 1 / 3;
+}
+.mainDiv .wayToCome .map #map {
+  margin-bottom: 30px;
+  transition: all 600ms;
+}
+.mainDiv .wayToCome .map p {
+  font-size: 24px;
+  font-weight: 600;
+  transition: all 600ms;
 }
