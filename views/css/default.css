@@ -1,8 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 * {
   margin: 0;
   box-sizing: border-box;
-  font-family: "Noto Sans KR", serif;
 }
 ul {
   list-style: none;
@@ -13,6 +11,4 @@ a {
 }
 main {
   padding-top: 70px;
-  width: 1562px;
-  margin: 0 auto;
 }
