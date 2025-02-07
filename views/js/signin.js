@@ -31,7 +31,7 @@ function idck() {
     isck = true
     submit.className="input_id submiton"
   }else{
-    isck = true
+    isck = false
     submit.className="input_id submitoff"
   }
 }
