@@ -60,6 +60,7 @@ app.set("layout extractStyle", true);
 app.get("/", function (req, res) {
   res.render("index", {
     title: "main",
+    style: "",
   });
 });
 
@@ -202,7 +203,7 @@ app.get("/:url", function (req, res) {
   res.redirect("/");
 });
 //마이페이지에서 비밀번호 확인 코드
-app.post("/pwck", function (req, res) {
+app.post("/mypage_detail", function (req, res) {
   var user = req.cookies.id;
   var pw = req.body.pw;
 
@@ -220,7 +221,8 @@ app.post("/pwck", function (req, res) {
         return;
       }
       if (results.length > 0 && ispassword) {
-        res.status(200).json({ msg: "비밀번호 확인 성공", data: results[0] });
+        // res.status(200).json({ msg: "비밀번호 확인 성공", data: results[0] });
+        res.render("mypage_detail", { title: "", data: results[0], style: "" });
       } else {
         res.status(400).json({ msg: "비밀번호 확인 실패" });
         return;
@@ -229,7 +231,7 @@ app.post("/pwck", function (req, res) {
   });
 });
 //마이페이지에서 정보 수정 코드
-app.post("/mypage", function (req, res) {
+app.post("/mypageedit", function (req, res) {
   var user = req.cookies.id;
   var isad = req.body.ad;
   var nickname = req.body.nickname;
