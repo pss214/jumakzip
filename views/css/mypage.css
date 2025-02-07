@@ -1,17 +1,7 @@
-.container{
-    display: flex;
-    width: 100%;
-    margin: 0;
+.wrap {
+  position: relative;
 }
-.submenu{
-    padding-top: 50px;
-    padding-left: 70px;
-    padding-right: 60px;
-}
-.subject{
-    display: flex;
-    width: 100%;
-    border-bottom-color: gray;
-    border-bottom-width: 3px;
-    border-bottom-style: inset;
+.sideBar {
+  position: absolute;
+  left: -150px;
 }
