@@ -79,14 +79,19 @@ header .user {
   column-gap: 10px;
   width: 220px;
 }
-header .user .profile {
+header .user .login_profile {
+  display: flex;
   margin-left: auto;
   width: 36px;
   height: 36px;
   border-radius: 100%;
   background: #000;
 }
-header .user .logIn {
+header .user .logout_profile {
+  display: none;
+}
+.on {
+  color: #000;
   cursor: pointer;
   height: 36px;
   border: 1px solid black;
@@ -94,4 +99,13 @@ header .user .logIn {
   padding: 0 26px;
   font-size: 16px;
   line-height: 36px;
+}
+.off {
+  display: none;
+}
+.log_on{
+  display: flex;
+}
+.log_off{
+  display: none;
 }
