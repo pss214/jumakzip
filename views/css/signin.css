@@ -45,7 +45,11 @@
   color: #1e1e23;
   z-index: 5;
 }
-.input_id.submit {
+.input_id .submitoff{
+  background-color: gray;
+  color: black;
+}
+.input_id.submiton {
   background-color: #3a8dfd;
   color: white;
 }

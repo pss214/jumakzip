@@ -149,19 +149,19 @@ app.post("/signin", function (req, res) {
   dbconn.query(sql, function (err, results, fields) {
     if (err) {
       console.error(err);
-      res.redirect("/error");
+      res.status(500).json({"msg":"오류 발생"})
       return;
     }
     bcrypt.compare(pw, results[0].password, (err, ispassword) => {
       if (err) {
         console.error(err);
-        res.redirect("/error");
+        res.status(500).json({"msg":"오류 발생"})
         return;
       }
-      if (results.length > 0 || ispassword) {
+      if (results.length > 0 && ispassword) {
         res.cookie("id", id, { maxAge: 60000 * 60 * 3 });
         res.cookie("usertype", results[0].usertype, { maxAge: 60000 * 60 * 3 });
-        res.redirect("/");
+        res.status(200).json({"msg":"로그인 성공"})
       } else {
         res.status(400).json({ msg: "로그인을 실패했습니다." });
         return;
