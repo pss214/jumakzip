@@ -60,7 +60,6 @@ app.set("layout extractStyle", true);
 app.get("/", function (req, res) {
   res.render("index", {
     title: "main",
-    style: '<link rel="stylesheet" href="/css/index.css">',
   });
 });
 
@@ -71,15 +70,15 @@ app.get("/signin", function (req, res) {
 
 //예약페이지 로드
 app.get("/reservation", function (req, res) {
-  res.render("reservation", { title: "reservation",style:"" });
+  res.render("reservation", { title: "reservation", style: "" });
 });
 //예약페이지 로드
 app.get("/reservation/detail", function (req, res) {
-  res.render("reservation_detail", { title: "reservation_detail",style:"" });
+  res.render("reservation_detail", { title: "reservation_detail", style: "" });
 });
 //예약페이지 로드
 app.get("/reservation/pay", function (req, res) {
-  res.render("reservation_pay", { title: "reservation_pay",style:"" });
+  res.render("reservation_pay", { title: "reservation_pay", style: "" });
 });
 
 //소개페이지 로드
@@ -149,19 +148,19 @@ app.post("/signin", function (req, res) {
   dbconn.query(sql, function (err, results, fields) {
     if (err) {
       console.error(err);
-      res.status(500).json({"msg":"오류 발생"})
+      res.status(500).json({ msg: "오류 발생" });
       return;
     }
     bcrypt.compare(pw, results[0].password, (err, ispassword) => {
       if (err) {
         console.error(err);
-        res.status(500).json({"msg":"오류 발생"})
+        res.status(500).json({ msg: "오류 발생" });
         return;
       }
       if (results.length > 0 && ispassword) {
         res.cookie("id", id, { maxAge: 60000 * 60 * 3 });
         res.cookie("usertype", results[0].usertype, { maxAge: 60000 * 60 * 3 });
-        res.status(200).json({"msg":"로그인 성공"})
+        res.status(200).json({ msg: "로그인 성공" });
       } else {
         res.status(400).json({ msg: "로그인을 실패했습니다." });
         return;
@@ -191,7 +190,6 @@ app.get("/mypage", function (req, res) {
     }
     res.render("mypage", {
       title: "mypage",
-      style: "",
     });
   });
 });
