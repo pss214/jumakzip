@@ -1,0 +1,19 @@
+.content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.main{
+    text-align: center;
+}
+.main h1{
+    font-display: 1;
+    font-weight: bold;
+}
+.main p{
+    font-size: 3;
+}
+.main span{
+    color: red;
+}
