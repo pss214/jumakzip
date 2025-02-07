@@ -13,7 +13,7 @@ function checkPassword() {
       res.json().then((json) => {
         if (res.status == 200) {
           if (json.data != null) {
-            data = json.data;
+            data = JSON.parse(json.data);
           } else {
           }
         } else {

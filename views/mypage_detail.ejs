@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="contentsWrap">
+      <section class="sideBar">
+        <span>마이 페이지</span>
+        <ul>
+          <li>개인정보 수정</li>
+          <li>예약 내역 조회</li>
+        </ul>
+      </section>
+      <section class="content">
+        <section class="updatePersonalInfo">
+          <ul>
+            <li>
+              <span>닉네임</span>
+              <input type="text" placeholder="별난 감자" />
+              <button>수정하기</button>
+            </li>
+            <li><span>아이디</span><%= data.username %></li>
+            <li><span>비밀번호</span><%= data.password %></li>
+            <li><span>비밀번호 확인</span></li>
+            <li><span>전화번호</span></li>
+            <li><span>광고 수신 동의</span></li>
+          </ul>
+        </section>
+        <section class="checkReservationDetail"></section>
+      </section>
+    </div>
+  </body>
+</html>
