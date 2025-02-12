@@ -10,12 +10,12 @@
     <main>
       <div class="contentsWrap">
         <section class="content">
-          <p>별난 감자님</p>
+          <p><%= data.nickname %>님</p>
           <section class="updatePersonalInfo">
             <ul>
               <li>
                 <span>닉네임</span>
-                <input type="text" placeholder="별난 감자" />
+                <input type="text" placeholder="<%= data.nickname %>" />
                 <button>수정하기</button>
               </li>
               <li>
@@ -24,7 +24,7 @@
               </li>
               <li>
                 <span>비밀번호</span>
-                <input type="text" placeholder="별난 감자" />
+                <input type="text" placeholder="비밀번호를 입력해주세요" />
                 <button>수정하기</button>
               </li>
               <li>
@@ -37,12 +37,12 @@
               </li>
               <li>
                 <span>전화번호</span>
-                <input type="text" value="<%= data %>" readonly />
+                <input type="text" value="<%= data.phone %>" readonly />
                 <button>수정하기</button>
               </li>
               <li>
                 <span>광고 수신 동의</span>
-                <input type="text" placeholder="별난 감자" />
+                <input type="checkbox" placeholder="<%= data.isad %>" />
                 <button>수정하기</button>
               </li>
             </ul>
