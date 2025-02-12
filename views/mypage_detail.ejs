@@ -4,17 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="css/mypage.css" />
+    <link rel="stylesheet" href="css/mypage_detail.css" />
   </head>
   <body>
     <main>
-      <section class="sideBar">
-        <span>마이 페이지</span>
-        <ul>
-          <li>개인정보 수정</li>
-          <li>예약 내역 조회</li>
-        </ul>
-      </section>
       <div class="contentsWrap">
         <section class="content">
           <p>별난 감자님</p>
@@ -36,17 +29,15 @@
               </li>
               <li>
                 <span>비밀번호 확인</span>
-                <input type="text" placeholder="별난 감자" />
+                <input
+                  type="text"
+                  placeholder="수정하기 버튼 클릭시 생성 + 수정하기 버튼 삭제"
+                />
                 <button>수정하기</button>
               </li>
               <li>
                 <span>전화번호</span>
-                <input
-                  type="text"
-                  placeholder="별난 감자"
-                  value="010-3015-4954"
-                  readonly
-                />
+                <input type="text" value="<%= data %>" readonly />
                 <button>수정하기</button>
               </li>
               <li>
