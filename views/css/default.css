@@ -14,5 +14,21 @@ a {
 main {
   padding-top: 70px;
   width: 1400px;
+  min-height: 100vh;
   margin: 0 auto;
+}
+.jumakButton {
+  height: 100%;
+  font-size: 20px;
+  font-weight: 600;
+  background-color: #fff;
+  color: #3a8dfd;
+  border: none;
+  border-radius: 5px;
+}
+.jumakButton:hover {
+  background-color: #3a8dfd;
+  color: #fff;
+  transition: all 100ms;
+  cursor: pointer;
 }

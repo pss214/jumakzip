@@ -72,7 +72,7 @@ window.addEventListener("scroll", () => {
     mainVideoDiv.style.position = "static";
     mainVideo.style.height = "auto";
     mainVideo.style.transform = "translateY(-50%)";
-    mainVideoDiv.style.margin = "300px auto 0 auto";
+    mainVideoDiv.style.margin = "200px auto 50px auto";
     videoWrap.style.height = "380px";
     videoWrap.style.position = "relative";
     tagsOnVideo.style.opacity = "0";
@@ -214,14 +214,11 @@ window.addEventListener("scroll", () => {
   if (wayToComeMapY < scroll + screenHeight) {
     wayToComeMap.style.opacity = "1";
     wayToComeMap.style.transform = "translateY(0%)";
-  } else {
-    wayToComeMap.style.opacity = "0";
-    wayToComeMap.style.transform = "translateY(15%)";
-  }
-  if (wayToComeLocationY < scroll + screenHeight) {
     wayToComeLocation.style.opacity = "1";
     wayToComeLocation.style.transform = "translateY(0%)";
   } else {
+    wayToComeMap.style.opacity = "0";
+    wayToComeMap.style.transform = "translateY(15%)";
     wayToComeLocation.style.opacity = "0";
     wayToComeLocation.style.transform = "translateY(15%)";
   }

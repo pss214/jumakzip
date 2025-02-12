@@ -1,0 +1,61 @@
+.contentsWrap .content > p {
+  font-size: 50px;
+  padding: 20px 0 50px 0;
+  font-weight: 600;
+  border-bottom: 1px solid #aaa;
+  margin-bottom: 50px;
+  margin-top: 25px;
+}
+.contentsWrap .content .updatePersonalInfo ul li {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  column-gap: 20px;
+  height: 50px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.contentsWrap .content .updatePersonalInfo ul li span {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+}
+.contentsWrap .content .updatePersonalInfo ul li input {
+  height: 100%;
+  font-size: 20px;
+  outline: none;
+  padding-left: 10px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px dotted #000;
+}
+.contentsWrap .content .updatePersonalInfo ul li input[readonly] {
+  height: 100%;
+  font-size: 20px;
+  outline: none;
+  background: #fff;
+  padding-left: 10px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px dotted #000;
+}
+.contentsWrap .content .updatePersonalInfo ul li button {
+  height: 100%;
+  font-size: 20px;
+  font-weight: 600;
+  background-color: #fff;
+  color: #3a8dfd;
+  border: none;
+  border-radius: 5px;
+}
+.contentsWrap .content .updatePersonalInfo ul li button:hover {
+  background-color: #3a8dfd;
+  color: #fff;
+  transition: all 100ms;
+  cursor: pointer;
+}
+/* .checkPassword {
+  display: none;
+} */
