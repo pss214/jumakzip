@@ -33,7 +33,7 @@ main {
   width: 100%;
   height: 100vh;
   left: 0;
-  top: -70;
+  top: -70px;
   transition: all 600ms;
 }
 .mainVideoDiv .videoWrap {
@@ -94,7 +94,7 @@ main {
 
 .mainDiv {
   width: 1400px;
-  margin: 0 auto;
+  margin: 50px auto;
   transition: all 600ms;
 }
 .mainDiv .mainText {
