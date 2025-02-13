@@ -8,48 +8,95 @@
   </head>
   <body>
     <main>
-      <div class="contentsWrap">
-        <section class="content">
-          <p><%= data.nickname %>님</p>
-          <section class="updatePersonalInfo">
-            <ul>
-              <li>
-                <span>닉네임</span>
-                <input type="text" placeholder="<%= data.nickname %>" />
-                <button>수정하기</button>
-              </li>
-              <li>
-                <span>아이디</span>
-                <input type="text" value="<%= data.username %>" readonly />
-              </li>
-              <li>
-                <span>비밀번호</span>
-                <input type="text" placeholder="비밀번호를 입력해주세요" />
-                <button>수정하기</button>
-              </li>
-              <li>
-                <span>비밀번호 확인</span>
-                <input
-                  type="text"
-                  placeholder="수정하기 버튼 클릭시 생성 + 수정하기 버튼 삭제"
-                />
-                <button>수정하기</button>
-              </li>
-              <li>
-                <span>전화번호</span>
-                <input type="text" value="<%= data.phone %>" readonly />
-                <button>수정하기</button>
-              </li>
-              <li>
-                <span>광고 수신 동의</span>
-                <input type="checkbox" placeholder="<%= data.isad %>" />
-                <button>수정하기</button>
-              </li>
-            </ul>
-          </section>
-          <section class="checkReservationDetail"></section>
-        </section>
-      </div>
+      <section class="updatePersonalInfo">
+        <p><%= data.nickname %>님</p>
+        <form method="post" action="">
+          <ul>
+            <li>
+              <span>닉네임</span>
+              <input type="text" placeholder="<%= data.nickname %>" />
+            </li>
+            <li>
+              <span>아이디</span>
+              <input type="text" value="<%= data.username %>" readonly />
+            </li>
+            <li>
+              <span>비밀번호</span>
+              <input type="text" placeholder="비밀번호를 입력해주세요" />
+            </li>
+            <li>
+              <span>비밀번호 확인</span>
+              <input
+                type="text"
+                placeholder="수정하기 버튼 클릭시 생성 + 수정하기 버튼 삭제"
+              />
+            </li>
+            <li>
+              <span>전화번호</span>
+              <input type="text" value="<%= data.phone %>" readonly />
+            </li>
+            <li>
+              <span>광고 수신 동의</span>
+              <input type="checkbox" placeholder="<%= data.isad %>" />
+            </li>
+            <li>
+              <button
+                type="submit"
+                class="jumakButtonReverse jumakButtonReverseHover jumakButtonActive"
+              >
+                수정하기
+              </button>
+            </li>
+          </ul>
+        </form>
+      </section>
+      <section class="checkReservationDetail">
+        <ul>
+          <li>
+            <span>체크인</span>
+            <div><p>2025년 2월 13일 3PM</p></div>
+          </li>
+          <li>
+            <span>체크아웃</span>
+            <div><p>2025년 2월 14일 11AM</p></div>
+          </li>
+          <li>
+            <span>인원</span>
+            <div><p>4인</p></div>
+          </li>
+          <li>
+            <span>방 정보</span>
+            <div>
+              <img src="" alt="" />
+              <div>
+                <p>이 방은 엄청난 방 입니다.</p>
+                <div>
+                  <img src="" alt="" />
+                  <img src="" alt="" />
+                  <img src="" alt="" />
+                  <span></span>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <span>추가 옵션</span>
+            <div>
+              <img src="" alt="" />
+              <img src="" alt="" />
+              <img src="" alt="" />
+            </div>
+          </li>
+          <li>
+            <span>총 금액</span>
+            <p>75,000원</p>
+          </li>
+          <li>
+            <span>결제 여부</span>
+            <input type="checkbox" />
+          </li>
+        </ul>
+      </section>
     </main>
   </body>
 </html>
