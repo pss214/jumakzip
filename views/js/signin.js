@@ -7,10 +7,16 @@ function ok() {
     fetch("/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        id: elinputitem,
-        pw: dlinputpw,
-      }),
+      body:JSON.stringify({
+        "id":elinputitem,
+        "pw":dlinputpw
+    })
+    }).then(res=>{
+      if(res.status==200){
+        location.replace("/")
+      }else{
+        alert("아이디와 비밀번호를 다시 확인해주세요")
+      }
     })
       .then((res) => {
         if (res.status == 200) {
