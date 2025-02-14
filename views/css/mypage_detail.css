@@ -11,6 +11,12 @@
   border-bottom: 1px solid #aaa;
   padding-bottom: 50px;
 }
+.updatePersonalInfo form h4 {
+  padding-left: 40px;
+  font-size: 40px;
+  font-weight: 900;
+  margin-bottom: 50px;
+}
 .updatePersonalInfo form ul li {
   width: 100%;
   display: grid;
@@ -46,6 +52,12 @@
   margin-top: 20px;
 }
 
+.checkReservationDetail h4 {
+  padding-left: 40px;
+  font-size: 40px;
+  font-weight: 900;
+  margin-bottom: 50px;
+}
 .checkReservationDetail {
   margin-top: 50px;
   padding: 0 50px;
@@ -53,10 +65,61 @@
 .checkReservationDetail ul li {
   display: grid;
   grid-template-columns: 1fr 4fr;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  align-items: center;
 }
-.checkReservationDetail ul li span {
+.checkReservationDetail ul li p {
+  font-size: 20px;
+  font-weight: 200;
+}
+.checkReservationDetail ul li > span {
   text-align: center;
   font-size: 20px;
   font-weight: 600;
+}
+
+.checkReservationDetail ul .roomInfo .wrap {
+  display: flex;
+  align-items: center;
+}
+.checkReservationDetail ul .roomInfo .wrap > img {
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+.checkReservationDetail ul .roomInfo .wrap div .roomName {
+  font-size: 20px;
+  font-weight: 200;
+  margin-bottom: 20px;
+}
+.checkReservationDetail ul .roomInfo .wrap div .roomOption {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.checkReservationDetail ul .roomInfo .wrap div .roomOption > span {
+  font-weight: 400;
+  font-size: 17px;
+}
+.checkReservationDetail ul .roomInfo .wrap div div {
+  display: flex;
+  column-gap: 20px;
+}
+.checkReservationDetail ul .roomInfo .wrap div div img {
+  width: 40px;
+  height: 40px;
+}
+
+.checkReservationDetail ul .additionalOption div p {
+  margin-bottom: 10px;
+}
+.checkReservationDetail ul .additionalOption div div {
+  display: flex;
+  column-gap: 20px;
+}
+.checkReservationDetail ul .additionalOption div div img {
+  width: 40px;
+  height: 40px;
 }

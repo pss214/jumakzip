@@ -11,6 +11,7 @@
       <section class="updatePersonalInfo">
         <p><%= data.nickname %>님</p>
         <form method="post" action="">
+          <h4>개인정보 수정</h4>
           <ul>
             <li>
               <span>닉네임</span>
@@ -51,49 +52,59 @@
         </form>
       </section>
       <section class="checkReservationDetail">
+        <h4>예약 내역</h4>
+        <!-- 예약한 정보가 없을 시의 상황도 제작해야 함 -->
         <ul>
           <li>
             <span>체크인</span>
-            <div><p>2025년 2월 13일 3PM</p></div>
+            <p>2025년 2월 13일 3PM</p>
           </li>
           <li>
             <span>체크아웃</span>
-            <div><p>2025년 2월 14일 11AM</p></div>
+            <p>2025년 2월 14일 11AM</p>
           </li>
           <li>
             <span>인원</span>
-            <div><p>4인</p></div>
+            <p>4인</p>
           </li>
-          <li>
+          <li class="roomInfo">
             <span>방 정보</span>
-            <div>
-              <img src="" alt="" />
+            <div class="wrap">
+              <img src="/image/pension1.jpg" alt="pension" />
               <div>
-                <p>이 방은 엄청난 방 입니다.</p>
+                <p class="roomName">이 방은 엄청난 방 입니다.</p>
+                <p class="roomOption">
+                  옵션: <span>빔 프로젝터, 노래방, 바다뷰</span>
+                </p>
                 <div>
-                  <img src="" alt="" />
-                  <img src="" alt="" />
-                  <img src="" alt="" />
+                  <img src="image/beam.png" alt="baem" />
+                  <img src="image/mic.png" alt="mic" />
+                  <img src="image/sea.png" alt="sea" />
                   <span></span>
                 </div>
               </div>
             </div>
           </li>
-          <li>
+          <li class="additionalOption">
             <span>추가 옵션</span>
             <div>
-              <img src="" alt="" />
-              <img src="" alt="" />
-              <img src="" alt="" />
+              <p>추가 옵션: 빔 프로젝터, 노래방, 바다뷰</p>
+              <div>
+                <img src="image/beam.png" alt="baem" />
+                <img src="image/mic.png" alt="mic" />
+                <img src="image/sea.png" alt="sea" />
+              </div>
             </div>
           </li>
           <li>
             <span>총 금액</span>
             <p>75,000원</p>
           </li>
-          <li>
+          <li class="isPaid">
             <span>결제 여부</span>
-            <input type="checkbox" />
+            <div>
+              <input type="checkbox" />
+            </div>
           </li>
         </ul>
       </section>

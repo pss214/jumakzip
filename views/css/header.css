@@ -105,9 +105,11 @@ header .user .logout_profile {
 .off {
   display: none;
 }
-.log_on{
+.log_on {
   display: flex;
+  column-gap: 15px;
+  margin-left: auto;
 }
-.log_off{
+.log_off {
   display: none;
 }
