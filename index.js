@@ -271,9 +271,10 @@ app.delete("/mypage", function (req, res) {
   if (user == undefined) {
     res.redirect("/login");
   }
-  var sql = `delete * from account where username='${user.id}'`;
+  var sql = `delete from account where username='${user}'`;
   dbconn.query(sql, function (err, results, fields) {
     if (err || results.length == 0) {
+      console.log(err)
       res.status(400).json({ msg: "회원 조회를 실패했습니다." });
       return;
     }

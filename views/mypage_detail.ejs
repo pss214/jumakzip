@@ -10,25 +10,27 @@
     <main>
       <section class="updatePersonalInfo">
         <p><%= data.nickname %>님</p>
-        <form method="post" action="">
+        <form>
           <h4>개인정보 수정</h4>
           <ul>
             <li>
-              <span>닉네임</span>
-              <input type="text" placeholder="<%= data.nickname %>" />
+              <span>아이디</span>
+              <input type="text" style="color: gray;" value="<%= data.username %>" readonly />
             </li>
             <li>
-              <span>아이디</span>
-              <input type="text" value="<%= data.username %>" readonly />
+              <span>닉네임</span>
+              <input type="text" id="nickname" placeholder="<%= data.nickname %>" />
             </li>
+            
             <li>
               <span>비밀번호</span>
-              <input type="text" placeholder="비밀번호를 입력해주세요" />
+              <input type="password" id="password" placeholder="비밀번호를 입력해주세요" />
             </li>
             <li>
               <span>비밀번호 확인</span>
               <input
-                type="text"
+                type="password"
+                id="passwordck"
                 placeholder="수정하기 버튼 클릭시 생성 + 수정하기 버튼 삭제"
               />
             </li>
@@ -38,14 +40,23 @@
             </li>
             <li>
               <span>광고 수신 동의</span>
-              <input type="checkbox" placeholder="<%= data.isad %>" />
+              <input type="checkbox" id="isad" placeholder="<%= data.isad %>" />
             </li>
             <li>
               <button
-                type="submit"
+                type="button"
+                onclick="edit()"
                 class="jumakButtonReverse jumakButtonReverseHover jumakButtonActive"
               >
                 수정하기
+              </button>
+              <button
+                type="button"
+                onclick="del()"
+                class="jumakButtonReverse jumakButtonReverseHover jumakButtonActive"
+                style="background-color: red;"
+              >
+                탈퇴하기
               </button>
             </li>
           </ul>
@@ -109,5 +120,5 @@
         </ul>
       </section>
     </main>
-  </body>
+    <script src="/js/mypage_detail.js"></script>
 </html>
