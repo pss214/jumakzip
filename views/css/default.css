@@ -25,12 +25,12 @@ main {
   color: #3a8dfd;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
 }
 .jumakButtonHover:hover {
   background-color: #3a8dfd;
   color: #fff;
   transition: all 100ms;
-  cursor: pointer;
 }
 .jumakButtonReverse {
   padding: 5px 10px;
@@ -40,11 +40,11 @@ main {
   color: #fff;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
 }
 .jumakButtonReverseHover:hover {
   filter: brightness(95%);
   transition: all 100ms;
-  cursor: pointer;
 }
 .jumakButtonRed {
   padding: 5px 10px;
@@ -54,12 +54,12 @@ main {
   color: #fd473a;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
 }
 .jumakButtonRedHover:hover {
   background-color: #fd473a;
   color: #fff;
   transition: all 100ms;
-  cursor: pointer;
 }
 .jumakButtonBlack {
   padding: 5px 10px;
@@ -69,12 +69,12 @@ main {
   color: #000;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
 }
 .jumakButtonBlackHover:hover {
   background-color: #000;
   color: #fff;
   transition: all 100ms;
-  cursor: pointer;
 }
 .jumakButtonActive:active {
   filter: brightness(85%);
