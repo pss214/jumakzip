@@ -60,7 +60,6 @@ app.set("layout extractStyle", true);
 app.get("/", function (req, res) {
   res.render("index", {
     title: "main",
-    style: "",
   });
 });
 
@@ -140,6 +139,14 @@ app.post("/signup", function (req, res) {
     });
   });
 });
+
+//관리자 페이지 로드
+app.get("/admin", function (req, res) {
+  res.render("admin", {
+    title: "admin",
+  });
+});
+
 //로그인 성공 이후 세션쿠키 전달하는 코드
 app.post("/signin", function (req, res) {
   var id = req.body.id;
@@ -184,7 +191,6 @@ app.get("/mypage", function (req, res) {
   }
   res.render("mypage", {
     title: "mypage",
-    style: "",
   });
 });
 //에러 페이지로 이동

@@ -1,0 +1,23 @@
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  column-gap: 50px;
+  padding-top: 120px;
+}
+main .sidebarArea .sidebar {
+  position: fixed;
+  border: 1px solid #000;
+  border-radius: 10px;
+  overflow: hidden;
+}
+main .sidebarArea .sidebar p {
+  padding: 15px 30px;
+  border-bottom: 1px solid #000;
+}
+main .sidebarArea .sidebar ul li {
+  padding: 10px 0;
+  text-align: center;
+}
+main .sidebarArea .sidebar ul li:not(:last-child) {
+  border-bottom: 1px solid #000;
+}

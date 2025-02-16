@@ -1,18 +1,36 @@
 <link rel="stylesheet" href="/css/header.css" />
+<script src="/js/header.js" defer></script>
 
 <header>
   <div class="logo">
     <a href="/"><img src="/image/jumakziplogo.png" alt="logo" /></a>
   </div>
-  <ul class="menu">
-    <li>소개</li>
-    <li>주변관광지</li>
-    <li>고객센터</li>
-    <li>실시간예약</li>
-  </ul>
+  <div class="menu">
+    <div class="search">
+      <input
+        class="personnel"
+        type="number"
+        placeholder="숙박인원"
+        min="0"
+        max="20"
+      />
+      <!-- max값은 임의로 지정 -->
+      <input class="period" type="text" placeholder="숙박기간" />
+      <button class="jumakButton jumakButtonReverseHover jumakButtonActive">
+        예약하기
+      </button>
+    </div>
+    <!-- 관리자 계정일 때에만 생성 -->
+    <a class="admin" href="/admin">
+      <img src="../image/manager.png" alt="admin" />
+    </a>
+  </div>
   <div class="user">
     <div id="log_on">
-      <a href="/mypage"><div id="profile"></div></a>
+      <a href="/mypage"
+        ><div id="profile">
+          <img src="../image/profile.png" alt="profile" /></div
+      ></a>
       <a onclick="logout()"><p id="p_logon"></p></a>
     </div>
     <div id="log_off">
@@ -20,21 +38,3 @@
     </div>
   </div>
 </header>
-
-<div class="detailMenuBackground">
-  <div class="detailMenu">
-    <ul class="introduction">
-      <li>오시는 길</li>
-      <li>야외시설</li>
-      <li>펜션정보</li>
-    </ul>
-    <ul class="tour"></ul>
-    <ul class="customerCenter">
-      <li>공지사항</li>
-      <li>문의하기</li>
-    </ul>
-    <ul class="reservation"></ul>
-  </div>
-</div>
-
-<script src="/js/header.js"></script>
