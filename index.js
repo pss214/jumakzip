@@ -77,12 +77,20 @@ app.get("/signin", function (req, res) {
 });
 
 //예약페이지 로드
-app.get("/reservation", function (req, res) {
-  res.render("reservation", { title: "reservation" });
-});
-//예약페이지 로드
 app.get("/reservation/detail", function (req, res) {
-  res.render("reservation_detail", { title: "reservation_detail" });
+  var roomid = req.query.room;
+  var imgUrl = req.query.img;
+  var name = req.query.name;
+  var price = req.query.price;
+  var h_max = req.query.h_max;
+  res.render("reservation_detail", {
+    title: "reservation_detail",
+    roomid: roomid,
+    imgUrl: imgUrl,
+    name: name,
+    price: price,
+    h_max: h_max,
+  });
 });
 //예약페이지 로드
 app.get("/reservation/pay", function (req, res) {
@@ -249,16 +257,16 @@ app.post("/mypageedit", async function (req, res) {
     }
     sql = `UPDATE jumakzip.account SET 
     nickname=IF(? = '', nickname, '${nickname}'),isad= '${isad}',password=IF(? = '', password, '${pw}') WHERE username='${user}'`;
-    var results =dbconn.query(sql, [nickname,pw])
-      if (results.affectedRows > 0) {
-        res.status(201).json({ msg: "회원 정보가 저장되었습니다" });
-        return
-      } else {
-        res.status(200).json({ msg: "회원 정보를 저장할 내용이 없습니다" });
-        return
-      }
-  }catch{
-    res.status(500)
+    var results = dbconn.query(sql, [nickname, pw]);
+    if (results.affectedRows > 0) {
+      res.status(201).json({ msg: "회원 정보가 저장되었습니다" });
+      return;
+    } else {
+      res.status(200).json({ msg: "회원 정보를 저장할 내용이 없습니다" });
+      return;
+    }
+  } catch {
+    res.status(500);
   }
 });
 //마이페이지에서 유저 삭제 코드
@@ -282,20 +290,26 @@ app.delete("/mypage", function (req, res) {
 });
 
 //예약 리스트 조회
-app.post("/reservation", function (res,req) {
-  var h_cnt = req.body.hCount
-  var start = req.body.startDay
-  var end = req.body.endDay
-  try{
-    var sql = `SELECT name,img,price,h_max FROM room r join room_op ro on ro.roop_id = r.roop_id 
-                WHERE r.room_id NOT IN  (select room_id from resersvation
-                where st_date >= '${start}' and end_date <= '${end}') and ${h_cnt} <= ro.h_max ;`
-    var results = dbconn.query(sql)
-    res.render("reservation", { title: "reservation", style: "" ,data: results})
-  }catch{
-
-  }
-})
+app.post("/reservation", function (req, res) {
+  var h_cnt = req.body.count;
+  var start = req.body.start;
+  var end = req.body.end;
+  var sql = `SELECT name,img,price,h_max,room_id FROM room r join room_op ro on ro.roop_id = r.roop_id 
+              WHERE r.room_id NOT IN  (select room_id from resersvation
+              where st_date >= '${start}' and end_date <= '${end}') and ${h_cnt} <= ro.h_max ;`;
+  dbconn.query(sql, (err, results) => {
+    if (err) {
+      res.status(500);
+      return;
+    }
+    console.log("results: ", results);
+    res.render("reservation", {
+      title: "reservation",
+      style: "",
+      data: results,
+    });
+  });
+});
 //파일 가져오기 ------------------------------
 
 //video 가져오는 경로
