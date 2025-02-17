@@ -54,12 +54,20 @@ app.set("layout", "layouts/layout");
 app.set("layout extractScripts", true);
 app.set("layout extractStyle", true);
 
+//비밀번호 함수
+async function password_hash(pw) {
+  let res = ''
+  const salt = await bcrypt.genSalt(10)
+  res = await bcrypt.hash(pw,salt)
+  return res
+}
 // 페이지 로드 코드들 ----------------------------------------------------------
 
 //메인페이지 로드
 app.get("/", function (req, res) {
   res.render("index", {
     title: "main",
+    style: "",
   });
 });
 
@@ -90,6 +98,14 @@ app.get("/info", function (req, res) {
 app.get("/signup", function (req, res) {
   res.render("signup", { title: "회원가입", style: "" });
 });
+
+//관리자 페이지 로드
+app.get("/admin", function (req, res) {
+  res.render("admin", {
+    title: "admin",
+  });
+});
+
 //회원가입 이후 데이터를 db에 저장하는 코드
 app.post("/idck", function (req, res) {
   var sql = `select username from account where username='${req.body.id}'`;
@@ -114,20 +130,9 @@ app.post("/signup", function (req, res) {
   var phone = req.body.phone;
   var nickname = req.body.nickname;
   var isad = req.body.ad;
-  var hashpw = "";
-  bcrypt.genSalt(10, (err, salt) => {
-    if (err) {
-      console.error(err);
-      return;
-    }
-    bcrypt.hash(pw, salt, (err, hash) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      hashpw = hash;
-      var sql = `insert into account(username,password,phone,nickname,usertype,isad) 
-      value ('${id}','${hashpw}','${phone}','${nickname}', 'user','${isad}')`;
+  password_hash(pw, (hash)=>{
+    var sql = `insert into account(username,password,phone,nickname,usertype,isad) 
+      value ('${id}','${hash}','${phone}','${nickname}', 'user','${isad}')`;
       dbconn.query(sql, function (err, results, fields) {
         if (err) {
           console.error("회원가입 데이터 기입 실패 : ", err);
@@ -136,17 +141,8 @@ app.post("/signup", function (req, res) {
         }
         res.status(201).json({ msg: "회원가입이 완료되었습니다!" });
       });
-    });
-  });
+  })
 });
-
-//관리자 페이지 로드
-app.get("/admin", function (req, res) {
-  res.render("admin", {
-    title: "admin",
-  });
-});
-
 //로그인 성공 이후 세션쿠키 전달하는 코드
 app.post("/signin", function (req, res) {
   var id = req.body.id;
@@ -195,6 +191,7 @@ app.get("/mypage", function (req, res) {
   }
   res.render("mypage", {
     title: "mypage",
+    style: "",
   });
 });
 //에러 페이지로 이동
@@ -241,35 +238,26 @@ app.post("/mypage_detail", function (req, res) {
   });
 });
 //마이페이지에서 정보 수정 코드
-app.post("/mypageedit", function (req, res) {
+app.post("/mypageedit", async function (req, res) {
   var user = req.cookies.id;
   var isad = req.body.ad;
   var nickname = req.body.nickname;
-  var pw = req.body.pw;
-
-  var sql = `select user_id from account where username='${user}'`;
-  dbconn.query(sql, function (err, results, fields) {
-    if (err) {
-      console.error("mypage" + err);
-      res.status(400).json({ msg: "회원 조회를 실패했습니다." });
-      return;
+  var pw = req.body.password;
+  try{
+    if (pw != ''){
+      pw = await password_hash(pw)
     }
-    var id = results[0].user_id;
     sql = `UPDATE jumakzip.account SET 
-    nickname='${nickname}',isad= '${isad}',password='${pw}' WHERE user_id=${id}`;
-    dbconn.query(sql, function (err, results, fields) {
-      if (err) {
-        console.error("mypage" + err);
-        res.status(400).json({ msg: "회원 조회를 실패했습니다." });
-        return;
-      }
+    nickname=IF(? = '', nickname, '${nickname}'),isad= '${isad}',password=IF(? = '', password, '${pw}') WHERE username=${user}`;
+    var results =dbconn.query(sql, [nickname,pw])
       if (results.affectedRows > 0) {
         res.status(201).json({ msg: "회원 정보가 저장되었습니다" });
       } else {
         res.status(400).json({ msg: "회원 정보 저장이 실패했습니다." });
       }
-    });
-  });
+  }catch{
+    res.status(500)
+  }
 });
 //마이페이지에서 유저 삭제 코드
 app.delete("/mypage", function (req, res) {

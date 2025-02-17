@@ -40,12 +40,16 @@
             </li>
             <li>
               <span>광고 수신 동의</span>
-              <input type="checkbox" id="isad" placeholder="<%= data.isad %>" />
+              <% if(data.isad) {%>
+              <input type="checkbox" id="isad" checked/>
+              <% }else{ %>
+                <input type="checkbox" id="isad"/>
+              <% } %>
             </li>
             <li>
               <button
                 type="button"
-                onclick="edit()"
+                onclick="edit('<%= data.isad %>')"
                 class="jumakButtonReverse jumakButtonReverseHover jumakButtonActive"
               >
                 수정하기
