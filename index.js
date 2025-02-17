@@ -54,6 +54,13 @@ app.set("layout", "layouts/layout");
 app.set("layout extractScripts", true);
 app.set("layout extractStyle", true);
 
+//비밀번호 함수
+async function password_hash(pw) {
+  let res = "";
+  const salt = await bcrypt.genSalt(10);
+  res = await bcrypt.hash(pw, salt);
+  return res;
+}
 // 페이지 로드 코드들 ----------------------------------------------------------
 
 //메인페이지 로드
@@ -66,20 +73,20 @@ app.get("/", function (req, res) {
 
 //로그인페이지 로드
 app.get("/signin", function (req, res) {
-  res.render("signin", { title: "로그인", style: "" });
+  res.render("signin", { title: "로그인" });
 });
 
 //예약페이지 로드
 app.get("/reservation", function (req, res) {
-  res.render("reservation", { title: "reservation", style: "" });
+  res.render("reservation", { title: "reservation" });
 });
 //예약페이지 로드
 app.get("/reservation/detail", function (req, res) {
-  res.render("reservation_detail", { title: "reservation_detail", style: "" });
+  res.render("reservation_detail", { title: "reservation_detail" });
 });
 //예약페이지 로드
 app.get("/reservation/pay", function (req, res) {
-  res.render("reservation_pay", { title: "reservation_pay", style: "" });
+  res.render("reservation_pay", { title: "reservation_pay" });
 });
 
 //소개페이지 로드
@@ -89,8 +96,16 @@ app.get("/info", function (req, res) {
 
 //회원가입페이지 로드
 app.get("/signup", function (req, res) {
-  res.render("signup", { title: "회원가입", style: "" });
+  res.render("signup", { title: "회원가입" });
 });
+
+//관리자 페이지 로드
+app.get("/admin", function (req, res) {
+  res.render("admin", {
+    title: "admin",
+  });
+});
+
 //회원가입 이후 데이터를 db에 저장하는 코드
 app.post("/idck", function (req, res) {
   var sql = `select username from account where username='${req.body.id}'`;
@@ -115,28 +130,16 @@ app.post("/signup", function (req, res) {
   var phone = req.body.phone;
   var nickname = req.body.nickname;
   var isad = req.body.ad;
-  var hashpw = "";
-  bcrypt.genSalt(10, (err, salt) => {
-    if (err) {
-      console.error(err);
-      return;
-    }
-    bcrypt.hash(pw, salt, (err, hash) => {
+  password_hash(pw, (hash) => {
+    var sql = `insert into account(username,password,phone,nickname,usertype,isad) 
+      value ('${id}','${hash}','${phone}','${nickname}', 'user','${isad}')`;
+    dbconn.query(sql, function (err, results, fields) {
       if (err) {
-        console.error(err);
+        console.error("회원가입 데이터 기입 실패 : ", err);
+        res.status(400).json({ msg: "회원가입이 실패되었습니다" });
         return;
       }
-      hashpw = hash;
-      var sql = `insert into account(username,password,phone,nickname,usertype,isad) 
-      value ('${id}','${hashpw}','${phone}','${nickname}', 'user','${isad}')`;
-      dbconn.query(sql, function (err, results, fields) {
-        if (err) {
-          console.error("회원가입 데이터 기입 실패 : ", err);
-          res.status(400).json({ msg: "회원가입이 실패되었습니다" });
-          return;
-        }
-        res.status(201).json({ msg: "회원가입이 완료되었습니다!" });
-      });
+      res.status(201).json({ msg: "회원가입이 완료되었습니다!" });
     });
   });
 });
@@ -152,13 +155,17 @@ app.post("/signin", function (req, res) {
       res.status(500).json({ msg: "오류 발생" });
       return;
     }
+    if (results.length == 0) {
+      res.status(400).json({ msg: "로그인을 실패했습니다." });
+      return;
+    }
     bcrypt.compare(pw, results[0].password, (err, ispassword) => {
       if (err) {
         console.error(err);
         res.status(500).json({ msg: "오류 발생" });
         return;
       }
-      if (results.length > 0 && ispassword) {
+      if (ispassword) {
         res.cookie("id", id, { maxAge: 60000 * 60 * 3 });
         res.cookie("usertype", results[0].usertype, { maxAge: 60000 * 60 * 3 });
         res.status(200).json({ msg: "로그인 성공" });
@@ -222,7 +229,7 @@ app.post("/mypage_detail", function (req, res) {
       }
       if (results.length > 0 && ispassword) {
         // res.status(200).json({ msg: "비밀번호 확인 성공", data: results[0] });
-        res.render("mypage_detail", { title: "", data: results[0], style: "" });
+        res.render("mypage_detail", { title: "", data: results[0] });
       } else {
         res.status(400).json({ msg: "비밀번호 확인 실패" });
         return;
@@ -231,35 +238,28 @@ app.post("/mypage_detail", function (req, res) {
   });
 });
 //마이페이지에서 정보 수정 코드
-app.post("/mypageedit", function (req, res) {
+app.post("/mypageedit", async function (req, res) {
   var user = req.cookies.id;
   var isad = req.body.ad;
   var nickname = req.body.nickname;
-  var pw = req.body.pw;
-
-  var sql = `select user_id from account where username='${user}'`;
-  dbconn.query(sql, function (err, results, fields) {
-    if (err) {
-      console.error("mypage" + err);
-      res.status(400).json({ msg: "회원 조회를 실패했습니다." });
-      return;
+  var pw = req.body.password;
+  try {
+    if (pw != "") {
+      pw = await password_hash(pw);
     }
-    var id = results[0].user_id;
     sql = `UPDATE jumakzip.account SET 
-    nickname='${nickname}',isad= '${isad}',password='${pw}' WHERE user_id=${id}`;
-    dbconn.query(sql, function (err, results, fields) {
-      if (err) {
-        console.error("mypage" + err);
-        res.status(400).json({ msg: "회원 조회를 실패했습니다." });
-        return;
-      }
+    nickname=IF(? = '', nickname, '${nickname}'),isad= '${isad}',password=IF(? = '', password, '${pw}') WHERE username='${user}'`;
+    var results =dbconn.query(sql, [nickname,pw])
       if (results.affectedRows > 0) {
         res.status(201).json({ msg: "회원 정보가 저장되었습니다" });
+        return
       } else {
-        res.status(400).json({ msg: "회원 정보 저장이 실패했습니다." });
+        res.status(200).json({ msg: "회원 정보를 저장할 내용이 없습니다" });
+        return
       }
-    });
-  });
+  }catch{
+    res.status(500)
+  }
 });
 //마이페이지에서 유저 삭제 코드
 app.delete("/mypage", function (req, res) {
@@ -267,9 +267,10 @@ app.delete("/mypage", function (req, res) {
   if (user == undefined) {
     res.redirect("/login");
   }
-  var sql = `delete * from account where username='${user.id}'`;
+  var sql = `delete from account where username='${user}'`;
   dbconn.query(sql, function (err, results, fields) {
     if (err || results.length == 0) {
+      console.log(err);
       res.status(400).json({ msg: "회원 조회를 실패했습니다." });
       return;
     }
@@ -279,6 +280,22 @@ app.delete("/mypage", function (req, res) {
     });
   });
 });
+
+//예약 리스트 조회
+app.post("/reservation", function (res,req) {
+  var h_cnt = req.body.hCount
+  var start = req.body.startDay
+  var end = req.body.endDay
+  try{
+    var sql = `SELECT name,img,price,h_max FROM room r join room_op ro on ro.roop_id = r.roop_id 
+                WHERE r.room_id NOT IN  (select room_id from resersvation
+                where st_date >= '${start}' and end_date <= '${end}') and ${h_cnt} <= ro.h_max ;`
+    var results = dbconn.query(sql)
+    res.render("reservation", { title: "reservation", style: "" ,data: results})
+  }catch{
+
+  }
+})
 //파일 가져오기 ------------------------------
 
 //video 가져오는 경로

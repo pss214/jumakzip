@@ -4,14 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
+    <link rel="stylesheet" href="/css/mypage.css" />
   </head>
   <body>
     <main>
       <div class="checkPassword">
-        <span>비밀번호 인증</span>
+        <p>비밀번호 인증</p>
         <form method="post" action="/mypage_detail">
-          <input type="password" name="pw" />
-          <button type="submit">확인</button>
+          <p>비밀번호</p>
+          <div class="container">
+            <input type="password" name="pw" />
+            <button
+              type="submit"
+              class="jumakButton jumakButtonHover jumakButtonActive"
+            >
+              확인
+            </button>
+          </div>
         </form>
       </div>
     </main>

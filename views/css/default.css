@@ -14,5 +14,68 @@ a {
 main {
   padding-top: 70px;
   width: 1400px;
+  min-height: 100vh;
   margin: 0 auto;
+}
+.jumakButton {
+  padding: 5px 10px;
+  font-size: 20px;
+  font-weight: 600;
+  background-color: #fff;
+  color: #3a8dfd;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.jumakButtonHover:hover {
+  background-color: #3a8dfd;
+  color: #fff;
+  transition: all 100ms;
+}
+.jumakButtonReverse {
+  padding: 5px 10px;
+  font-size: 20px;
+  font-weight: 600;
+  background-color: #3a8dfd;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.jumakButtonReverseHover:hover {
+  filter: brightness(95%);
+  transition: all 100ms;
+}
+.jumakButtonRed {
+  padding: 5px 10px;
+  font-size: 20px;
+  font-weight: 600;
+  background-color: #fff;
+  color: #fd473a;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.jumakButtonRedHover:hover {
+  background-color: #fd473a;
+  color: #fff;
+  transition: all 100ms;
+}
+.jumakButtonBlack {
+  padding: 5px 10px;
+  font-size: 20px;
+  font-weight: 600;
+  background-color: #fff;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.jumakButtonBlackHover:hover {
+  background-color: #000;
+  color: #fff;
+  transition: all 100ms;
+}
+.jumakButtonActive:active {
+  filter: brightness(85%);
 }

@@ -4,61 +4,125 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="css/mypage.css" />
+    <link rel="stylesheet" href="css/mypage_detail.css" />
   </head>
   <body>
     <main>
-      <section class="sideBar">
-        <span>마이 페이지</span>
+      <section class="updatePersonalInfo">
+        <p><%= data.nickname %>님</p>
+        <form>
+          <h4>개인정보 수정</h4>
+          <ul>
+            <li>
+              <span>아이디</span>
+              <input type="text" style="color: gray;" value="<%= data.username %>" readonly />
+            </li>
+            <li>
+              <span>닉네임</span>
+              <input type="text" id="nickname" placeholder="<%= data.nickname %>" />
+            </li>
+            
+            <li>
+              <span>비밀번호</span>
+              <input type="password" id="password" placeholder="비밀번호를 입력해주세요" />
+            </li>
+            <li>
+              <span>비밀번호 확인</span>
+              <input
+                type="password"
+                id="passwordck"
+                placeholder="수정하기 버튼 클릭시 생성 + 수정하기 버튼 삭제"
+              />
+            </li>
+            <li>
+              <span>전화번호</span>
+              <input type="text" value="<%= data.phone %>" readonly />
+            </li>
+            <li>
+              <span>광고 수신 동의</span>
+              <% if(data.isad) {%>
+              <input type="checkbox" id="isad" checked/>
+              <% }else{ %>
+                <input type="checkbox" id="isad"/>
+              <% } %>
+            </li>
+            <li>
+              <button
+                type="button"
+                onclick="edit('<%= data.isad %>')"
+                class="jumakButtonReverse jumakButtonReverseHover jumakButtonActive"
+              >
+                수정하기
+              </button>
+              <button
+                type="button"
+                onclick="del()"
+                class="jumakButtonReverse jumakButtonReverseHover jumakButtonActive"
+                style="background-color: red;"
+              >
+                탈퇴하기
+              </button>
+            </li>
+          </ul>
+        </form>
+      </section>
+      <section class="checkReservationDetail">
+        <h4>예약 내역</h4>
+        <!-- 예약한 정보가 없을 시의 상황도 제작해야 함 -->
         <ul>
-          <li>개인정보 수정</li>
-          <li>예약 내역 조회</li>
+          <li>
+            <span>체크인</span>
+            <p>2025년 2월 13일 3PM</p>
+          </li>
+          <li>
+            <span>체크아웃</span>
+            <p>2025년 2월 14일 11AM</p>
+          </li>
+          <li>
+            <span>인원</span>
+            <p>4인</p>
+          </li>
+          <li class="roomInfo">
+            <span>방 정보</span>
+            <div class="wrap">
+              <img src="/image/pension1.jpg" alt="pension" />
+              <div>
+                <p class="roomName">이 방은 엄청난 방 입니다.</p>
+                <p class="roomOption">
+                  옵션: <span>빔 프로젝터, 노래방, 바다뷰</span>
+                </p>
+                <div>
+                  <img src="image/beam.png" alt="baem" />
+                  <img src="image/mic.png" alt="mic" />
+                  <img src="image/sea.png" alt="sea" />
+                  <span></span>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="additionalOption">
+            <span>추가 옵션</span>
+            <div>
+              <p>추가 옵션: 빔 프로젝터, 노래방, 바다뷰</p>
+              <div>
+                <img src="image/beam.png" alt="baem" />
+                <img src="image/mic.png" alt="mic" />
+                <img src="image/sea.png" alt="sea" />
+              </div>
+            </div>
+          </li>
+          <li>
+            <span>총 금액</span>
+            <p>75,000원</p>
+          </li>
+          <li class="isPaid">
+            <span>결제 여부</span>
+            <div>
+              <input type="checkbox" />
+            </div>
+          </li>
         </ul>
       </section>
-      <div class="contentsWrap">
-        <section class="content">
-          <p>별난 감자님</p>
-          <section class="updatePersonalInfo">
-            <ul>
-              <li>
-                <span>닉네임</span>
-                <input type="text" placeholder="별난 감자" />
-                <button>수정하기</button>
-              </li>
-              <li>
-                <span>아이디</span>
-                <input type="text" value="<%= data.username %>" readonly />
-              </li>
-              <li>
-                <span>비밀번호</span>
-                <input type="text" placeholder="별난 감자" />
-                <button>수정하기</button>
-              </li>
-              <li>
-                <span>비밀번호 확인</span>
-                <input type="text" placeholder="별난 감자" />
-                <button>수정하기</button>
-              </li>
-              <li>
-                <span>전화번호</span>
-                <input
-                  type="text"
-                  placeholder="별난 감자"
-                  value="010-3015-4954"
-                  readonly
-                />
-                <button>수정하기</button>
-              </li>
-              <li>
-                <span>광고 수신 동의</span>
-                <input type="text" placeholder="별난 감자" />
-                <button>수정하기</button>
-              </li>
-            </ul>
-          </section>
-          <section class="checkReservationDetail"></section>
-        </section>
-      </div>
     </main>
-  </body>
+    <script src="/js/mypage_detail.js"></script>
 </html>

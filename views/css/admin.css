@@ -1,0 +1,77 @@
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  padding-top: 120px;
+}
+main .sidebarArea .sidebar {
+  position: fixed;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 5px 5px 5px #ddd;
+}
+main .sidebarArea .sidebar p {
+  padding: 18px 30px;
+  border-bottom: 1px dotted #000;
+}
+main .sidebarArea .sidebar ul li {
+  padding: 8px 0;
+  text-align: center;
+  cursor: pointer;
+}
+main .sidebarArea .sidebar ul li:not(:last-child) {
+  border-bottom: 1px dotted #000;
+}
+
+main .contentArea {
+  grid-column: 3/12;
+}
+main .contentArea .bulletinBoard {
+  margin-bottom: 50px;
+  height: 75vh;
+  overflow-y: auto;
+}
+main .contentArea .bulletinBoard h4 {
+  font-size: 32px;
+  font-weight: 500;
+}
+
+main .contentArea .bulletinBoard .content .attribute {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  column-gap: 20px;
+  text-align: center;
+  border-bottom: 1px dashed #aaa;
+}
+main .contentArea .bulletinBoard .content .attribute p {
+  padding: 20px 0;
+  font-weight: 800;
+}
+
+main .contentArea .bulletinBoard .content .rows .row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  text-align: center;
+  border-bottom: 1px dashed #aaa;
+  padding: 20px 0;
+  font-weight: 400;
+  column-gap: 20px;
+}
+main .contentArea .bulletinBoard .content .rows .row p:nth-child(1) {
+  color: #3a8dfd;
+}
+main .contentArea .bulletinBoard .content .rows .row a {
+  grid-column: 5/6;
+  font-style: none;
+  color: #666;
+  font-weight: 300;
+}
+main .contentArea .bulletinBoard .content .rows .reservation img {
+  margin: 0 auto;
+  width: 24px;
+}
+main .contentArea .bulletinBoard .content .rows .inquiry p:nth-child(3) {
+  grid-column: 3/5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
