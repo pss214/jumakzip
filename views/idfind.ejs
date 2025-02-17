@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/signin.css" />
+    <title><%- title %></title>
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <div class="login_wrap">
+          <h2>아이디 찾기</h2>
+          <form action="/idfind" method="post">
+            <div class="inner_line">
+              <div class="login_box">
+                <div class="input_item id">
+                  <input
+                    class="input_id"
+                    type="text"
+                    name="phone"
+                    placeholder="전화번호"
+                    onkeydown="enter(event)"
+                  />
+                </div>
+                <div style="height: 15px"></div>
+                <div class="input_item id">
+                  <input
+                    id="submit"
+                    type="submit"
+                    value="확인"
+                    class="input_id submiton"
+                  />
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

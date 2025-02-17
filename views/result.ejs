@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/signin.css" />
+    <title><%- title %></title>
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <div class="login_wrap">
+          <h2><%= st %></h2>
+          <form action="/idfind" method="post">
+            <div class="inner_line">
+              <% if(st == "아이디"){ %>
+                <p> 아이디는 <%= data.username %> 입니다</p>
+                <div class="input_item id">
+                  <input
+                    id="submit"
+                    type="button"
+                    value="돌아가기"
+                    onclick="location.replace(`/signin`)"
+                    class="input_id submiton"
+                  />
+                </div>
+              <%}%>
+              <% if(st == "실패"){ %>
+                <p> <%= data %></p>
+                <div class="input_item id">
+                  <input
+                    id="submit"
+                    type="button"
+                    value="돌아가기"
+                    onclick="location.replace(`/signin`)"
+                    class="input_id submiton"
+                  />
+                </div>
+              <%}%>
+              <% if(st == "비밀번호"){ %>
+                <p> <%= data.nickname %>님 새로운 비밀번호를 입력해주세요!</p>
+                <div class="input_item id">  
+                  <img src="/image/password.png">
+                  <input type="password" class="input_pw" name="pw" id="pw" placeholder="비밀번호">
+                </div>
+                <div style="height: 15px"></div>
+                <div class="input_item id">
+                    <img src="/image/password.png"> 
+                    <input type="password" class="input_pw" name="pwck" id="pwck" placeholder="비밀번호확인">
+                </div>
+                <div style="height: 15px"></div>
+                <div id="pwerr" class="msg">- 비밀번호가 유효하지 않습니다. (문자와 숫자,특수문자포함 8글자 이상)</div>
+                <div id="pwckerr" class="msg">- 비밀번호와 같지 않습니다. </div>
+                <div class="input_item id">
+                  <input id="submit" class="input_id submiton" type="button" onclick="ok(`<%= data.username%>`)" value="확인"> 
+                </div>
+              <%}%>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+    <script src="/js/result.js"></script>
+  </body>
+</html>

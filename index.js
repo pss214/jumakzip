@@ -104,13 +104,77 @@ app.get("/signup", function (req, res) {
   res.render("signup", { title: "회원가입" });
 });
 
+//아이디찾기페이지 로드
+app.get("/idfind", function (req, res) {
+  res.render("idfind", { title: "아이디 찾기" });
+});
+//비밀번호찾기페이지 로드
+app.get("/passwordfind", function (req, res) {
+  res.render("passwordfind", { title: "비밀번호 찾기" });
+});
 //관리자 페이지 로드
 app.get("/admin", function (req, res) {
   res.render("admin", {
     title: "admin",
   });
 });
-
+//아이디찾기 결과창 로드
+app.post("/idfind", function(req,res){
+  var phone = req.body.phone
+  var sql = `SELECT username from account where phone='${phone}'`
+  dbconn.query(sql, function (err, results) {
+    if(err){
+      console.error(err);
+      res.status(500).render("result",{title:"아이디찾기",data : "회원을 찾지 못했습니다", st: "실패"})
+      return
+    }
+    if(results.length == 0){
+      res.status(400).render("result",{title:"아이디찾기",data : "회원을 찾지 못했습니다",st: "실패"})
+      return
+    }
+    res.status(200).render("result",{title:"아이디찾기",data : results[0],st: "아이디"})
+  })
+})
+//비밀번호찾기 결과창 로드
+app.post("/passwordfind", function(req,res){
+  var username = req.body.id
+  var phone = req.body.phone
+  var sql = `SELECT username,nickname from account where phone='${phone}' and username = '${username}'`
+  dbconn.query(sql, function (err, results) {
+    if(err){
+      console.error(err);
+      res.status(500).render("result",{title:"비밀번호찾기",data : "회원을 찾지 못했습니다", st: "실패"})
+      return
+    }
+    if(results.length == 0){
+      res.status(400).render("result",{title:"비밀번호찾기",data : "회원을 찾지 못했습니다",st: "실패"})
+      return
+    }
+    res.status(200).render("result",{title:"비밀번호찾기",data : results[0],st: "비밀번호"})
+  })
+})
+//비밀번호찾기 비밀번호변경하는 코드
+app.post("/newpassword", async function(req,res){
+  var user = req.body.id;
+  var pw = req.body.pw;
+  try {
+    if (pw != "") {
+      pw = await password_hash(pw);
+    }
+    sql = `UPDATE jumakzip.account SET 
+    password=IF(? = '', password, '${pw}') WHERE username='${user}'`;
+    var results = dbconn.query(sql, [ pw]);
+    if (results.affectedRows > 0) {
+      res.status(201).json({ msg: "회원 정보가 저장되었습니다" });
+      return;
+    } else {
+      res.status(200).json({ msg: "회원 정보가 저장되었습니다" });
+      return;
+    }
+  } catch {
+    res.status(500);
+  }
+})
 //회원가입 이후 데이터를 db에 저장하는 코드
 app.post("/idck", function (req, res) {
   var sql = `select username from account where username='${req.body.id}'`;
@@ -284,7 +348,18 @@ app.delete("/mypage", function (req, res) {
     });
   });
 });
+//예약 리스트 생성
+app.post("/reservation/new", function(req,res){
+  var h_cnt = req.body.cnt
+  var bbq = req.body.bbq
+  var animal = req.body.animal
+  var start = req.body.start
+  var end = req.body.end
+  var bbaji = req.body.bbaji
+  var total = req.body.total
+  var user = req.cookies.id;
 
+})
 //예약 리스트 조회
 app.post("/reservation", function (req, res) {
   var h_cnt = req.body.count;
@@ -308,30 +383,35 @@ app.post("/reservation", function (req, res) {
 //kakaopay 단건 결제
 app.post("/kakaopay", async function (req, res) {
   var price = req.body.price;
-  var response = await fetch(
-    "https://open-api.kakaopay.com/online/v1/payment/ready",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `SECRET_KEY DEV1E308B4362AF928B7B25CA38E5D1E9F7E5E93`,
-      },
-      body: JSON.stringify({
-        cid: "TC0ONETIME",
-        partner_order_id: "1234",
-        partner_user_id: "jumakzip",
-        item_name: "105호",
-        quantity: "1",
-        total_amount: price,
-        tax_free_amount: "0",
-        approval_url: "http://localhost:3000/",
-        cancel_url: "http://localhost:3000/",
-        fail_url: "http://localhost:3000/",
-      }),
-    }
-  );
-  var json = await response.json();
-  res.status(200).json({ url: json.next_redirect_pc_url });
+  try{
+    var response = await fetch(
+      "https://open-api.kakaopay.com/online/v1/payment/ready",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `SECRET_KEY DEV1E308B4362AF928B7B25CA38E5D1E9F7E5E93`,
+        },
+        body: JSON.stringify({
+          cid: "TC0ONETIME",
+          partner_order_id: "1234",
+          partner_user_id: "jumakzip",
+          item_name: "105호",
+          quantity: "1",
+          total_amount: price,
+          tax_free_amount: "0",
+          approval_url: "http://localhost:3000/",
+          cancel_url: "http://localhost:3000/",
+          fail_url: "http://localhost:3000/",
+        }),
+      }
+    );
+    var json = await response.json();
+    res.status(200).json({ url: json.next_redirect_pc_url });
+  }catch{
+    res.status(500).json({msg : "오류가 발생했습니다! 다시 시도해주세요"})
+  }
+  
 });
 //파일 가져오기 ------------------------------
 
