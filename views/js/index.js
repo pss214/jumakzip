@@ -235,4 +235,3 @@ window.addEventListener("scroll", () => {
 //   position: new naver.maps.LatLng(37.207713, 127.034744),
 //   map: map,
 // });
-// console.log("지도 가져오기");
