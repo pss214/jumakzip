@@ -56,10 +56,10 @@ app.set("layout extractStyle", true);
 
 //비밀번호 함수
 async function password_hash(pw) {
-  let res = ''
-  const salt = await bcrypt.genSalt(10)
-  res = await bcrypt.hash(pw,salt)
-  return res
+  let res = "";
+  const salt = await bcrypt.genSalt(10);
+  res = await bcrypt.hash(pw, salt);
+  return res;
 }
 // 페이지 로드 코드들 ----------------------------------------------------------
 
@@ -73,20 +73,20 @@ app.get("/", function (req, res) {
 
 //로그인페이지 로드
 app.get("/signin", function (req, res) {
-  res.render("signin", { title: "로그인", style: "" });
+  res.render("signin", { title: "로그인" });
 });
 
 //예약페이지 로드
 app.get("/reservation", function (req, res) {
-  res.render("reservation", { title: "reservation", style: "" });
+  res.render("reservation", { title: "reservation" });
 });
 //예약페이지 로드
 app.get("/reservation/detail", function (req, res) {
-  res.render("reservation_detail", { title: "reservation_detail", style: "" });
+  res.render("reservation_detail", { title: "reservation_detail" });
 });
 //예약페이지 로드
 app.get("/reservation/pay", function (req, res) {
-  res.render("reservation_pay", { title: "reservation_pay", style: "" });
+  res.render("reservation_pay", { title: "reservation_pay" });
 });
 
 //소개페이지 로드
@@ -96,7 +96,7 @@ app.get("/info", function (req, res) {
 
 //회원가입페이지 로드
 app.get("/signup", function (req, res) {
-  res.render("signup", { title: "회원가입", style: "" });
+  res.render("signup", { title: "회원가입" });
 });
 
 //관리자 페이지 로드
@@ -130,18 +130,18 @@ app.post("/signup", function (req, res) {
   var phone = req.body.phone;
   var nickname = req.body.nickname;
   var isad = req.body.ad;
-  password_hash(pw, (hash)=>{
+  password_hash(pw, (hash) => {
     var sql = `insert into account(username,password,phone,nickname,usertype,isad) 
       value ('${id}','${hash}','${phone}','${nickname}', 'user','${isad}')`;
-      dbconn.query(sql, function (err, results, fields) {
-        if (err) {
-          console.error("회원가입 데이터 기입 실패 : ", err);
-          res.status(400).json({ msg: "회원가입이 실패되었습니다" });
-          return;
-        }
-        res.status(201).json({ msg: "회원가입이 완료되었습니다!" });
-      });
-  })
+    dbconn.query(sql, function (err, results, fields) {
+      if (err) {
+        console.error("회원가입 데이터 기입 실패 : ", err);
+        res.status(400).json({ msg: "회원가입이 실패되었습니다" });
+        return;
+      }
+      res.status(201).json({ msg: "회원가입이 완료되었습니다!" });
+    });
+  });
 });
 //로그인 성공 이후 세션쿠키 전달하는 코드
 app.post("/signin", function (req, res) {
@@ -156,8 +156,8 @@ app.post("/signin", function (req, res) {
       return;
     }
     if (results.length == 0) {
-      res.status(400).json({msg:"로그인을 실패했습니다."})
-      return
+      res.status(400).json({ msg: "로그인을 실패했습니다." });
+      return;
     }
     bcrypt.compare(pw, results[0].password, (err, ispassword) => {
       if (err) {
@@ -229,7 +229,7 @@ app.post("/mypage_detail", function (req, res) {
       }
       if (results.length > 0 && ispassword) {
         // res.status(200).json({ msg: "비밀번호 확인 성공", data: results[0] });
-        res.render("mypage_detail", { title: "", data: results[0], style: "" });
+        res.render("mypage_detail", { title: "", data: results[0] });
       } else {
         res.status(400).json({ msg: "비밀번호 확인 실패" });
         return;
@@ -243,9 +243,9 @@ app.post("/mypageedit", async function (req, res) {
   var isad = req.body.ad;
   var nickname = req.body.nickname;
   var pw = req.body.password;
-  try{
-    if (pw != ''){
-      pw = await password_hash(pw)
+  try {
+    if (pw != "") {
+      pw = await password_hash(pw);
     }
     sql = `UPDATE jumakzip.account SET 
     nickname=IF(? = '', nickname, '${nickname}'),isad= '${isad}',password=IF(? = '', password, '${pw}') WHERE username='${user}'`;
@@ -270,7 +270,7 @@ app.delete("/mypage", function (req, res) {
   var sql = `delete from account where username='${user}'`;
   dbconn.query(sql, function (err, results, fields) {
     if (err || results.length == 0) {
-      console.log(err)
+      console.log(err);
       res.status(400).json({ msg: "회원 조회를 실패했습니다." });
       return;
     }

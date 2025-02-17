@@ -28,6 +28,27 @@ header .menu .search {
   width: 100%;
   height: 100%;
   display: flex;
+  justify-content: space-evenly;
+}
+header .menu .search .inputContainer {
+  background-color: #efefef;
+  padding: 0 10px;
+  border-radius: 4px;
+}
+header .menu .search .inputContainer p {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #aaa;
+}
+header .menu .search select {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  background-color: #efefef;
 }
 header .menu .search input {
   width: 100%;
@@ -35,7 +56,9 @@ header .menu .search input {
   outline: none;
   font-size: 16px;
   font-weight: 600;
+  text-align: center;
   padding-left: 20px;
+  background-color: #efefef;
 }
 header .menu .search button {
   min-width: 100px;
