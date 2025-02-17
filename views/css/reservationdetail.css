@@ -17,7 +17,7 @@ body{
     justify-content: center;
 }
 
-.bodywrap{
+main{
     width: 1190.39px; /* 1536px  80% */
     /*height: 1644px;*/
     position: absolute;
