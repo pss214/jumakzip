@@ -4,51 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
-    <link rel="stylesheet" href="/css/reservation.css">
+    <link rel="stylesheet" href="/css/reservation.css" />
     <script src="/js/jquery-1.12.3.js"></script>
-    <script src="/js/reservation.js"></script>
+    <script src="/js/reservation.js" defer></script>
   </head>
   <body>
-    <div class="bodywrap">
-      <div class="wrap0">
-        <img src="image/Real-time reservation.png" alt="img0">
+    <main>
+      <img src="/image/Real-time reservation.png" alt="logo" class="logo" />
+      <hr />
+      <div class="wrapwrap0">
+        <button class="jumakButton jumakButtonReverseHover jumakButtonActive">
+          인원순
+          <!-- 클릭하면 가격순으로 변경 -->
+        </button>
+        <ul>
+          <% for (let i = 0; i < data.length; i++) { %>
+          <li>
+            <a
+              href="/reservation/detail?room=<%= data[i].room_id %>&img=<%= data[i].img %>&name=<%= data[i].name %>&price=<%= data[i].price %>&h_max=<%= data[i].h_max %>"
+            >
+              <img
+                src="/image/<%= data[i].img ? data[i].img : 'default.png' %>"
+              />
+            </a>
+            <div>
+              <div>
+                <h3><%= data[i].name %></h3>
+                <p class="capacity"><%= data[i].h_max %>인실</p>
+                <p class="price"><%= data[i].price %>원</p>
+              </div>
+              <button class="likeButton">♡</button>
+            </div>
+          </li>
+          <% } %>
+        </ul>
       </div>
-
-      <div class="wrap1">
-        <div class="calendar0">
-          
-        </div>
-
-        <form>
-          <label><img src="image/Number of guests.png"> <input type="number" required min="1" max="5"></label>
-          <label><img src="image/length of stay.png"> <input type="text" required></label>
-          <input type="submit" value="조회하기">
-        </form>
-      </div>
-
-      <div class="wrap2">
-        <div class="wrapwrap0">
-          <span>인원수</span>
-          
-          <div class="wrapwrap1">
-            <ul>
-              <% for (let i = 0; i < results.length; i++) {
-                %>
-                  <li>
-                    <a href="#"><img src='/image/<%= results[i].img %>'></a>
-                    <h3><% results[i].name</h3>
-                    <span class="span0">수용 인원 : <%= results[i].h_max</span>
-                    <b class="b0"><% results[i].price %><small class="small0">원</small> </b>
-                    <span class="span1">♡</span>
-                  </li>
-              <% } %>
-            </ul>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-    
+    </main>
   </body>
 </html>
