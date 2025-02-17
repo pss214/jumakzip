@@ -248,12 +248,14 @@ app.post("/mypageedit", async function (req, res) {
       pw = await password_hash(pw)
     }
     sql = `UPDATE jumakzip.account SET 
-    nickname=IF(? = '', nickname, '${nickname}'),isad= '${isad}',password=IF(? = '', password, '${pw}') WHERE username=${user}`;
+    nickname=IF(? = '', nickname, '${nickname}'),isad= '${isad}',password=IF(? = '', password, '${pw}') WHERE username='${user}'`;
     var results =dbconn.query(sql, [nickname,pw])
       if (results.affectedRows > 0) {
         res.status(201).json({ msg: "회원 정보가 저장되었습니다" });
+        return
       } else {
-        res.status(400).json({ msg: "회원 정보 저장이 실패했습니다." });
+        res.status(200).json({ msg: "회원 정보를 저장할 내용이 없습니다" });
+        return
       }
   }catch{
     res.status(500)
@@ -278,6 +280,22 @@ app.delete("/mypage", function (req, res) {
     });
   });
 });
+
+//예약 리스트 조회
+app.post("/reservation", function (res,req) {
+  var h_cnt = req.body.hCount
+  var start = req.body.startDay
+  var end = req.body.endDay
+  try{
+    var sql = `SELECT name,img,price,h_max FROM room r join room_op ro on ro.roop_id = r.roop_id 
+                WHERE r.room_id NOT IN  (select room_id from resersvation
+                where st_date >= '${start}' and end_date <= '${end}') and ${h_cnt} <= ro.h_max ;`
+    var results = dbconn.query(sql)
+    res.render("reservation", { title: "reservation", style: "" ,data: results})
+  }catch{
+
+  }
+})
 //파일 가져오기 ------------------------------
 
 //video 가져오는 경로

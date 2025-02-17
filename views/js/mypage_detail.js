@@ -31,7 +31,7 @@ async function edit(isad) {
                         nickname : newnickname
                     })
                 })
-        if(res.status == 200){
+        if(res.status == 200 || res.status == 201){
             alert("수정이 완료되었습니다!")
             location.replace("/mypage")
         }
