@@ -310,6 +310,30 @@ app.post("/reservation", function (req, res) {
     });
   });
 });
+//kakaopay 단건 결제
+app.post("/kakaopay", async function(req,res){
+  var price = req.body.price
+  var response = await fetch("https://open-api.kakaopay.com/online/v1/payment/ready",{
+    method:"POST",
+    headers: { "Content-Type": "application/json", "Authorization": `SECRET_KEY DEV1E308B4362AF928B7B25CA38E5D1E9F7E5E93` },
+    body: JSON.stringify({
+          cid:"TC0ONETIME",
+          partner_order_id:"1234",
+          partner_user_id : "jumakzip",
+          item_name : "105호",
+          quantity : "1",
+          total_amount : price,
+          tax_free_amount : "0",
+          approval_url : "http://localhost:3000/",
+          cancel_url : "http://localhost:3000/",
+          fail_url : "http://localhost:3000/"
+      })
+    })
+  var json = await response.json()
+  console.log(response)
+  console.log(json)
+  res.status(200).json({ url : json.next_redirect_pc_url})
+})
 //파일 가져오기 ------------------------------
 
 //video 가져오는 경로

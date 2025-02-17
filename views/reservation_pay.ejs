@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/css/reservation_confirmationandpayment.css">
 </head>
 <body>
-    <main>
+    <div class="bodywrap">
         <div class="wrap0">
             <a href="reservation_detail.ejs"> <p>←</p> </a>
             <p>예약 확인 및 결제</p>
@@ -52,8 +52,9 @@
                 
             </div>
 
-            <input type="submit" value="500,000원 결제하기">
+            <input type="button" onclick="pay(500000)" value="500,000원 결제하기">
         </form>
-    </main>
+    </div>
+    <script src="/js/reservationpay.js"></script>
 </body>
 </html>
