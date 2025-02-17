@@ -27,7 +27,8 @@ main .contentArea {
 }
 main .contentArea .bulletinBoard {
   margin-bottom: 50px;
-  min-height: 80vh;
+  height: 75vh;
+  overflow-y: auto;
 }
 main .contentArea .bulletinBoard h4 {
   font-size: 32px;
