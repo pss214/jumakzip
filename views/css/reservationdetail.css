@@ -1,221 +1,218 @@
 @charset "utf-8";
 
-*{
-    margin: 0 auto;
-    padding: 0;
-    color: #333333;
-    font-family: "함초롱바탕";
+a {
+  text-decoration: none;
+  display: block;
+  overflow: hidden;
+}
+a > img {
+  width: 100%;
+  transform: translateY(-30%);
 }
 
-a{
-    text-decoration: none;
-    display: block;
+body {
+  display: flex;
+  justify-content: center;
 }
 
-body{
-    display: flex;
-    justify-content: center;
+main {
+  width: 1190.39px; /* 1536px  80% */
+  /*height: 1644px;*/
+  position: absolute;
+  top: 70px;
 }
 
-main{
-    width: 1190.39px; /* 1536px  80% */
-    /*height: 1644px;*/
-    position: absolute;
-    top: 70px;
+.wrap0 {
+  width: 100%;
+  height: 442px;
+  margin-top: 70px;
 }
 
-.wrap0{
-    width: 100%;
-    height: 442px;
-    margin-top: 70px;
+.wrap0 > a {
+  width: 1135.568px;
+  height: 300px;
+  border-radius: 12px;
+  background-color: #f9f9f9;
 }
 
-.wrap0>a{
-    width: 1135.568px;
-    height: 290px;
-    border-radius: 12px;
-    background-color: #F9F9F9;
+.li0 {
+  float: left;
+  width: 1135.568px;
+  height: 32px;
+  margin-top: 40px;
+  margin-left: 27.406px;
 }
 
-.li0{
-    float: left;
-    width: 1135.568px;;
-    height: 32px;
-    margin-top: 40px;
-    margin-left: 27.406px;
+.wrap0 > li > h2:first-child {
+  float: left;
 }
 
-.wrap0>li>h2:first-child{
-    float: left;
+.wrap0 > li > h2:last-child {
+  float: right;
 }
 
-.wrap0>li>h2:last-child{
-    float: right;
+.li1 {
+  float: left;
+  width: 1135.568px;
+  height: 35px;
+  margin-top: 40px;
+  margin-left: 27.406px;
 }
 
-.li1{
-    float: left;
-    width: 1135.568px;;
-    height: 35px;
-    margin-top: 40px;
-    margin-left: 27.406px;
+.span1 {
+  float: right;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50px;
+  background-color: #d9d9d9;
+  color: #666666;
+  font-size: 20px;
+  text-align: center;
+  cursor: pointer;
 }
 
-.span1{
-    float: right;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    border-radius: 50px;
-    background-color: #D9D9D9;
-    color: #666666;
-    font-size: 20px;
-    text-align: center;
-    cursor: pointer;
+.span1:hover {
+  background-color: #dddddd;
+  color: #ffffff;
 }
 
-.span1:hover{
-    background-color: #dddddd;
-    color: #ffffff;
+.span1.active {
+  background-color: red;
+  color: #ffffff;
 }
 
-.span1.active{
-    background-color: red;
-    color: #ffffff;
+.wrap1 {
+  box-sizing: content-box;
+  width: 100%;
+  height: 769px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  border-top: 1px solid #dddddd;
 }
 
-.wrap1{
-    box-sizing: content-box;
-    width: 100%;
-    height: 769px;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    border-top: 1px solid #dddddd;
+figure {
+  width: 1135.568px;
+  margin-top: 50px;
 }
 
-figure{
-    width: 1135.568px;
-    margin-top: 50px; 
+figcaption {
+  width: 100%;
+  margin-bottom: 50px;
 }
 
-figcaption{
-    width: 100%;
-    margin-bottom: 50px;
+figcaption > h3 {
+  width: 100%;
 }
 
-figcaption>h3{
-    width: 100%;
+form {
+  width: 100%;
 }
 
-form{
-    width: 100%;
-
+form > ul {
+  width: 100%;
+  height: 374px;
 }
 
-form>ul{
-    width: 100%;
-    height: 374px;
+form > ul > li {
+  width: 100%;
+  height: 56px;
+  margin-bottom: 50px;
 }
 
-form>ul>li{
-    width: 100%;
-    height: 56px;
-    margin-bottom: 50px;
+.a0 {
+  width: 100%;
+  height: 31px;
+  position: relative;
 }
 
-.a0{
-    width: 100%;
-    height: 31px;
-    position: relative;
+.a0 > label {
+  width: 164.078px;
+  height: 31px;
+  position: absolute;
+  cursor: pointer;
 }
 
-.a0>label{
-    width: 164.078px;
-    height: 31px;
-    position: absolute;
-    cursor: pointer;
+.a0 > label > input {
+  width: 31px;
+  height: 31px;
 }
 
-.a0>label>input{
-    width: 31px;
-    height: 31px;
+.a0 > label > span {
+  width: 123.09px;
+  height: 31px;
+  line-height: 31px;
+  position: absolute;
+  margin-left: 10px;
+  font-size: 23px;
+  text-align: center;
 }
 
-.a0>label>span{
-    width: 123.09px;
-    height: 31px;
-    line-height: 31px;
-    position: absolute;
-    margin-left: 10px;
-    font-size: 23px;
-    text-align: center;
+.a0 > span {
+  width: 128.39px;
+  height: 31px;
+  line-height: 31px;
+  position: absolute;
+  right: 0;
+  color: #3a8dfd;
+  font-size: 23px;
+  font-weight: bold;
 }
 
-.a0>span{
-    width: 128.39px;
-    height: 31px;
-    line-height: 31px;
-    position: absolute;
-    right: 0;
-    color: #3A8DFD;
-    font-size: 23px;
-    font-weight: bold;
+.a0 > label:hover {
+  opacity: 0.9;
 }
 
-.a0>label:hover{
-    opacity: 0.9;
+.a1 {
+  width: 158.625px;
+  height: 20px;
+  margin-top: 5px;
+  margin-left: 41px;
+  cursor: pointer;
 }
 
-.a1{
-    width: 158.625px;
-    height: 20px;
-    margin-top: 5px;
-    margin-left: 41px;
-    cursor: pointer;
+.a1:hover {
+  opacity: 0.5;
 }
 
-.a1:hover{
-    opacity: 0.5;
+.b0 {
+  float: left;
+  display: block;
+  width: 20px;
+  height: 20px;
+  line-height: 6px;
+  border: 2px solid #aaaaaa;
+  border-radius: 50px;
+  margin: 0;
+  font-size: 20px;
+  text-align: center;
 }
 
-.b0{
-    float: left;
-    display: block;
-    width: 20px;
-    height: 20px;
-    line-height: 6px;
-    border: 2px solid #aaaaaa;
-    border-radius: 50px;
-    margin: 0;
-    font-size: 20px;
-    text-align: center;
+.b1 {
+  float: left;
+  display: block;
+  width: 133.625px;
+  height: 20px;
+  line-height: 20px;
+  margin: 0;
+  margin-left: 5px;
+  color: #aaaaaa;
 }
 
-.b1{
-    float: left;
-    display: block;
-    width: 133.625px;
-    height: 20px;
-    line-height: 20px;
-    margin: 0;
-    margin-left: 5px;
-    color: #aaaaaa;
+form > input {
+  width: 1135.568px;
+  height: 70px;
+  border: none;
+  border-radius: 10px;
+  margin-top: 200px;
+  background-color: #3a8dfd;
+  color: #ffffff;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-form>input{
-    width: 1135.568px;
-    height: 70px;
-    border: none;
-    border-radius: 10px;
-    margin-top: 200px;
-    background-color: #3A8DFD;
-    color: #ffffff;
-    font-size: 30px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-form>input:hover{
-    border: 1px solid #ffff00;
-    color: #ffff00;
+form > input:hover {
+  border: 1px solid #ffff00;
+  color: #ffff00;
 }
