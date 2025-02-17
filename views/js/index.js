@@ -223,16 +223,16 @@ window.addEventListener("scroll", () => {
     wayToComeLocation.style.transform = "translateY(15%)";
   }
 });
-//네이버 지도 api 호출
-let mapOptions = {
-  center: new naver.maps.LatLng(37.207713, 127.034744),
-  zoom: 10,
-};
+// //네이버 지도 api 호출
+// let mapOptions = {
+//   center: new naver.maps.LatLng(37.207713, 127.034744),
+//   zoom: 10,
+// };
 
-let map = new naver.maps.Map("map", mapOptions);
+// let map = new naver.maps.Map("map", mapOptions);
 
-let marker = new naver.maps.Marker({
-  position: new naver.maps.LatLng(37.207713, 127.034744),
-  map: map,
-});
-console.log("지도 가져오기");
+// let marker = new naver.maps.Marker({
+//   position: new naver.maps.LatLng(37.207713, 127.034744),
+//   map: map,
+// });
+// console.log("지도 가져오기");

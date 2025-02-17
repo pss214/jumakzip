@@ -4,7 +4,14 @@ let logoff = document.getElementById("log_off");
 let p_on = document.getElementById("p_logon");
 let p_off = document.getElementById("p_logoff");
 const searchButton = document.querySelector(".search > button");
+const today = new Date();
+const todayIso = new Date().toISOString().substring(0, 10);
+const tomorrowIso = new Date(today.setDate(today.getDate() + 1))
+  .toISOString()
+  .substring(0, 10);
 
+document.querySelector("#startDay").value = todayIso;
+document.querySelector("#endDay").value = tomorrowIso;
 function getCookie(cookiename) {
   const cookies = document.cookie.split(";");
 
@@ -39,8 +46,3 @@ function logout() {
     location.replace("/logout");
   }
 }
-
-// 예약하기 버튼 클릭시 예약페이지로 이동
-searchButton.addEventListener("click", () => {
-  location.href = "/reservation";
-});
