@@ -11,6 +11,5 @@ sidebarNavis.forEach((sidebarNavi, index) => {
       left: 0,
       behavior: "smooth",
     });
-    console.log(index, " ", moveLocs);
   });
 });
