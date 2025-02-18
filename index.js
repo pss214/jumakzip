@@ -99,8 +99,8 @@ app.get("/reservation/detail", function (req, res) {
       h_max: h_max,
       data: results[0],
       count: h_cnt,
-      start:start,
-      end:end
+      start: start,
+      end: end,
     });
   });
 });
@@ -344,7 +344,7 @@ app.get("/:url", function (req, res) {
 app.post("/mypage_detail", function (req, res) {
   var user = req.cookies.id;
   var pw = req.body.pw;
-  var now = new Date()
+  var now = new Date().toISOString().substring(0, 10);
   var sql = `select * from account where username='${user}'`;
   dbconn.query(sql, function (err, results, fields) {
     if (err) {
@@ -363,16 +363,19 @@ app.post("/mypage_detail", function (req, res) {
         var sql2 = `select * from jumakzip.resersvation r 
                     join jumakzip.room rm on rm.room_id = r.room_id  
                     join jumakzip.room_op op on op.roop_id = rm.roop_id
-                    WHERE user_id = '${results[0].user_id}'and end_date >= '${now}' `
-        dbconn.query(sql2, (err, reservation)=>{
+                    WHERE user_id = '${results[0].user_id}'and end_date >= '${now}' `;
+        dbconn.query(sql2, (err, reservation) => {
           if (err) {
             console.error(err);
             res.status(500).json({ msg: "오류 발생" });
             return;
           }
-          res.render("mypage_detail", { title: "", data: results[0],reservation:reservation[0] });
-        })
-        
+          res.render("mypage_detail", {
+            title: "",
+            data: results[0],
+            reservation: reservation[0],
+          });
+        });
       } else {
         res.status(400).json({ msg: "비밀번호 확인 실패" });
         return;
@@ -488,8 +491,8 @@ app.post("/kakaopay", async function (req, res) {
       }
     );
     var json = await response.json();
-    var sql = `insert into reservation(st_date,end_date,)`
-    dbconn.query
+    var sql = `insert into reservation(st_date,end_date,)`;
+    dbconn.query;
     res.status(200).json({ url: json.next_redirect_pc_url });
   } catch {
     res.status(500).json({ msg: "오류가 발생했습니다! 다시 시도해주세요" });
