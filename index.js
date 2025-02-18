@@ -134,10 +134,12 @@ app.get("/KakaopayApproval", function (req, res) {
   var token = req.query.pg_token
   var user = req.cookies.id
   var now = new Date().toISOString().substring(0, 10)
-  var sql = `update reservation SET pay_ck=1,payment=${token} where username=${user} and  create_date=${now}`
+  var sql = `update reservation SET pay_ck='1',payment='${token}' 
+  where user_id=(select user_id from account where username='${user}') and create_date='${now}'`
   dbconn.query(sql, (err,results)=>{
     if(err){
-      res.render("오류가 발생되었습니다")
+      console.error(err)
+      res.send("오류가 발생되었습니다")
       return
     }
     res.render("KakaopayApproval", {
@@ -147,10 +149,12 @@ app.get("/KakaopayApproval", function (req, res) {
 });
 //카카오 단건결제 취소 페이지
 app.get("/KakaopayCancel", function (req, res) {
-  var sql = `delete from reservation where username=${user} and  create_date=${now}`
+  var sql = `delete from reservation where 
+  user_id=(select user_id from account where username='${user}') and create_date='${now}'`
   dbconn.query(sql, (err,results)=>{
     if(err){
-      res.render("오류가 발생되었습니다")
+      console.error(err)
+      res.send("오류가 발생되었습니다")
       return
     }
     res.render("KakaopayCancel", {
@@ -161,10 +165,12 @@ app.get("/KakaopayCancel", function (req, res) {
 });
 //카카오 단건결제 실패 페이지
 app.get("/KakaopayFail", function (req, res) {
-  var sql = `delete from reservation where username=${user} and  create_date=${now}`
+  var sql = `delete from reservation where 
+  user_id=(select user_id from account where username='${user}') and create_date='${now}'`
   dbconn.query(sql, (err,results)=>{
     if(err){
-      res.render("오류가 발생되었습니다")
+      console.error(err)
+      res.send("오류가 발생되었습니다")
       return
     }
     res.render("KakaopayFail", {
@@ -376,7 +382,7 @@ app.post("/mypage_detail", function (req, res) {
       }
       if (results.length > 0 && ispassword) {
         // res.status(200).json({ msg: "비밀번호 확인 성공", data: results[0] });
-        var sql2 = `select * from jumakzip.resersvation r 
+        var sql2 = `select * from jumakzip.reservation r 
                     join jumakzip.room rm on rm.room_id = r.room_id  
                     join jumakzip.room_op op on op.roop_id = rm.roop_id
                     WHERE user_id = '${results[0].user_id}'and end_date >= '${now}' `;
@@ -447,7 +453,7 @@ app.get("/reservation/list", function (req, res) {
   var start = req.query.start;
   var end = req.query.end;
   var sql1 = `SELECT name,img,price,h_max,room_id FROM room r join room_op ro on ro.roop_id = r.roop_id 
-              WHERE r.room_id NOT IN  (select room_id from resersvation
+              WHERE r.room_id NOT IN  (select room_id from reservation
               where st_date >= '${start}' and end_date <= '${end}') and ${h_cnt} <= ro.h_max ;`;
   dbconn.query(sql1, (err, results1) => {
     if (err) {
@@ -455,7 +461,7 @@ app.get("/reservation/list", function (req, res) {
       return;
     }
     var sql2 = `SELECT name,img,price,h_max,room_id FROM room r join room_op ro on ro.roop_id = r.roop_id 
-              WHERE r.room_id IN  (select room_id from resersvation
+              WHERE r.room_id IN  (select room_id from reservation
               where st_date >= '${start}' and end_date <= '${end}') and ${h_cnt} <= ro.h_max ;`;
     dbconn.query(sql2, (err, results2) => {
       if (err) {
@@ -487,10 +493,10 @@ app.post("/kakaopay", function (req, res) {
   var user = req.cookies.id;
   var name = req.body.name;
   var now = new Date().toISOString().substring(0, 10)
-  var sql = `INSERT INTO jumakzip.resersvation 
+  var sql = `INSERT INTO jumakzip.reservation 
             (st_date,end_date,h_cnt,bbq_ck,animal_ck,bbaji_ck,total_price,pay_ck,user_id,room_id,create_date)
             VALUES ('${start}','${end}',${h_cnt},${bbq},${animal},${bbaji},${total},0,
-            (select user_id from account where username='${user}'),'${room}'),${now}`
+            (select user_id from account where username='${user}'),'${room}','${now}')`
         dbconn.query(sql, (err,results)=>{
           if (err) {
             res.status(500);
