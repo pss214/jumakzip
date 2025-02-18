@@ -6,7 +6,7 @@
     <a href="/"><img src="/image/jumakziplogo.png" alt="logo" /></a>
   </div>
   <div class="menu">
-    <form class="search" method="post" action="/reservation">
+    <form class="search" method="get" action="/reservation">
       <div class="inputContainer">
         <p>인원</p>
         <select name="count" class="personnel">
@@ -31,8 +31,8 @@
         <input class="period" id="endDay" type="date" name="end" />
       </div>
       <button
-        type="submit"
-        class="jumakButton jumakButtonReverseHover jumakButtonActive"
+        type="button"
+        class="submitButton jumakButton jumakButtonReverseHover jumakButtonActive"
       >
         예약하기
       </button>
@@ -44,14 +44,20 @@
   </div>
   <div class="user">
     <div id="log_on">
-      <a href="/mypage"
-        ><div id="profile">
-          <img src="../image/profile.png" alt="profile" /></div
-      ></a>
-      <a onclick="logout()"><p id="p_logon"></p></a>
+      <button
+        onclick="logout()"
+        class="jumakButtonReverseHover jumakButtonActive"
+      >
+        로그아웃
+      </button>
+      <a href="/mypage" class="profile">
+        <img src="../image/profile.png" alt="profile"
+      /></a>
     </div>
     <div id="log_off">
-      <a href="/signin"><p id="p_logoff"></p></a>
+      <a href="/signin" class="jumakButtonReverseHover jumakButtonActive"
+        >로그인</a
+      >
     </div>
   </div>
 </header>

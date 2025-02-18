@@ -10,38 +10,38 @@ header {
   z-index: 50;
 }
 
-header .logo {
+header > .logo {
   width: 220px;
   cursor: pointer;
 }
-header .logo img {
+header > .logo img {
   width: 100%;
 }
 
-header .menu {
+header > .menu {
   width: 600px;
   display: flex;
   align-items: center;
   column-gap: 20px;
 }
-header .menu .search {
+header > .menu .search {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: space-evenly;
 }
-header .menu .search .inputContainer {
+header > .menu .search .inputContainer {
   background-color: #efefef;
   padding: 0 10px;
   border-radius: 4px;
 }
-header .menu .search .inputContainer p {
+header > .menu .search .inputContainer p {
   text-align: center;
   font-size: 14px;
   font-weight: 700;
   color: #aaa;
 }
-header .menu .search select {
+header > .menu .search select {
   width: 100%;
   border: none;
   outline: none;
@@ -50,7 +50,7 @@ header .menu .search select {
   text-align: center;
   background-color: #efefef;
 }
-header .menu .search input {
+header > .menu .search input {
   width: 100%;
   border: none;
   outline: none;
@@ -60,55 +60,67 @@ header .menu .search input {
   padding-left: 20px;
   background-color: #efefef;
 }
-header .menu .search button {
+header > .menu .search button {
   min-width: 100px;
   font-size: 16px;
 }
-header .menu .admin {
+header > .menu .admin {
   width: 25px;
   cursor: pointer;
 }
-header .menu .admin img {
+header > .menu .admin img {
   width: 100%;
 }
 
-header .menu {
+header > .menu {
   width: 600px;
 }
 
-header .user {
+header > .user {
   display: flex;
   column-gap: 10px;
   width: 220px;
+  align-items: center;
 }
-header .user .login_profile {
+
+header > .user #log_on {
   display: flex;
-  margin-left: auto;
-  width: 36px;
-  height: 36px;
-  border-radius: 100%;
-}
-header .user .logout_profile {
-  display: none;
-}
-.on {
-  color: #000;
-  cursor: pointer;
-  height: 36px;
-  border: 1px solid black;
-  border-radius: 18px;
-  padding: 0 26px;
-  font-size: 16px;
-  line-height: 36px;
-}
-.off {
-  display: none;
-}
-.log_on {
-  display: flex;
+  width: 100%;
   column-gap: 15px;
-  margin-left: auto;
+  flex-direction: row-reverse;
+  align-items: center;
 }
-.log_off {
+header > .user #log_on .profile {
+  width: 40px;
+  height: 40px;
+}
+header > .user #log_on .profile img {
+  width: 100%;
+  object-fit: cover;
+}
+header > .user #log_on button {
+  border: 2px solid #000;
+  background-color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 20px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+header > .user #log_off {
   display: none;
+  width: 100%;
+  column-gap: 15px;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+header > .user #log_off a {
+  border: 2px solid #000;
+  background-color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 20px;
+  padding: 8px 12px;
+  cursor: pointer;
+  margin-left: auto;
 }
