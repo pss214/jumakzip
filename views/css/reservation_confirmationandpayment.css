@@ -19,7 +19,8 @@ body {
 
 main {
   width: 1190.39px; /* 1536px  80% */
-  height: 1644px;
+  height: 1190px;
+  box-sizing: content-box;
   position: absolute;
   top: 70px;
 }
@@ -34,6 +35,7 @@ main {
   float: left;
   width: 33.266px;
   height: 33px;
+  margin-left: 10px;
 }
 
 .wrap0 > a > p {
@@ -137,16 +139,85 @@ main {
 }
 
 .wrap2 > figure {
+  width: 1135.568px;
+  margin-top: 50px;
 }
 
 .wrap2 > figure > figcaption {
+  width: 100%;
+  height: 25px;
+  margin-bottom: 20px;
 }
 
 .wrap2 > figure > figcaption > h3 {
+  float: left;
 }
 
 .wrap2 > figure > ul {
+  list-style: none;
+  width: 100%;
+  height: 184px;
+  box-sizing: content-box;
+  border-bottom: 2px dotted #aaaaaa;
+  position: relative;
 }
 
 .wrap2 > figure > ul > li {
+  width: 100%;
+  height: 26px;
+  margin-bottom: 20px;
+}
+
+.PaymentHistory0 {
+  float: left;
+  color: #666666;
+  font-size: 19px;
+}
+
+.PaymentHistory1 {
+  float: right;
+  color: black;
+  font-size: 19px;
+}
+
+.wrap2 > figure > div {
+  width: 100%;
+  height: 32px;
+  margin-top: 25px;
+}
+
+.wrap2 > figure > div > span {
+  float: left;
+  color: black;
+  font-size: 24px;
+}
+
+.wrap2 > figure > div > h2 {
+  float: right;
+  color: #ff0000;
+}
+
+.wrap3 {
+  width: 100%;
+  margin-top: 70px;
+  margin-bottom: 50px;
+}
+
+.wrap3 > input {
+  width: 100%;
+  height: 70px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 10px;
+  background-color: #3a8dfd;
+  color: #ffffff;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+}
+
+.wrap3 > input:hover {
+  border: 1px solid #ffff00;
+  color: #ffff00;
 }

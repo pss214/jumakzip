@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/css/reservation_confirmationandpayment.css" />
   </head>
   <body>
-    <div class="bodywrap">
+    <main>
       <div class="wrap0">
         <a href="reservation_detail.ejs"> <p>←</p> </a>
         <p>예약 확인 및 결제</p>
@@ -42,22 +42,26 @@
           <figcaption><h3>결제 내역</h3></figcaption>
           <ul>
             <li>
-              <span class="productprice0">상품 금액</span>
-              <span class="productprice1">500,000원</span>
+              <span class="PaymentHistory0">상품 금액</span>
+              <span class="PaymentHistory1">500,000원</span>
             </li>
             <li>
-              <span class="bbqusing">바베규 이용</span>
-              <span class="bbq">10,000원</span>
+              <span class="PaymentHistory0">바베규 이용</span>
+              <span class="PaymentHistory1">0원</span>
             </li>
             <li>
-              <span>동물 놀이터 이용</span>
-              <span>50,000원</span>
+              <span class="PaymentHistory0">동물 놀이터 이용</span>
+              <span class="PaymentHistory1">0원</span>
             </li>
             <li>
-              <span>빠지 이용</span>
-              <span>50,000원</span>
+              <span class="PaymentHistory0">빠지 이용</span>
+              <span class="PaymentHistory1">0원</span>
             </li>
           </ul>
+          <div>
+            <span>총 결제 금액</span>
+            <h2>500,000원</h2>
+          </div>
         </figure>
       </div>
 
@@ -72,7 +76,7 @@
 
         <input type="button" onclick="pay(500000)" value="500,000원 결제하기" />
       </form>
-    </div>
+    </main>
     <script src="/js/reservationpay.js"></script>
   </body>
 </html>
