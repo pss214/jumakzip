@@ -1,60 +1,78 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="/css/reservation_confirmationandpayment.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/css/reservation_confirmationandpayment.css" />
+  </head>
+  <body>
     <div class="bodywrap">
-        <div class="wrap0">
-            <a href="reservation_detail.ejs"> <p>←</p> </a>
-            <p>예약 확인 및 결제</p>
-        </div>
+      <div class="wrap0">
+        <a href="reservation_detail.ejs"> <p>←</p> </a>
+        <p>예약 확인 및 결제</p>
+      </div>
 
-        <ul class="wrap1">
-            <li class="e0">
-                <h3 class="a0">101호실</h3>
-                <h3 class="a1">500,000원</h3>
+      <ul class="wrap1">
+        <a href="#"></a>
+
+        <li class="e0">
+          <h3 class="a0">101호실</h3>
+          <h3 class="a1">500,000원</h3>
+        </li>
+
+        <li class="e1">
+          <span class="b0">체크인</span>
+          <span class="b1">체크아웃</span>
+        </li>
+
+        <li class="e2">
+          <span class="c0">2025.02.03</span>
+          <span class="c1">2025.02.04</span>
+        </li>
+
+        <li class="e3">
+          <span class="d0">14:00</span>
+          <span class="d1">11:00</span>
+        </li>
+      </ul>
+
+      <div class="wrap2">
+        <figure>
+          <figcaption><h3>결제 내역</h3></figcaption>
+          <ul>
+            <li>
+              <span class="productprice0">상품 금액</span>
+              <span class="productprice1">500,000원</span>
             </li>
-
-            <li class="e1">
-                <span class="b0">체크인</span>
-                <span class="b1">체크아웃</span>
+            <li>
+              <span class="bbqusing">바베규 이용</span>
+              <span class="bbq">10,000원</span>
             </li>
-
-            <li class="e2">
-                <span class="c0">2025.02.03</span>
-                <span class="c1">2025.02.04</span>
+            <li>
+              <span>동물 놀이터 이용</span>
+              <span>50,000원</span>
             </li>
-
-            <li class="e3">
-                <span class="d0">14:00</span>
-                <span class="d1">11:00</span>
+            <li>
+              <span>빠지 이용</span>
+              <span>50,000원</span>
             </li>
-        </ul>
+          </ul>
+        </figure>
+      </div>
 
-        <form class="wrap2">
-            <div class="wrapwrap0">
+      <form class="wrap3">
+        <div class="wrapwrap0"></div>
 
-            </div>
+        <div class="wrapwrap1"></div>
 
-            <div class="wrapwrap1">
-                
-            </div>
+        <div class="wrapwrap2"></div>
 
-            <div class="wrapwrap2">
-                
-            </div>
+        <div class="wrapwrap3"></div>
 
-            <div class="wrapwrap3">
-                
-            </div>
-
-            <input type="button" onclick="pay(500000)" value="500,000원 결제하기">
-        </form>
+        <input type="button" onclick="pay(500000)" value="500,000원 결제하기" />
+      </form>
     </div>
     <script src="/js/reservationpay.js"></script>
-</body>
+  </body>
 </html>

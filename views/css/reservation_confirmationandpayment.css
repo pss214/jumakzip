@@ -58,9 +58,17 @@ main {
   margin-top: 50px;
 }
 
+.wrap1 > a {
+  width: 1135.568px;
+  height: 290px;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+}
+
 .e0 {
   width: 100%;
   height: 25px;
+  margin-top: 40px;
 }
 
 .a0 {
@@ -119,4 +127,26 @@ main {
 .d1 {
   margin-left: 497px;
   font-size: 19px;
+}
+
+.wrap2 {
+  width: 100%;
+  box-sizing: content-box;
+  border-top: 1px solid #dddddd;
+  margin-top: 50px;
+}
+
+.wrap2 > figure {
+}
+
+.wrap2 > figure > figcaption {
+}
+
+.wrap2 > figure > figcaption > h3 {
+}
+
+.wrap2 > figure > ul {
+}
+
+.wrap2 > figure > ul > li {
 }
