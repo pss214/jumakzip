@@ -6,12 +6,30 @@ const startDay = document.querySelector("#startDay");
 const endDay = document.querySelector("#endDay");
 const today = new Date();
 const defaultStartDay = new Date().toISOString().substring(0, 10);
-const defaultEndDay = new Date(today.setDate(today.getDate() + 1))
+const defaulteEndDay = new Date(today.setDate(today.getDate() + 1))
   .toISOString()
   .substring(0, 10);
 
-startDay.value = defaultStartDay;
-endDay.value = defaultEndDay;
+let startDayTmp = localStorage.getItem("startDayTmp");
+let endDayTmp = localStorage.getItem("endDayTmp");
+
+if (!startDayTmp) {
+  startDay.value = defaultStartDay;
+} else {
+  startDay.value = startDayTmp;
+}
+if (!endDayTmp) {
+  endDay.value = defaulteEndDay;
+} else {
+  endDay.value = endDayTmp;
+}
+
+startDay.addEventListener("change", (e) => {
+  localStorage.setItem("startDayTmp", startDay.value);
+});
+endDay.addEventListener("change", (e) => {
+  localStorage.setItem("endDayTmp", endDay.value);
+});
 
 function getCookie(cookiename) {
   const cookies = document.cookie.split(";");
