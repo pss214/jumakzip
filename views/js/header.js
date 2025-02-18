@@ -2,16 +2,43 @@ const submitButton = document.querySelector(".submitButton");
 const logOnTags = document.querySelector("#log_on");
 const logOffTags = document.querySelector("#log_off");
 const searchButton = document.querySelector(".search > button");
+const hCount = document.querySelector(".hCount");
 const startDay = document.querySelector("#startDay");
 const endDay = document.querySelector("#endDay");
 const today = new Date();
 const defaultStartDay = new Date().toISOString().substring(0, 10);
-const defaultEndDay = new Date(today.setDate(today.getDate() + 1))
+const defaulteEndDay = new Date(today.setDate(today.getDate() + 1))
   .toISOString()
   .substring(0, 10);
 
-startDay.value = defaultStartDay;
-endDay.value = defaultEndDay;
+// form data 유지
+let startDayTmp = sessionStorage.getItem("startDayTmp");
+let endDayTmp = sessionStorage.getItem("endDayTmp");
+let hCountTmp = sessionStorage.getItem("hCountTmp");
+
+if (!startDayTmp) {
+  startDay.value = defaultStartDay;
+} else {
+  startDay.value = startDayTmp;
+}
+if (!endDayTmp) {
+  endDay.value = defaulteEndDay;
+} else {
+  endDay.value = endDayTmp;
+}
+if (hCountTmp) {
+  hCount.value = hCountTmp;
+}
+
+startDay.addEventListener("change", () => {
+  sessionStorage.setItem("startDayTmp", startDay.value);
+});
+endDay.addEventListener("change", () => {
+  sessionStorage.setItem("endDayTmp", endDay.value);
+});
+hCount.addEventListener("change", () => {
+  sessionStorage.setItem("hCountTmp", hCount.value);
+});
 
 function getCookie(cookiename) {
   const cookies = document.cookie.split(";");
