@@ -1,0 +1,11 @@
+footer {
+  border-top: 1px solid #aaa;
+  padding: 50px 0;
+}
+
+footer p {
+  text-align: center;
+}
+footer p:not(:last-child) {
+  margin-bottom: 10px;
+}

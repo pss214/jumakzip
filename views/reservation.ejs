@@ -38,17 +38,18 @@
           </li>
           <% } %>
         </ul>
-        <hr />
+
+        <% if (reservation[0]) { %>
         <ul>
           <% for (let i = 0; i < reservation.length; i++) { %>
           <li>
             <a>
               <p class="reservation">예약됨</p>
-              <img class="reservation"
-              src="/image/<%= reservation[i].img ? reservation[i].img : 'default.png' %>"
+              <img
+                class="reservation"
+                src="/image/<%= reservation[i].img ? reservation[i].img : 'default.png' %>"
               />
-              
-            </a>    
+            </a>
             <div>
               <div>
                 <h3><%= reservation[i].name %></h3>
@@ -60,6 +61,7 @@
           </li>
           <% } %>
         </ul>
+        <% } %>
       </div>
     </main>
     <script src="/js/reservation.js"></script>
