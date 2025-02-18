@@ -25,3 +25,26 @@
   font-weight: 400;
   color: #aaa;
 }
+
+main > a {
+  width: 200px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 10px;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -70%);
+  background-color: #3a8dfd;
+  color: #ffffff;
+  font-size: 30px;
+  text-align: center;
+}
+
+main > a:hover {
+  opacity: 0.9;
+}
+
+a:visited {
+  color: #ffffff;
+}
