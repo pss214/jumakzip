@@ -360,7 +360,7 @@ app.get("/:url", function (req, res) {
 app.post("/mypage_detail", function (req, res) {
   var user = req.cookies.id;
   var pw = req.body.pw;
-  var now = new Date();
+  var now = new Date().toISOString().substring(0, 10);
   var sql = `select * from account where username='${user}'`;
   dbconn.query(sql, function (err, results, fields) {
     if (err) {
