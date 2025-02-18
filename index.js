@@ -80,14 +80,24 @@ app.get("/reservation/detail", function (req, res) {
   var name = req.query.name;
   var price = req.query.price;
   var h_max = req.query.h_max;
-  res.render("reservation_detail", {
-    title: "reservation_detail",
-    roomid: roomid,
-    imgUrl: imgUrl,
-    name: name,
-    price: price,
-    h_max: h_max,
-  });
+  var sql = `select * from room_op where roop_id = (select roop_id from room where room_id = '${roomid}')`
+  dbconn.query(sql,(err,results)=>{
+    if(err){
+      console.error(err)
+      res.status(500)
+      return
+    }
+    res.render("reservation_detail", {
+      title: "reservation_detail",
+      roomid: roomid,
+      imgUrl: imgUrl,
+      name: name,
+      price: price,
+      h_max: h_max,
+      data: results[0]
+    });
+  })
+  
 });
 //예약페이지 로드
 app.get("/reservation/pay", function (req, res) {
@@ -361,24 +371,36 @@ app.post("/reservation/new", function(req,res){
 
 })
 //예약 리스트 조회
-app.post("/reservation", function (req, res) {
+app.get("/reservation", function (req, res) {
   var h_cnt = req.body.count;
-  var start = req.body.start;
-  var end = req.body.end;
-  var sql = `SELECT name,img,price,h_max,room_id FROM room r join room_op ro on ro.roop_id = r.roop_id 
+  var start = req.query.start;
+  var end = req.query.end;
+  var sql1 = `SELECT name,img,price,h_max,room_id FROM room r join room_op ro on ro.roop_id = r.roop_id 
               WHERE r.room_id NOT IN  (select room_id from resersvation
               where st_date >= '${start}' and end_date <= '${end}') and ${h_cnt} <= ro.h_max ;`;
-  dbconn.query(sql, (err, results) => {
+  dbconn.query(sql1, (err, results1) => {
     if (err) {
       res.status(500);
       return;
     }
-    res.render("reservation", {
-      title: "reservation",
-      style: "",
-      data: results,
-    });
+    var sql2 = `SELECT name,img,price,h_max,room_id FROM room r join room_op ro on ro.roop_id = r.roop_id 
+              WHERE r.room_id IN  (select room_id from resersvation
+              where st_date >= '${start}' and end_date <= '${end}') and ${h_cnt} <= ro.h_max ;`;
+    dbconn.query(sql2, (err, results2)=>{
+      if(err){
+        res.status(500);
+      return;
+      }
+      res.render("reservation", {
+        title: "reservation",
+        style: "",
+        data: results1,
+        reservation : results2
+      });
+    })
+    
   });
+  
 });
 //kakaopay 단건 결제
 app.post("/kakaopay", async function (req, res) {

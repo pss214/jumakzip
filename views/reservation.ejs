@@ -38,6 +38,28 @@
           </li>
           <% } %>
         </ul>
+        <hr />
+        <ul>
+          <% for (let i = 0; i < reservation.length; i++) { %>
+          <li>
+            <a>
+              <p class="reservation">예약됨</p>
+              <img class="reservation"
+              src="/image/<%= reservation[i].img ? reservation[i].img : 'default.png' %>"
+              />
+              
+            </a>    
+            <div>
+              <div>
+                <h3><%= reservation[i].name %></h3>
+                <p class="capacity"><%= data[i].h_max %>인실</p>
+                <p class="price"><%= data[i].price %>원</p>
+              </div>
+              <button class="likeButton">♡</button>
+            </div>
+          </li>
+          <% } %>
+        </ul>
       </div>
     </main>
     <script src="/js/reservation.js"></script>

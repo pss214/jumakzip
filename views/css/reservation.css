@@ -58,3 +58,10 @@ main > .logo {
   border: 0;
   cursor: pointer;
 }
+
+.reservation {
+  background-color: (255,255,255);
+  opacity: 50%;
+  text-align: center;
+  font-size: 30px;
+}
