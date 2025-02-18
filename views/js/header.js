@@ -2,6 +2,7 @@ const submitButton = document.querySelector(".submitButton");
 const logOnTags = document.querySelector("#log_on");
 const logOffTags = document.querySelector("#log_off");
 const searchButton = document.querySelector(".search > button");
+const hCount = document.querySelector(".hCount");
 const startDay = document.querySelector("#startDay");
 const endDay = document.querySelector("#endDay");
 const today = new Date();
@@ -10,8 +11,10 @@ const defaulteEndDay = new Date(today.setDate(today.getDate() + 1))
   .toISOString()
   .substring(0, 10);
 
-let startDayTmp = localStorage.getItem("startDayTmp");
-let endDayTmp = localStorage.getItem("endDayTmp");
+// form data 유지
+let startDayTmp = sessionStorage.getItem("startDayTmp");
+let endDayTmp = sessionStorage.getItem("endDayTmp");
+let hCountTmp = sessionStorage.getItem("hCountTmp");
 
 if (!startDayTmp) {
   startDay.value = defaultStartDay;
@@ -23,12 +26,18 @@ if (!endDayTmp) {
 } else {
   endDay.value = endDayTmp;
 }
+if (hCountTmp) {
+  hCount.value = hCountTmp;
+}
 
-startDay.addEventListener("change", (e) => {
-  localStorage.setItem("startDayTmp", startDay.value);
+startDay.addEventListener("change", () => {
+  sessionStorage.setItem("startDayTmp", startDay.value);
 });
-endDay.addEventListener("change", (e) => {
-  localStorage.setItem("endDayTmp", endDay.value);
+endDay.addEventListener("change", () => {
+  sessionStorage.setItem("endDayTmp", endDay.value);
+});
+hCount.addEventListener("change", () => {
+  sessionStorage.setItem("hCountTmp", hCount.value);
 });
 
 function getCookie(cookiename) {
