@@ -103,6 +103,21 @@ app.get("/reservation/pay", function (req, res) {
   res.render("reservation_pay", { title: "reservation_pay" });
 });
 
+//KakaopayApproval 페이지 로드
+app.get("/reservation/approval", function (req, res) {
+  res.render("KakaopayApproval", { title: "KakaopayApproval" });
+});
+
+//KakaopayCancel 페이지 로드
+app.get("/reservation/cancel", function (req, res) {
+  res.render("KakaopayCancel", { title: "KakaopayCancel" });
+});
+
+//KakaopayFail 페이지 로드
+app.get("/reservation/fail", function (req, res) {
+  res.render("KakaopayFail", { title: "KakaopayFail" });
+});
+
 //소개페이지 로드
 app.get("/info", function (req, res) {
   res.render("info", { title: "info" });
