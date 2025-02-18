@@ -80,6 +80,9 @@ app.get("/reservation/detail", function (req, res) {
   var name = req.query.name;
   var price = req.query.price;
   var h_max = req.query.h_max;
+  var h_cnt = req.query.count;
+  var start = req.query.start;
+  var end = req.query.end;
   var sql = `select * from room_op where roop_id = (select roop_id from room where room_id = '${roomid}')`;
   dbconn.query(sql, (err, results) => {
     if (err) {
@@ -95,12 +98,11 @@ app.get("/reservation/detail", function (req, res) {
       price: price,
       h_max: h_max,
       data: results[0],
+      count: h_cnt,
+      start:start,
+      end:end
     });
   });
-});
-//예약페이지 로드
-app.get("/reservation/pay", function (req, res) {
-  res.render("reservation_pay", { title: "reservation_pay" });
 });
 
 //KakaopayApproval 페이지 로드
@@ -342,7 +344,7 @@ app.get("/:url", function (req, res) {
 app.post("/mypage_detail", function (req, res) {
   var user = req.cookies.id;
   var pw = req.body.pw;
-
+  var now = new Date()
   var sql = `select * from account where username='${user}'`;
   dbconn.query(sql, function (err, results, fields) {
     if (err) {
@@ -358,7 +360,19 @@ app.post("/mypage_detail", function (req, res) {
       }
       if (results.length > 0 && ispassword) {
         // res.status(200).json({ msg: "비밀번호 확인 성공", data: results[0] });
-        res.render("mypage_detail", { title: "", data: results[0] });
+        var sql2 = `select * from jumakzip.resersvation r 
+                    join jumakzip.room rm on rm.room_id = r.room_id  
+                    join jumakzip.room_op op on op.roop_id = rm.roop_id
+                    WHERE user_id = '${results[0].user_id}'and end_date >= '${now}' `
+        dbconn.query(sql2, (err, reservation)=>{
+          if (err) {
+            console.error(err);
+            res.status(500).json({ msg: "오류 발생" });
+            return;
+          }
+          res.render("mypage_detail", { title: "", data: results[0],reservation:reservation[0] });
+        })
+        
       } else {
         res.status(400).json({ msg: "비밀번호 확인 실패" });
         return;
@@ -408,17 +422,6 @@ app.delete("/mypage", function (req, res) {
     });
   });
 });
-//예약 리스트 생성
-app.post("/reservation/new", function (req, res) {
-  var h_cnt = req.body.cnt;
-  var bbq = req.body.bbq;
-  var animal = req.body.animal;
-  var start = req.body.start;
-  var end = req.body.end;
-  var bbaji = req.body.bbaji;
-  var total = req.body.total;
-  var user = req.cookies.id;
-});
 //예약 리스트 조회
 app.get("/reservation/list", function (req, res) {
   var h_cnt = req.query.count;
@@ -452,6 +455,15 @@ app.get("/reservation/list", function (req, res) {
 //kakaopay 단건 결제
 app.post("/kakaopay", async function (req, res) {
   var price = req.body.price;
+  var room = req.body.room;
+  var h_cnt = req.body.count;
+  var bbq = req.body.bbq;
+  var animal = req.body.animal;
+  var start = req.body.start;
+  var end = req.body.end;
+  var bbaji = req.body.bbaji;
+  var user = req.cookies.id;
+  var name = req.body.name;
   try {
     var response = await fetch(
       "https://open-api.kakaopay.com/online/v1/payment/ready",
@@ -476,6 +488,8 @@ app.post("/kakaopay", async function (req, res) {
       }
     );
     var json = await response.json();
+    var sql = `insert into reservation(st_date,end_date,)`
+    dbconn.query
     res.status(200).json({ url: json.next_redirect_pc_url });
   } catch {
     res.status(500).json({ msg: "오류가 발생했습니다! 다시 시도해주세요" });

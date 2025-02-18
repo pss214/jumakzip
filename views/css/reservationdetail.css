@@ -178,7 +178,7 @@ form > ul > li {
   opacity: 0.9;
 }
 
-form > input {
+.submitpay {
   width: 1135.568px;
   height: 70px;
   border: none;
@@ -194,4 +194,40 @@ form > input {
 form > input:hover {
   border: 1px solid #ffff00;
   color: #ffff00;
+}
+.wrap2 {
+  width: 100%;
+  box-sizing: content-box;
+  border-top: 1px solid #dddddd;
+  margin-top: 50px;
+}
+
+.wrap2 > figure {
+  width: 1135.568px;
+  margin-top: 50px;
+}
+
+.wrap2 > figure > figcaption {
+  width: 100%;
+  height: 25px;
+  margin-bottom: 20px;
+}
+
+.wrap2 > figure > figcaption > h3 {
+  float: left;
+}
+
+.wrap2 > figure > ul {
+  list-style: none;
+  width: 100%;
+  height: 184px;
+  box-sizing: content-box;
+  border-bottom: 2px dotted #aaaaaa;
+  position: relative;
+}
+
+.wrap2 > figure > ul > li {
+  width: 100%;
+  height: 26px;
+  margin-bottom: 20px;
 }

@@ -21,7 +21,7 @@
           <% for (let i = 0; i < data.length; i++) { %>
           <li>
             <a
-              href="/reservation/detail?room=<%= data[i].room_id %>&img=<%= data[i].img %>&name=<%= data[i].name %>&price=<%= data[i].price %>&h_max=<%= data[i].h_max %>"
+            href="/reservation/detail?room=<%= data[i].room_id %>&img=<%= data[i].img %>&name=<%= data[i].name %>&price=<%= data[i].price %>&h_max=<%= data[i].h_max %>&count=<%=count%>&start=<%=start%>&end=<%=end%>"
             >
               <img
                 src="/image/<%= data[i].img ? data[i].img : 'default.png' %>"
