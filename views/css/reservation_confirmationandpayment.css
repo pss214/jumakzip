@@ -13,16 +13,18 @@ a {
 }
 
 body {
-  display: flex;
-  justify-content: center;
+  position: relative;
+  /*display: flex;
+  justify-content: center;*/
+  height: 1495px;
 }
 
 main {
   width: 1190.39px; /* 1536px  80% */
   height: 1190px;
   box-sizing: content-box;
-  position: absolute;
-  top: 70px;
+  /*position: absolute;
+  top: 70px;*/
 }
 
 .wrap0 {
@@ -200,7 +202,6 @@ main {
 .wrap3 {
   width: 100%;
   margin-top: 70px;
-  margin-bottom: 50px;
 }
 
 .wrap3 > input {
@@ -220,4 +221,11 @@ main {
 .wrap3 > input:hover {
   border: 1px solid #ffff00;
   color: #ffff00;
+}
+
+footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  margin: 0;
 }

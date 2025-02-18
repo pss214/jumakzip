@@ -15,6 +15,7 @@ var url = new URL(window.location.href).searchParams
 var price = url.get("price")
 var count = url.get("count")
 var room = url.get("room")
+var roomname = url.get("name")
 var start = new Date(url.get("start"))
 var end = new Date(url.get("end"))
 var totalid = document.getElementById("total")
@@ -67,16 +68,27 @@ function total_price(){
 }
 
 function getpayment(){
+  var bbq = document.getElementById("bbq").checked? 1:0
+  var animal = document.getElementById("animal").checked ? 1:0
+  var bbaji = document.getElementById("bbaji").checked? 1:0
     fetch("/kakaopay", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        price: price,
+        total: total,
+        room:room,
+        count:count,
+        bbq: bbq,
+        animal:animal,
+        bbaji:bbaji,
+        start: start.toISOString().substring(0, 10),
+        end: end.toISOString().substring(0, 10),
+        name:roomname
       }),
     }).then(res=>{
-      res.json(json=>{
-        if (res.status == 200) {
-          window.open(json.url);
+      res.json().then(json=>{
+        if (res.status == 200 || res.status == 201) {
+          location.replace(json.url);
         }
       })
     })

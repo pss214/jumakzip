@@ -105,21 +105,6 @@ app.get("/reservation/detail", function (req, res) {
   });
 });
 
-//KakaopayApproval 페이지 로드
-app.get("/reservation/approval", function (req, res) {
-  res.render("KakaopayApproval", { title: "KakaopayApproval" });
-});
-
-//KakaopayCancel 페이지 로드
-app.get("/reservation/cancel", function (req, res) {
-  res.render("KakaopayCancel", { title: "KakaopayCancel" });
-});
-
-//KakaopayFail 페이지 로드
-app.get("/reservation/fail", function (req, res) {
-  res.render("KakaopayFail", { title: "KakaopayFail" });
-});
-
 //소개페이지 로드
 app.get("/info", function (req, res) {
   res.render("info", { title: "info" });
@@ -144,17 +129,48 @@ app.get("/admin", function (req, res) {
     title: "admin",
   });
 });
+//카카오 단건결제 승인 페이지
+app.get("/KakaopayApproval", function (req, res) {
+  var token = req.query.pg_token
+  var user = req.cookies.id
+  var now = new Date().toISOString().substring(0, 10)
+  var sql = `update reservation SET pay_ck=1,payment=${token} where username=${user} and  create_date=${now}`
+  dbconn.query(sql, (err,results)=>{
+    if(err){
+      res.render("오류가 발생되었습니다")
+      return
+    }
+    res.render("KakaopayApproval", {
+      title: "KakaopayApproval",
+    });
+  })
+});
 //카카오 단건결제 취소 페이지
 app.get("/KakaopayCancel", function (req, res) {
-  res.render("KakaopayCancel", {
-    title: "KakaopayCancel",
-  });
+  var sql = `delete from reservation where username=${user} and  create_date=${now}`
+  dbconn.query(sql, (err,results)=>{
+    if(err){
+      res.render("오류가 발생되었습니다")
+      return
+    }
+    res.render("KakaopayCancel", {
+      title: "KakaopayCancel",
+    });
+  })
+  
 });
 //카카오 단건결제 실패 페이지
 app.get("/KakaopayFail", function (req, res) {
-  res.render("KakaopayFail", {
-    title: "KakaopayFail",
-  });
+  var sql = `delete from reservation where username=${user} and  create_date=${now}`
+  dbconn.query(sql, (err,results)=>{
+    if(err){
+      res.render("오류가 발생되었습니다")
+      return
+    }
+    res.render("KakaopayFail", {
+      title: "KakaopayFail",
+    });
+  })
 });
 //아이디찾기 결과창 로드
 app.post("/idfind", function (req, res) {
@@ -450,14 +466,17 @@ app.get("/reservation/list", function (req, res) {
         title: "reservation",
         style: "",
         data: results1,
-        reservation: results2,
+        reservation: results2,        
+        start:start,
+        end:end,
+        count:h_cnt
       });
     });
   });
 });
 //kakaopay 단건 결제
-app.post("/kakaopay", async function (req, res) {
-  var price = req.body.price;
+app.post("/kakaopay", function (req, res) {
+  var total = req.body.total;
   var room = req.body.room;
   var h_cnt = req.body.count;
   var bbq = req.body.bbq;
@@ -467,37 +486,46 @@ app.post("/kakaopay", async function (req, res) {
   var bbaji = req.body.bbaji;
   var user = req.cookies.id;
   var name = req.body.name;
-  try {
-    var response = await fetch(
-      "https://open-api.kakaopay.com/online/v1/payment/ready",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `SECRET_KEY DEV1E308B4362AF928B7B25CA38E5D1E9F7E5E93`,
-        },
-        body: JSON.stringify({
-          cid: "TC0ONETIME",
-          partner_order_id: "1234",
-          partner_user_id: "jumakzip",
-          item_name: "105호",
-          quantity: "1",
-          total_amount: price,
-          tax_free_amount: "0",
-          approval_url: "http://localhost:3000/KakaopayApproval",
-          cancel_url: "http://localhost:3000/KakaopayCancel",
-          fail_url: "http://localhost:3000/KakaopayFail",
-        }),
-      }
-    );
-    var json = await response.json();
-    var sql = `insert into reservation(st_date,end_date,)`;
-    dbconn.query;
-    res.status(200).json({ url: json.next_redirect_pc_url });
-  } catch {
-    res.status(500).json({ msg: "오류가 발생했습니다! 다시 시도해주세요" });
-  }
-});
+  var now = new Date().toISOString().substring(0, 10)
+  var sql = `INSERT INTO jumakzip.resersvation 
+            (st_date,end_date,h_cnt,bbq_ck,animal_ck,bbaji_ck,total_price,pay_ck,user_id,room_id,create_date)
+            VALUES ('${start}','${end}',${h_cnt},${bbq},${animal},${bbaji},${total},0,
+            (select user_id from account where username='${user}'),'${room}'),${now}`
+        dbconn.query(sql, (err,results)=>{
+          if (err) {
+            res.status(500);
+            console.error(err)
+            return;
+          }
+        })
+  fetch(
+    "https://open-api.kakaopay.com/online/v1/payment/ready",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `SECRET_KEY DEV1E308B4362AF928B7B25CA38E5D1E9F7E5E93`,
+      },
+      body: JSON.stringify({
+        cid: "TC0ONETIME",
+        partner_order_id: "1234",
+        partner_user_id: "jumakzip",
+        item_name: name,
+        quantity: "1",
+        total_amount: total,
+        tax_free_amount: "0",
+        approval_url: "http://localhost:3000/KakaopayApproval",
+        cancel_url: "http://localhost:3000/KakaopayCancel",
+        fail_url: "http://localhost:3000/KakaopayFail",
+      }),
+    }).then(response=>{
+      response.json().then(json=>{
+          res.status(201).json({ url: json.next_redirect_pc_url });
+      })
+  }).catch(err=>{
+    console.error(err)
+  })
+})
 //파일 가져오기 ------------------------------
 
 //video 가져오는 경로
