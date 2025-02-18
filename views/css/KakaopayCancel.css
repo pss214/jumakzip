@@ -1,0 +1,27 @@
+.wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.wrap div {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 20px;
+}
+.wrap div img {
+  width: 100%;
+  object-fit: cover;
+}
+.wrap p:nth-child(2) {
+  font-size: 32px;
+  font-weight: 600;
+}
+.wrap p:nth-child(3) {
+  font-size: 20px;
+  font-weight: 400;
+  color: #aaa;
+}
