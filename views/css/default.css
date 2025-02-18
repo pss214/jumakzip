@@ -11,6 +11,9 @@ ul {
 a {
   text-decoration: none;
 }
+a:visited {
+  color: #000;
+}
 main {
   padding-top: 70px;
   width: 1400px;
