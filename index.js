@@ -142,6 +142,18 @@ app.get("/admin", function (req, res) {
     title: "admin",
   });
 });
+//카카오 단건결제 취소 페이지
+app.get("/KakaopayCancel", function (req, res) {
+  res.render("KakaopayCancel", {
+    title: "KakaopayCancel",
+  });
+});
+//카카오 단건결제 실패 페이지
+app.get("/KakaopayFail", function (req, res) {
+  res.render("KakaopayFail", {
+    title: "KakaopayFail",
+  });
+});
 //아이디찾기 결과창 로드
 app.post("/idfind", function (req, res) {
   var phone = req.body.phone;
@@ -457,9 +469,9 @@ app.post("/kakaopay", async function (req, res) {
           quantity: "1",
           total_amount: price,
           tax_free_amount: "0",
-          approval_url: "http://localhost:3000/",
-          cancel_url: "http://localhost:3000/",
-          fail_url: "http://localhost:3000/",
+          approval_url: "http://localhost:3000/KakaopayApproval",
+          cancel_url: "http://localhost:3000/KakaopayCancel",
+          fail_url: "http://localhost:3000/KakaopayFail",
         }),
       }
     );
