@@ -80,12 +80,12 @@ app.get("/reservation/detail", function (req, res) {
   var name = req.query.name;
   var price = req.query.price;
   var h_max = req.query.h_max;
-  var sql = `select * from room_op where roop_id = (select roop_id from room where room_id = '${roomid}')`
-  dbconn.query(sql,(err,results)=>{
-    if(err){
-      console.error(err)
-      res.status(500)
-      return
+  var sql = `select * from room_op where roop_id = (select roop_id from room where room_id = '${roomid}')`;
+  dbconn.query(sql, (err, results) => {
+    if (err) {
+      console.error(err);
+      res.status(500);
+      return;
     }
     res.render("reservation_detail", {
       title: "reservation_detail",
@@ -94,10 +94,9 @@ app.get("/reservation/detail", function (req, res) {
       name: name,
       price: price,
       h_max: h_max,
-      data: results[0]
+      data: results[0],
     });
-  })
-  
+  });
 });
 //예약페이지 로드
 app.get("/reservation/pay", function (req, res) {
@@ -129,42 +128,66 @@ app.get("/admin", function (req, res) {
   });
 });
 //아이디찾기 결과창 로드
-app.post("/idfind", function(req,res){
-  var phone = req.body.phone
-  var sql = `SELECT username from account where phone='${phone}'`
+app.post("/idfind", function (req, res) {
+  var phone = req.body.phone;
+  var sql = `SELECT username from account where phone='${phone}'`;
   dbconn.query(sql, function (err, results) {
-    if(err){
+    if (err) {
       console.error(err);
-      res.status(500).render("result",{title:"아이디찾기",data : "회원을 찾지 못했습니다", st: "실패"})
-      return
+      res.status(500).render("result", {
+        title: "아이디찾기",
+        data: "회원을 찾지 못했습니다",
+        st: "실패",
+      });
+      return;
     }
-    if(results.length == 0){
-      res.status(400).render("result",{title:"아이디찾기",data : "회원을 찾지 못했습니다",st: "실패"})
-      return
+    if (results.length == 0) {
+      res.status(400).render("result", {
+        title: "아이디찾기",
+        data: "회원을 찾지 못했습니다",
+        st: "실패",
+      });
+      return;
     }
-    res.status(200).render("result",{title:"아이디찾기",data : results[0],st: "아이디"})
-  })
-})
+    res.status(200).render("result", {
+      title: "아이디찾기",
+      data: results[0],
+      st: "아이디",
+    });
+  });
+});
 //비밀번호찾기 결과창 로드
-app.post("/passwordfind", function(req,res){
-  var username = req.body.id
-  var phone = req.body.phone
-  var sql = `SELECT username,nickname from account where phone='${phone}' and username = '${username}'`
+app.post("/passwordfind", function (req, res) {
+  var username = req.body.id;
+  var phone = req.body.phone;
+  var sql = `SELECT username,nickname from account where phone='${phone}' and username = '${username}'`;
   dbconn.query(sql, function (err, results) {
-    if(err){
+    if (err) {
       console.error(err);
-      res.status(500).render("result",{title:"비밀번호찾기",data : "회원을 찾지 못했습니다", st: "실패"})
-      return
+      res.status(500).render("result", {
+        title: "비밀번호찾기",
+        data: "회원을 찾지 못했습니다",
+        st: "실패",
+      });
+      return;
     }
-    if(results.length == 0){
-      res.status(400).render("result",{title:"비밀번호찾기",data : "회원을 찾지 못했습니다",st: "실패"})
-      return
+    if (results.length == 0) {
+      res.status(400).render("result", {
+        title: "비밀번호찾기",
+        data: "회원을 찾지 못했습니다",
+        st: "실패",
+      });
+      return;
     }
-    res.status(200).render("result",{title:"비밀번호찾기",data : results[0],st: "비밀번호"})
-  })
-})
+    res.status(200).render("result", {
+      title: "비밀번호찾기",
+      data: results[0],
+      st: "비밀번호",
+    });
+  });
+});
 //비밀번호찾기 비밀번호변경하는 코드
-app.post("/newpassword", async function(req,res){
+app.post("/newpassword", async function (req, res) {
   var user = req.body.id;
   var pw = req.body.pw;
   try {
@@ -173,7 +196,7 @@ app.post("/newpassword", async function(req,res){
     }
     sql = `UPDATE jumakzip.account SET 
     password=IF(? = '', password, '${pw}') WHERE username='${user}'`;
-    var results = dbconn.query(sql, [ pw]);
+    var results = dbconn.query(sql, [pw]);
     if (results.affectedRows > 0) {
       res.status(201).json({ msg: "회원 정보가 저장되었습니다" });
       return;
@@ -184,7 +207,7 @@ app.post("/newpassword", async function(req,res){
   } catch {
     res.status(500);
   }
-})
+});
 //회원가입 이후 데이터를 db에 저장하는 코드
 app.post("/idck", function (req, res) {
   var sql = `select username from account where username='${req.body.id}'`;
@@ -359,20 +382,19 @@ app.delete("/mypage", function (req, res) {
   });
 });
 //예약 리스트 생성
-app.post("/reservation/new", function(req,res){
-  var h_cnt = req.body.cnt
-  var bbq = req.body.bbq
-  var animal = req.body.animal
-  var start = req.body.start
-  var end = req.body.end
-  var bbaji = req.body.bbaji
-  var total = req.body.total
+app.post("/reservation/new", function (req, res) {
+  var h_cnt = req.body.cnt;
+  var bbq = req.body.bbq;
+  var animal = req.body.animal;
+  var start = req.body.start;
+  var end = req.body.end;
+  var bbaji = req.body.bbaji;
+  var total = req.body.total;
   var user = req.cookies.id;
-
-})
+});
 //예약 리스트 조회
-app.get("/reservation", function (req, res) {
-  var h_cnt = req.body.count;
+app.get("/reservation/list", function (req, res) {
+  var h_cnt = req.query.count;
   var start = req.query.start;
   var end = req.query.end;
   var sql1 = `SELECT name,img,price,h_max,room_id FROM room r join room_op ro on ro.roop_id = r.roop_id 
@@ -386,26 +408,24 @@ app.get("/reservation", function (req, res) {
     var sql2 = `SELECT name,img,price,h_max,room_id FROM room r join room_op ro on ro.roop_id = r.roop_id 
               WHERE r.room_id IN  (select room_id from resersvation
               where st_date >= '${start}' and end_date <= '${end}') and ${h_cnt} <= ro.h_max ;`;
-    dbconn.query(sql2, (err, results2)=>{
-      if(err){
+    dbconn.query(sql2, (err, results2) => {
+      if (err) {
         res.status(500);
-      return;
+        return;
       }
       res.render("reservation", {
         title: "reservation",
         style: "",
         data: results1,
-        reservation : results2
+        reservation: results2,
       });
-    })
-    
+    });
   });
-  
 });
 //kakaopay 단건 결제
 app.post("/kakaopay", async function (req, res) {
   var price = req.body.price;
-  try{
+  try {
     var response = await fetch(
       "https://open-api.kakaopay.com/online/v1/payment/ready",
       {
@@ -430,10 +450,9 @@ app.post("/kakaopay", async function (req, res) {
     );
     var json = await response.json();
     res.status(200).json({ url: json.next_redirect_pc_url });
-  }catch{
-    res.status(500).json({msg : "오류가 발생했습니다! 다시 시도해주세요"})
+  } catch {
+    res.status(500).json({ msg: "오류가 발생했습니다! 다시 시도해주세요" });
   }
-  
 });
 //파일 가져오기 ------------------------------
 
