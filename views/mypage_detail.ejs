@@ -15,16 +15,29 @@
           <ul>
             <li>
               <span>아이디</span>
-              <input type="text" style="color: gray;" value="<%= data.username %>" readonly />
+              <input
+                type="text"
+                style="color: gray"
+                value="<%= data.username %>"
+                readonly
+              />
             </li>
             <li>
               <span>닉네임</span>
-              <input type="text" id="nickname" placeholder="<%= data.nickname %>" />
+              <input
+                type="text"
+                id="nickname"
+                placeholder="<%= data.nickname %>"
+              />
             </li>
-            
+
             <li>
               <span>비밀번호</span>
-              <input type="password" id="password" placeholder="비밀번호를 입력해주세요" />
+              <input
+                type="password"
+                id="password"
+                placeholder="비밀번호를 입력해주세요"
+              />
             </li>
             <li>
               <span>비밀번호 확인</span>
@@ -41,9 +54,9 @@
             <li>
               <span>광고 수신 동의</span>
               <% if(data.isad) {%>
-              <input type="checkbox" id="isad" checked/>
+              <input type="checkbox" id="isad" checked />
               <% }else{ %>
-                <input type="checkbox" id="isad"/>
+              <input type="checkbox" id="isad" />
               <% } %>
             </li>
             <li>
@@ -58,7 +71,7 @@
                 type="button"
                 onclick="del()"
                 class="jumakButtonReverse jumakButtonReverseHover jumakButtonActive"
-                style="background-color: red;"
+                style="background-color: red"
               >
                 탈퇴하기
               </button>
@@ -70,32 +83,52 @@
         <h4>예약 내역</h4>
         <!-- 예약한 정보가 없을 시의 상황도 제작해야 함 -->
         <ul>
+          <% for(i = 0; i < reservation.length; i++) { %>
           <li>
             <span>체크인</span>
-            <p>2025년 2월 13일 3PM</p>
+            <p><%= reservation[i].st_date %> 3PM</p>
           </li>
           <li>
             <span>체크아웃</span>
-            <p>2025년 2월 14일 11AM</p>
+            <p><%= reservation[i].end_date %> 11AM</p>
           </li>
           <li>
             <span>인원</span>
-            <p>4인</p>
+            <p><%= reservation[i].h_cnt %></p>
           </li>
           <li class="roomInfo">
             <span>방 정보</span>
             <div class="wrap">
               <img src="/image/pension1.jpg" alt="pension" />
               <div>
-                <p class="roomName">이 방은 엄청난 방 입니다.</p>
-                <p class="roomOption">
-                  옵션: <span>빔 프로젝터, 노래방, 바다뷰</span>
-                </p>
-                <div>
-                  <img src="image/beam.png" alt="baem" />
-                  <img src="image/mic.png" alt="mic" />
-                  <img src="image/sea.png" alt="sea" />
-                  <span></span>
+                <div class="title">
+                  <p class="name">이름</p>
+                  <p class="roomName"><%= reservation[i].room_name %></p>
+                </div>
+                <div class="roomOption">
+                  <p class="txt">옵션</p>
+                  <div class="options">
+                    <div class="option">
+                      <img src="image/beam.png" alt="baem" />
+                      <span>빔 프로젝터</span>
+                    </div>
+                    <div class="option">
+                      <img src="image/mic.png" alt="mic" />
+                      <span>빔 프로젝터</span>
+                    </div>
+                    <div class="option">
+                      <img src="image/sea.png" alt="sea" />
+                      <span>빔 프로젝터</span>
+                    </div>
+                    <div class="option">
+                      <img src="image/sea.png" alt="sea" />
+                      <span>빔 프로젝터</span>
+                    </div>
+                    <div class="option">
+                      <img src="image/sea.png" alt="sea" />
+                      <span>빔 프로젝터</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -103,12 +136,7 @@
           <li class="additionalOption">
             <span>추가 옵션</span>
             <div>
-              <p>추가 옵션: 빔 프로젝터, 노래방, 바다뷰</p>
-              <div>
-                <img src="image/beam.png" alt="baem" />
-                <img src="image/mic.png" alt="mic" />
-                <img src="image/sea.png" alt="sea" />
-              </div>
+              <p>빔 프로젝터, 노래방, 바다뷰</p>
             </div>
           </li>
           <li>
@@ -121,8 +149,10 @@
               <input type="checkbox" />
             </div>
           </li>
+          <% } %>
         </ul>
       </section>
     </main>
     <script src="/js/mypage_detail.js"></script>
+  </body>
 </html>

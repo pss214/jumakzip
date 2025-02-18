@@ -89,27 +89,65 @@
   object-fit: cover;
   margin-right: 20px;
 }
-.checkReservationDetail ul .roomInfo .wrap div .roomName {
-  font-size: 20px;
-  font-weight: 200;
-  margin-bottom: 20px;
-}
-.checkReservationDetail ul .roomInfo .wrap div .roomOption {
-  font-size: 17px;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-.checkReservationDetail ul .roomInfo .wrap div .roomOption > span {
-  font-weight: 400;
-  font-size: 17px;
-}
-.checkReservationDetail ul .roomInfo .wrap div div {
+.checkReservationDetail ul .roomInfo .wrap div .title {
   display: flex;
   column-gap: 20px;
 }
-.checkReservationDetail ul .roomInfo .wrap div div img {
-  width: 40px;
-  height: 40px;
+.checkReservationDetail ul .roomInfo .wrap div .title .name {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.checkReservationDetail ul .roomInfo .wrap div .title .roomName {
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+.checkReservationDetail ul .roomInfo .wrap div .roomOption {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+.checkReservationDetail ul .roomInfo .wrap div .roomOption .txt {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.checkReservationDetail ul .roomInfo .wrap div .roomOption .options {
+  display: flex;
+  column-gap: 20px;
+}
+
+.checkReservationDetail ul .roomInfo .wrap div .roomOption .options .option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 8px;
+}
+
+.checkReservationDetail
+  ul
+  .roomInfo
+  .wrap
+  div
+  .roomOption
+  .options
+  .option
+  span {
+  font-weight: 500;
+  font-size: 14px;
+}
+.checkReservationDetail
+  ul
+  .roomInfo
+  .wrap
+  div
+  .roomOption
+  .options
+  .option
+  img {
+  width: 50px;
+  height: 50px;
 }
 
 .checkReservationDetail ul .additionalOption div p {
@@ -118,8 +156,4 @@
 .checkReservationDetail ul .additionalOption div div {
   display: flex;
   column-gap: 20px;
-}
-.checkReservationDetail ul .additionalOption div div img {
-  width: 40px;
-  height: 40px;
 }
