@@ -440,16 +440,26 @@ app.delete("/mypage", function (req, res) {
   if (user == undefined) {
     res.redirect("/login");
   }
-  var sql = `delete from account where username='${user}'`;
+  var sql = `DELETE FROM reservation
+              WHERE user_id = (select user_id from account where username = '${user}');`
   dbconn.query(sql, function (err, results, fields) {
-    if (err || results.length == 0) {
-      res.status(400).json({ msg: "회원 조회를 실패했습니다." });
-      return;
+    if (err) {
+        console.error(err)
+        res.status(500).json({msg:"문제 발생되었습니다!"})
+        return;
     }
-    res.status(200).json({
-      msg: "회원 조회 성공",
-      user: results[0],
-    });
+    sql = `delete from account where username='${user}'`;
+    dbconn.query(sql, function (err, results) {
+      if (err) {
+        console.error(err)
+        res.status(500).json({msg:"문제 발생되었습니다!"})
+        return;
+      }
+      res.status(200).json({
+        msg: "회원 조회 성공",
+        user: results[0],
+      });
+    })
   });
 });
 //예약 리스트 조회
