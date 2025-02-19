@@ -65,6 +65,7 @@ header > .menu .search button {
   font-size: 16px;
 }
 header > .menu .admin {
+  display: none;
   width: 25px;
   cursor: pointer;
 }
