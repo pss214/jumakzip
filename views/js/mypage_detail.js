@@ -1,9 +1,5 @@
-
-
 async function edit(isad) {
     let ad = (isad=='1')? true : false
-    let asd = "zzz"
-    asd.length
     let newnickname = document.getElementById("nickname").value
     let newpassword = document.getElementById("password").value
     let newpasswordck = document.getElementById("passwordck").value
@@ -16,7 +12,7 @@ async function edit(isad) {
         return
     }
     //비번에서 유효성이 안맞거나 ck가 잘못된 경우
-    if(ckedit(newpassword,newpasswordck)){
+    if(ckedit(newpassword,newpasswordck) == false){
         alert("비밀번호가 맞지 않거나 유효하지 않습니다! 다시 입력해주세요.")
         return
     }
@@ -41,9 +37,9 @@ async function edit(isad) {
 }
 function ckedit(pw1, pw2) {
     if (pw1 == 0 && pw2 == 0) {
-        return false
+        return true
     }
-    return pw1 === pw2
+    return pw1 == pw2
 }
 
 function del() {
