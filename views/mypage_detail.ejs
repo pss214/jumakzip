@@ -55,13 +55,14 @@
         </ul>
       </form>
     </section>
+    <% if(!!reservation) {%>
     <section class="checkReservationDetail">
       <h4>예약 내역</h4>
       <!-- 예약한 정보가 없을 시의 상황도 제작해야 함 -->
       <ul>
         <li>
           <span>체크인</span>
-          <% 
+          <%
             let st_date = String(reservation.st_date); 
             let match = st_date.match(/([A-Za-z]+) (\d{1,2}) (\d{4})/); 
             let formattedStartDate = ''; 
@@ -166,8 +167,9 @@
           <% } %>
           </div>
         </li>
-      </ul>
-    </section>
+        </ul>
+        </section>
+        <%}%>
   </main>
   <script src="/js/mypage_detail.js"></script>
 </body>
