@@ -5,7 +5,7 @@ a {
   display: block;
   overflow: hidden;
 }
-a > img {
+.wrap0 > a > img {
   width: 100%;
   transform: translateY(-30%);
 }
@@ -13,13 +13,15 @@ a > img {
 body {
   display: flex;
   justify-content: center;
+  height: 2272px;
+  position: relative;
 }
 
 main {
   width: 1190.39px; /* 1536px  80% */
   /*height: 1644px;*/
-  position: absolute;
-  top: 70px;
+  /*position: absolute;
+  top: 70px;*/
 }
 
 .wrap0 {
@@ -230,4 +232,11 @@ form > input:hover {
   width: 100%;
   height: 26px;
   margin-bottom: 20px;
+}
+
+footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  margin: 0;
 }
