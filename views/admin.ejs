@@ -24,19 +24,23 @@
           <h4>회원정보 게시판</h4>
           <article class="content">
             <div class="attribute">
+              <p>번호</p>
               <p>닉네임</p>
               <p>아이디</p>
-              <p>타입</p>
+              <p>휴대폰</p>
             </div>
             <!-- 데이터 받을 시 rows는 ul로 row는 li로 변경하여 반복문 사용 -->
             <ul class="rows">
-              <li class="row user" id="잠자는고양이(userName)">
-                <!-- id에 사용자 이름 넣어주기 -->
-                <p>잠자는고양이</p>
-                <p>sleepingmeow</p>
-                <p>회원/비회원</p>
-                <a href="/">자세히 보기</a>
-              </li>
+              <% for (let i = 0; i < user.length; i++) {%>
+                <li class="row user" id="잠자는고양이(userName)">
+                  <!-- id에 사용자 이름 넣어주기 -->
+                  <p><%=user[i].user_id%></p>
+                  <p><%=user[i].nickname%></p>
+                  <p><%=user[i].username%></p>
+                  <p><%=user[i].phone%></p>
+                  <a href="/">자세히 보기</a>
+                </li>
+              <%} %>
             </ul>
           </article>
         </section>
@@ -50,14 +54,20 @@
               <p>결제여부</p>
             </div>
             <ul class="rows">
-              <li class="row reservation" id="userId+reservation">
-                <p>잠자는고양이</p>
-                <p>25-02-17</p>
-                <p>A 302</p>
-                <img src="/image/unchecked.png" alt="checkbox" />
-                <!-- 결제 여부 확인 후 img변경(3항연산자) -->
-                <a href="/">자세히 보기</a>
-              </li>
+              <% for (let i = 0; i < reservation.length; i++) { %>
+                <li class="row reservation" id="userId+reservation">
+                  <p><%=reservation[i].nickname%></p>
+                  <p><%=reservation[i].create_date.toISOString().substring(0, 10)%></p>
+                  <p><%=reservation[i].name%></p>
+                  <!-- 결제 여부 확인 후 img변경(3항연산자) -->
+                  <%if (reservation[i].pay_ck) { %>
+                    <input type="checkbox" checked disabled>
+                  <%} else{%>
+                    <input type="checkbox">
+                  <%}%>
+                  <a href="/">자세히 보기</a>
+                </li>
+              <% } %>
             </ul>
           </article>
         </section>
