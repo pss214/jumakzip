@@ -28,15 +28,16 @@
               <p>아이디</p>
               <p>타입</p>
             </div>
-            <div class="rows">
-              <div class="row user" id="잠자는고양이(userName)">
+            <!-- 데이터 받을 시 rows는 ul로 row는 li로 변경하여 반복문 사용 -->
+            <ul class="rows">
+              <li class="row user" id="잠자는고양이(userName)">
                 <!-- id에 사용자 이름 넣어주기 -->
                 <p>잠자는고양이</p>
                 <p>sleepingmeow</p>
                 <p>회원/비회원</p>
                 <a href="/">자세히 보기</a>
-              </div>
-            </div>
+              </li>
+            </ul>
           </article>
         </section>
         <section class="bulletinBoard" id="reservationInfo">
@@ -48,16 +49,16 @@
               <p>예약룸</p>
               <p>결제여부</p>
             </div>
-            <div class="rows">
-              <div class="row reservation" id="userId+reservation">
+            <ul class="rows">
+              <li class="row reservation" id="userId+reservation">
                 <p>잠자는고양이</p>
                 <p>25-02-17</p>
                 <p>A 302</p>
                 <img src="/image/unchecked.png" alt="checkbox" />
                 <!-- 결제 여부 확인 후 img변경(3항연산자) -->
                 <a href="/">자세히 보기</a>
-              </div>
-            </div>
+              </li>
+            </ul>
           </article>
         </section>
         <section class="bulletinBoard" id="inquiryInfo">
@@ -68,8 +69,8 @@
               <p>질문타입</p>
               <p>질문내용</p>
             </div>
-            <div class="rows">
-              <div class="row inquiry" id="userId+inquiry">
+            <ul class="rows">
+              <li class="row inquiry" id="userId+inquiry">
                 <p>잠자는고양이</p>
                 <p>펜션 내부 시설</p>
                 <p>
@@ -78,7 +79,7 @@
                 </p>
                 <!-- 결제 여부 확인 후 img변경(3항연산자) -->
                 <a href="/">자세히 보기</a>
-              </div>
+              </li>
             </div>
           </article>
         </section>
