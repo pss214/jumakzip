@@ -125,9 +125,35 @@ app.get("/passwordfind", function (req, res) {
 });
 //관리자 페이지 로드
 app.get("/admin", function (req, res) {
-  res.render("admin", {
-    title: "admin",
-  });
+  var type = req.cookies.usertype;
+  var userList
+  var reservationList
+  if(type != 'admin'){
+    res.redirect("/")
+  }
+  var sql1 = `select user_id, nickname, username, phone from account`
+  dbconn.query(sql1, function(err, result){
+      if(err){
+        console.error(err)
+        return
+      }
+      userList = result
+  })
+  var sql2 = `select nickname, create_date, name, pay_ck from reservation r 
+              join room ro on r.room_id = ro.room_id
+              join account a  on r.user_id = a.user_id`
+  dbconn.query(sql2, function(err, result){
+      if(err){
+        console.error(err)
+        return
+      }
+      reservationList = result
+      res.render("admin", {
+        title: "admin", 
+        user: userList,
+        reservation:reservationList
+      });
+  })
 });
 //카카오 단건결제 승인 페이지
 app.get("/KakaopayApproval", function (req, res) {
