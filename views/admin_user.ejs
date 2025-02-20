@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="/css/mypage_detail.css" />
+</head>
+
+<body>
+  <main>
+    <section class="updatePersonalInfo">
+      <p><%= data.nickname %>님</p>
+      <form>
+        <ul>
+          <li>
+            <span>아이디</span>
+            <input type="text" style="color: gray" value="<%= data.username %>" readonly />
+          </li>
+          <li>
+            <span>닉네임</span>
+            <input type="text" id="nickname" placeholder="<%= data.nickname %>" />
+          </li>
+          <li>
+            <span>전화번호</span>
+            <input type="text" value="<%= data.phone %>" readonly />
+          </li>
+          <li>
+            <span>광고 수신 동의</span>
+            <% if(data.isad) {%>
+            <input type="checkbox" id="isad" checked />
+            <% }else{ %>
+            <input type="checkbox" id="isad" />
+            <% } %>
+          </li>
+          <li>
+            <div></div>
+            <div style="display: flex; justify-content: center; column-gap: 20px;">
+              <button type="button" onclick="edit('<%= data.isad %>')" class="jumakButton jumakButtonReverseHover jumakButtonActive">
+                수정하기
+              </button>
+              <button type="button" onclick="del()" class="jumakButton jumakButtonReverseHover jumakButtonActive" style="color: red">
+                삭제하기
+              </button>
+              <button type="button" onclick="location.replace(`/admin`)" class="jumakButton jumakButtonReverseHover jumakButtonActive" style="color: black">
+                돌아가기
+              </button>
+            </div>
+          </li>
+        </ul>
+      </form>
+    </section>
+  </main>
+  <script src="/js/mypage_detail.js"></script>
+</body>
+
+</html>

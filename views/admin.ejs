@@ -38,7 +38,7 @@
                   <p><%=user[i].nickname%></p>
                   <p><%=user[i].username%></p>
                   <p><%=user[i].phone%></p>
-                  <a href="/">자세히 보기</a>
+                  <a href="/admin/user?id=<%=user[i].user_id%>">자세히 보기</a>
                 </li>
               <%} %>
             </ul>
@@ -48,6 +48,7 @@
           <h4>예약정보 게시판</h4>
           <article class="content">
             <div class="attribute">
+              <p>예약번호</p>
               <p>예약자명</p>
               <p>예약날짜</p>
               <p>예약룸</p>
@@ -56,16 +57,18 @@
             <ul class="rows">
               <% for (let i = 0; i < reservation.length; i++) { %>
                 <li class="row reservation" id="userId+reservation">
+                  <p><%=reservation[i].reservation_id%></p>
                   <p><%=reservation[i].nickname%></p>
                   <p><%=reservation[i].create_date.toISOString().substring(0, 10)%></p>
                   <p><%=reservation[i].name%></p>
                   <!-- 결제 여부 확인 후 img변경(3항연산자) -->
-                  <%if (reservation[i].pay_ck) { %>
+                  <div style="display: flex; column-gap: 10px; justify-content: center;">
+                    <%if (reservation[i].pay_ck) { %>
                     <input type="checkbox" checked disabled>
                   <%} else{%>
                     <input type="checkbox">
                   <%}%>
-                  <a href="/">자세히 보기</a>
+                  <a href="/admin/reservation?id=<%=reservation[i].reservation_id%>">자세히 보기</a></div>
                 </li>
               <% } %>
             </ul>

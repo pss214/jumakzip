@@ -139,7 +139,7 @@ app.get("/admin", function (req, res) {
       }
       userList = result
   })
-  var sql2 = `select nickname, create_date, name, pay_ck from reservation r 
+  var sql2 = `select reservation_id, nickname, create_date, name, pay_ck from reservation r 
               join room ro on r.room_id = ro.room_id
               join account a  on r.user_id = a.user_id`
   dbconn.query(sql2, function(err, result){
@@ -155,6 +155,47 @@ app.get("/admin", function (req, res) {
       });
   })
 });
+//어드민 - 유저 디테일
+app.get("/admin/user", function (req, res){
+  var type = req.cookies.usertype;
+  if(type != 'admin'){
+    res.redirect("/")
+  }
+  var user = req.query.id
+  var sql = `select * from account where user_id = ${user}`
+  dbconn.query(sql, (err,result)=>{
+    if(err){
+      console.error(err)
+      return
+    }
+    res.render("admin_user",{
+      title:"admin-user",
+      data:result[0]
+    })
+  })
+})
+//어드민 - 예약 디테일
+app.get("/admin/reservation", function (req, res){
+  var type = req.cookies.usertype;
+  if(type != 'admin'){
+    res.redirect("/")
+  }
+  var reservation = req.query.id
+  var sql = `select * from reservation r 
+            join room rm on r.room_id = rm.room_id 
+            join room_op ro on rm.roop_id = ro.roop_id  
+            where reservation_id = ${reservation}`
+  dbconn.query(sql, (err,result)=>{
+    if(err){
+      console.error(err)
+      return
+    }
+    res.render("admin_reservation",{
+      title:"admin-reservation",
+      reservation:result[0]
+    })
+  })
+})
 //카카오 단건결제 승인 페이지
 app.get("/KakaopayApproval", function (req, res) {
   var token = req.query.pg_token;

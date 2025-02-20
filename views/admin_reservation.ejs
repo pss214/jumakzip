@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="/css/mypage_detail.css" />
+</head>
+
+<body>
+  <main>
+    <section class="checkReservationDetail">
+      <!-- 예약한 정보가 없을 시의 상황도 제작해야 함 -->
+      <ul>
+        <li>
+          <span>체크인</span>
+          <%
+            let st_date = String(reservation.st_date); 
+            let match = st_date.match(/([A-Za-z]+) (\d{1,2}) (\d{4})/); 
+            let formattedStartDate = ''; 
+            if (!match) { 
+              console.error("날짜 형식이 맞지 않습니다:", st_date); 
+              formattedStartDate = "날짜 오류"; 
+            } else { 
+              let monthMap = { Jan: 1, Feb: 2, Mar: 3, Apr: 4, May: 5, Jun: 6, Jul: 7, Aug: 8, Sep: 9, Oct: 10, Nov: 11, Dec: 12 }; 
+              let year = match[3].slice(-2); 
+              let month = monthMap[match[1]]; 
+              let day = match[2]; formattedStartDate = `${year}년 ${month}월 ${day}일`; 
+            } 
+          %>
+
+          <p><%= formattedStartDate %> 3시</p>
+        </li>
+        <li>
+          <span>체크아웃</span>
+          <% 
+            let end_date = String(reservation.end_date); 
+            let endDateMatch = end_date.match(/([A-Za-z]+) (\d{1,2}) (\d{4})/); 
+            let formattedEndDate = ''; 
+            if (!endDateMatch) {
+              console.error("날짜형식이 맞지 않습니다:", end_date);
+              formattedEndDate = "날짜 오류"; 
+            } else { 
+              let monthMap = { Jan: 1, Feb: 2, Mar: 3, Apr: 4, May: 5, Jun: 6, Jul: 7, Aug: 8, Sep: 9, Oct: 10, Nov: 11, Dec: 12 }; 
+              let year = endDateMatch[3].slice(-2); 
+              let month = monthMap[endDateMatch[1]]; 
+              let day = endDateMatch[2];
+              formattedEndDate = `${year}년 ${month}월 ${day}일`; 
+            } 
+          %>
+
+          <p><%= formattedEndDate %> 11시</p>
+        </li>
+        <li>
+          <span>인원</span>
+          <p><%= reservation.h_cnt %>인</p>
+        </li>
+        <li class="roomInfo">
+          <span>방 정보</span>
+          <div class="wrap">
+            <img src="/image/pension1.jpg" alt="pension" />
+            <div>
+              <div class="title">
+                <p class="name">이름</p>
+                <p class="roomName"><%= reservation.name %></p>
+              </div>
+              <div class="roomOption">
+                <p class="txt">옵션</p>
+                <div class="options">
+                  <% if(reservation.bs_room_cnt) { %>
+                  <div class="option">
+                    <img src="/image/bathroom.png" alt="mic" />
+                    <span>화장실 <%= reservation.bs_room_cnt %>개</span>
+                  </div>
+                  <% } %> <% if(reservation.fool_ck) { %>
+                  <div class="option">
+                    <img src="/image/pool.png" alt="mic" />
+                    <span>수영장</span>
+                  </div>
+                  <% } %> <% if(reservation.song_ck) { %>
+                  <div class="option">
+                    <img src="/image/mic.png" alt="mic" />
+                    <span>노래방</span>
+                  </div>
+                  <% } %> <% if(reservation.room_cnt) { %>
+                  <div class="option">
+                    <img src="/image/room.png" alt="mic" />
+                    <span>방 <%= reservation.room_cnt %>개</span>
+                  </div>
+                  <% } %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="additionalOption">
+          <span>추가 옵션</span>
+          <div>
+            <p>
+              <% if(reservation.bbq_ck) {%> 바베큐, <% }%> <%
+                if(reservation.animal_ck) {%> 동물 놀이터, <% }%> <%
+                if(reservation.bbaji_ck) {%> 빠지 <% }%>
+            </p>
+          </div>
+        </li>
+        <li>
+          <span>총 금액</span>
+          <% if(reservation.total_price) {%>
+          <p><%=reservation.total_price%>원</p>
+          <%}%>
+          </li>
+          <li class="isPaid">
+            <span>결제 여부</span>
+            <div>
+              <% if(reservation.pay_ck) {%>
+          <input type="checkbox" checked disabled />
+          <% } else { %>
+          <input type="checkbox" disabled />
+          <% } %>
+          </div>
+        </li>
+        </ul>
+      </section>
+      <button type="button" onclick="location.replace(`/admin`)" class="jumakButton jumakButtonReverseHover jumakButtonActive" style="color: black">
+                돌아가기
+      </button>
+  </main>
+  <script src="/js/mypage_detail.js"></script>
+</body>
+
+</html>
