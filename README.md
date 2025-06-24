@@ -1,6 +1,8 @@
 # jumakzip
 펜션예약 서비스
 
+구글드라이브(시연 영상, 코드, PPT): https://drive.google.com/drive/folders/1SAWtcywAOgxB-wMskofsJBW2cBpPKshs?usp=drive_link
+
 ![슬라이드1](https://github.com/user-attachments/assets/9dbe5141-801c-41a8-933c-da108b639b4e)
 ![슬라이드2](https://github.com/user-attachments/assets/f9d48bee-cf3a-489e-bb3d-663ba3f3aeb9)
 ![슬라이드3](https://github.com/user-attachments/assets/cd257c03-364f-4d68-8411-6b7ffb0684c4)
