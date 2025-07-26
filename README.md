@@ -1,6 +1,8 @@
 # jumakzip
 펜션예약 서비스
 
+직접체험해보기 https://www.jumakzip.com
+
 구글드라이브(시연 영상, 코드, PPT): https://drive.google.com/drive/folders/1SAWtcywAOgxB-wMskofsJBW2cBpPKshs?usp=drive_link
 
 ![슬라이드1](https://github.com/user-attachments/assets/9dbe5141-801c-41a8-933c-da108b639b4e)
